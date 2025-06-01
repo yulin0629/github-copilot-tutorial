@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>遺留系統重構實驗室 - Agent 架構師</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🏗️ 遺留系統重構實驗室</h1>
+        <p class="subtitle">讓 Agent 主導重構一個混亂的遺留代碼系統！</p>
+        
+        <div class="system-status">
+            <h2>📊 系統現狀</h2>
+            <div class="status-grid">
+                <div class="status-card critical">
+                    <h3>代碼品質</h3>
+                    <div class="score">2.1/10</div>
+                    <p>嚴重技術債務</p>
+                </div>
+                
+                <div class="status-card warning">
+                    <h3>可維護性</h3>
+                    <div class="score">3.5/10</div>
+                    <p>難以修改</p>
+                </div>
+                
+                <div class="status-card critical">
+                    <h3>測試覆蓋率</h3>
+                    <div class="score">12%</div>
+                    <p>幾乎沒有測試</p>
+                </div>
+                
+                <div class="status-card warning">
+                    <h3>效能</h3>
+                    <div class="score">4.2/10</div>
+                    <p>執行緩慢</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="legacy-demo">
+            <h2>🎯 遺留系統演示</h2>
+            <p>這是一個電商訂單管理系統，充滿了典型的遺留代碼問題：</p>
+            
+            <div class="demo-section">
+                <h3>訂單處理功能</h3>
+                <div class="order-form">
+                    <div class="form-group">
+                        <label>商品名稱：</label>
+                        <input type="text" id="productName" placeholder="輸入商品名稱">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>數量：</label>
+                        <input type="number" id="quantity" value="1" min="1">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>單價：</label>
+                        <input type="number" id="price" placeholder="輸入單價" step="0.01">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>客戶類型：</label>
+                        <select id="customerType">
+                            <option value="regular">一般客戶</option>
+                            <option value="vip">VIP客戶</option>
+                            <option value="premium">白金客戶</option>
+                        </select>
+                    </div>
+                    
+                    <button onclick="processOrder()" class="process-btn">處理訂單</button>
+                </div>
+                
+                <div id="orderResult" class="result-area">
+                    <p>點擊「處理訂單」查看結果</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="problems-section">
+            <h2>🐛 遺留代碼問題</h2>
+            <div class="problems-grid">
+                <div class="problem-card">
+                    <h4>🍝 義大利麵條代碼</h4>
+                    <p>所有邏輯混在一起，難以理解和修改</p>
+                </div>
+                
+                <div class="problem-card">
+                    <h4>🔄 重複代碼</h4>
+                    <p>相同邏輯在多處重複，維護困難</p>
+                </div>
+                
+                <div class="problem-card">
+                    <h4>🏗️ 緊密耦合</h4>
+                    <p>組件間相互依賴，無法獨立測試</p>
+                </div>
+                
+                <div class="problem-card">
+                    <h4>📏 超長函數</h4>
+                    <p>函數過長，單一責任原則被違反</p>
+                </div>
+                
+                <div class="problem-card">
+                    <h4>🔢 魔法數字</h4>
+                    <p>硬編碼的數值，缺乏解釋</p>
+                </div>
+                
+                <div class="problem-card">
+                    <h4>❌ 缺乏錯誤處理</h4>
+                    <p>沒有適當的錯誤處理機制</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="refactoring-plan">
+            <h2>🎯 Agent 重構任務</h2>
+            <div class="task-workflow">
+                <div class="task-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>代碼分析</h4>
+                        <p>Agent 深度分析遺留系統架構</p>
+                    </div>
+                </div>
+                
+                <div class="task-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>重構策略</h4>
+                        <p>Agent 制定分階段重構計劃</p>
+                    </div>
+                </div>
+                
+                <div class="task-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>架構設計</h4>
+                        <p>Agent 設計新的模組化架構</p>
+                    </div>
+                </div>
+                
+                <div class="task-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>執行重構</h4>
+                        <p>Agent 逐步實現重構計劃</p>
+                    </div>
+                </div>
+                
+                <div class="task-step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h4>驗證改進</h4>
+                        <p>Agent 驗證重構效果並優化</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="code-showcase">
+            <h2>📁 遺留代碼檔案</h2>
+            <div class="file-list">
+                <div class="file-item">
+                    <span class="file-icon">📄</span>
+                    <span class="file-name">legacy-code/monolith.js</span>
+                    <span class="file-size">2,847 行</span>
+                    <span class="file-status critical">嚴重問題</span>
+                </div>
+                
+                <div class="file-item">
+                    <span class="file-icon">📄</span>
+                    <span class="file-name">legacy-code/utils-old.js</span>
+                    <span class="file-size">1,234 行</span>
+                    <span class="file-status warning">需要重構</span>
+                </div>
+                
+                <div class="file-item">
+                    <span class="file-icon">📄</span>
+                    <span class="file-name">app.js</span>
+                    <span class="file-size">156 行</span>
+                    <span class="file-status good">展示層</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="agent-guide">
+            <h3>🤖 Agent 60% 模式指南</h3>
+            <div class="guide-content">
+                <p><strong>在這個階段，Agent 將：</strong></p>
+                <ul>
+                    <li>🔍 自主分析複雜的遺留代碼架構</li>
+                    <li>📋 制定完整的重構策略和時程</li>
+                    <li>🏗️ 設計新的模組化架構</li>
+                    <li>⚡ 實現重構並保證功能完整性</li>
+                    <li>📊 驗證改進效果並持續優化</li>
+                </ul>
+                <p><em>這是 Agent 從協助者轉為架構師的關鍵階段！</em></p>
+            </div>
+        </div>
+    </div>
+    
+    <script src="legacy-code/monolith.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

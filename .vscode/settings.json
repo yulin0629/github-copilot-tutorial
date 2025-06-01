@@ -1,0 +1,16 @@
+{
+  // 核心必要設定
+  "github.copilot.chat.localeOverride": "zh-TW",
+  "github.copilot.chat.agent.thinkingTool": true,
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "github.copilot.chat.search.semanticTextResults": true,
+  "chat.detectParticipant.enabled": true,
+  
+  // 自訂指令系統
+  "github.copilot.chat.codeGeneration.useInstructionFiles": true,
+  "github.copilot.chat.codeGeneration.instructions": [
+    { "file": "./.github/instructions/javascript.instructions.md" },
+    { "file": "./.github/instructions/testing.instructions.md" },
+    { "file": "./.github/instructions/agent-mode.instructions.md" }
+  ]
+}

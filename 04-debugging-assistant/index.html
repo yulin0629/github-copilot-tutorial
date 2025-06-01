@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>購物車計算器 - 偵錯練習</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🛒 購物車計算器</h1>
+        <p class="subtitle">這個應用有幾個 Bug，讓 Agent 幫你找出來並修復！</p>
+        
+        <div class="product-section">
+            <h2>商品清單</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <h3>筆記型電腦</h3>
+                    <p class="price">$25,000</p>
+                    <input type="number" id="laptop-qty" value="0" min="0">
+                    <button onclick="addToCart('laptop', 25000)">加入購物車</button>
+                </div>
+                
+                <div class="product-card">
+                    <h3>藍牙耳機</h3>
+                    <p class="price">$3,500</p>
+                    <input type="number" id="headphones-qty" value="0" min="0">
+                    <button onclick="addToCart('headphones', 3500)">加入購物車</button>
+                </div>
+                
+                <div class="product-card">
+                    <h3>無線滑鼠</h3>
+                    <p class="price">$1,200</p>
+                    <input type="number" id="mouse-qty" value="0" min="0">
+                    <button onclick="addToCart('mouse', 1200)">加入購物車</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="cart-section">
+            <h2>購物車</h2>
+            <div id="cart-items">
+                <p class="empty-cart">購物車是空的</p>
+            </div>
+            
+            <div class="cart-summary">
+                <div class="summary-row">
+                    <span>小計：</span>
+                    <span id="subtotal">$0</span>
+                </div>
+                <div class="summary-row">
+                    <span>運費：</span>
+                    <span id="shipping">$0</span>
+                </div>
+                <div class="summary-row">
+                    <span>折扣：</span>
+                    <span id="discount">$0</span>
+                </div>
+                <div class="summary-row total">
+                    <span>總計：</span>
+                    <span id="total">$0</span>
+                </div>
+            </div>
+            
+            <button id="checkout-btn" onclick="checkout()" disabled>結帳</button>
+            <button id="clear-cart-btn" onclick="clearCart()">清空購物車</button>
+        </div>
+        
+        <div class="coupon-section">
+            <h3>優惠券</h3>
+            <input type="text" id="coupon-code" placeholder="輸入優惠券代碼">
+            <button onclick="applyCoupon()">套用優惠券</button>
+            <p class="coupon-hint">試試看：SAVE10, SAVE20, FREESHIP</p>
+        </div>
+        
+        <div class="debug-info">
+            <h3>🐛 已知問題</h3>
+            <ul>
+                <li>總金額計算錯誤</li>
+                <li>優惠券功能異常</li>
+                <li>清空購物車按鈕沒反應</li>
+                <li>運費計算邏輯有問題</li>
+                <li>數量更新時價格不會重新計算</li>
+            </ul>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

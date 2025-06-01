@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>數據分析工具 - Agent 測試實驗室</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>📊 數據分析工具</h1>
+        <p class="subtitle">讓 Agent 為這個工具設計完整的測試策略！</p>
+        
+        <div class="tool-section">
+            <h2>🔧 分析功能</h2>
+            
+            <div class="input-section">
+                <h3>數據輸入</h3>
+                <textarea id="dataInput" placeholder="輸入數據（每行一個數字，或用逗號分隔）：&#10;例如：&#10;10, 20, 30, 40, 50&#10;或&#10;10&#10;20&#10;30"></textarea>
+                <button onclick="analyzeData()">🔍 開始分析</button>
+                <button onclick="loadSampleData()">📝 載入範例數據</button>
+            </div>
+            
+            <div class="results-section">
+                <h3>分析結果</h3>
+                <div id="results" class="results-grid">
+                    <div class="result-card">
+                        <h4>基本統計</h4>
+                        <div id="basicStats">
+                            <p>數量：<span id="count">-</span></p>
+                            <p>總和：<span id="sum">-</span></p>
+                            <p>平均：<span id="average">-</span></p>
+                            <p>最大值：<span id="max">-</span></p>
+                            <p>最小值：<span id="min">-</span></p>
+                        </div>
+                    </div>
+                    
+                    <div class="result-card">
+                        <h4>進階統計</h4>
+                        <div id="advancedStats">
+                            <p>中位數：<span id="median">-</span></p>
+                            <p>標準差：<span id="stdDev">-</span></p>
+                            <p>變異數：<span id="variance">-</span></p>
+                            <p>範圍：<span id="range">-</span></p>
+                        </div>
+                    </div>
+                    
+                    <div class="result-card">
+                        <h4>數據品質</h4>
+                        <div id="qualityStats">
+                            <p>有效數據：<span id="validCount">-</span></p>
+                            <p>無效數據：<span id="invalidCount">-</span></p>
+                            <p>重複數據：<span id="duplicateCount">-</span></p>
+                            <p>數據完整度：<span id="completeness">-</span></p>
+                        </div>
+                    </div>
+                    
+                    <div class="result-card">
+                        <h4>數據分布</h4>
+                        <div id="distributionStats">
+                            <p>偏度：<span id="skewness">-</span></p>
+                            <p>峰度：<span id="kurtosis">-</span></p>
+                            <p>四分位距：<span id="iqr">-</span></p>
+                            <p>離群值：<span id="outliers">-</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="testing-section">
+            <h2>🧪 測試實驗室</h2>
+            <div class="test-controls">
+                <button onclick="runAllTests()" class="test-btn">▶️ 執行所有測試</button>
+                <button onclick="clearTestResults()" class="clear-btn">🗑️ 清除結果</button>
+            </div>
+            
+            <div id="testResults" class="test-results">
+                <p class="no-tests">尚未執行測試。讓 Agent 幫你設計測試策略！</p>
+            </div>
+        </div>
+        
+        <div class="agent-guide">
+            <h3>🤖 Agent 任務指南</h3>
+            <div class="task-list">
+                <div class="task-item">
+                    <span class="task-number">1</span>
+                    <span class="task-text">分析這個數據分析工具的功能</span>
+                </div>
+                <div class="task-item">
+                    <span class="task-number">2</span>
+                    <span class="task-text">設計完整的測試策略（單元測試 + 整合測試）</span>
+                </div>
+                <div class="task-item">
+                    <span class="task-number">3</span>
+                    <span class="task-text">實現測試用例並驗證功能正確性</span>
+                </div>
+                <div class="task-item">
+                    <span class="task-number">4</span>
+                    <span class="task-text">建立測試自動化流程</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="function-showcase">
+            <h3>🔍 待測試功能清單</h3>
+            <div class="function-grid">
+                <div class="function-card">
+                    <h4>數據解析</h4>
+                    <ul>
+                        <li>parseData()</li>
+                        <li>validateNumbers()</li>
+                        <li>cleanData()</li>
+                    </ul>
+                </div>
+                <div class="function-card">
+                    <h4>基本統計</h4>
+                    <ul>
+                        <li>calculateSum()</li>
+                        <li>calculateAverage()</li>
+                        <li>findMinMax()</li>
+                    </ul>
+                </div>
+                <div class="function-card">
+                    <h4>進階統計</h4>
+                    <ul>
+                        <li>calculateMedian()</li>
+                        <li>calculateStdDev()</li>
+                        <li>detectOutliers()</li>
+                    </ul>
+                </div>
+                <div class="function-card">
+                    <h4>數據品質</h4>
+                    <ul>
+                        <li>checkDataQuality()</li>
+                        <li>findDuplicates()</li>
+                        <li>calculateCompleteness()</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="dataProcessor.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

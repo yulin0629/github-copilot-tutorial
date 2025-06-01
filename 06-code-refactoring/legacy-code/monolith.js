@@ -1,718 +1,314 @@
-// 遺留電子商務系統 - 單體架構檔案
-// 這個檔案包含了多種程式碼異味，需要進行重構
+// 💀 遺留系統：電商訂單管理系統
+// 警告：這是一個充滿問題的遺留代碼，包含了所有常見的壞味道
+// 讓 Agent 來重構這個混亂的系統！
 
-const express = require('express');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const mysql = require('mysql2');
-const nodemailer = require('nodemailer');
-const moment = require('moment');
-const _ = require('lodash');
-
-// 全域變數 - 程式碼異味 #1
-var app = express();
-var db;
-var mailTransporter;
-var JWT_SECRET = "super_secret_key_123"; // 硬編碼密鑰 - 程式碼異味 #2
-var users = [];
-var products = [];
+// 全域變數濫用
 var orders = [];
-var inventory = [];
+var customers = [];
+var products = [];
+var currentUser = null;
+var totalRevenue = 0;
+var systemStatus = "running";
+var debugMode = false;
+var apiVersion = "v1.2.3";
 
-// 資料庫連線設定 - 硬編碼 - 程式碼異味 #3
-function connectDB() {
-    db = mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        password: 'password123',
-        database: 'ecommerce'
-    });
-    
-    db.connect((err) => {
-        if (err) {
-            console.log('Database connection failed');
-            throw err;
-        }
-        console.log('Connected to MySQL');
-    });
-}
+// 魔法數字和硬編碼
+var TAX_RATE = 0.08;
+var SHIPPING_COST = 50;
+var VIP_DISCOUNT = 0.1;
+var PREMIUM_DISCOUNT = 0.15;
+var FREE_SHIPPING_THRESHOLD = 1000;
 
-// 郵件設定 - 硬編碼 - 程式碼異味 #4
-function setupMail() {
-    mailTransporter = nodemailer.createTransporter({
-        service: 'gmail',
-        auth: {
-            user: 'admin@company.com',
-            pass: 'email_password_123'
-        }
-    });
-}
-
-// 超長函數 - 包含太多職責 - 程式碼異味 #5
-function handleUserRegistration(req, res) {
-    var email = req.body.email;
-    var password = req.body.password;
-    var name = req.body.name;
-    var phone = req.body.phone;
-    var address = req.body.address;
-    var birthdate = req.body.birthdate;
+// 超長的單一函數 - 違反單一責任原則
+function processOrder(productName, quantity, price, customerType, customerName, address, phone) {
+    // 沒有輸入驗證
+    console.log("Processing order...");
     
-    // 缺乏輸入驗證 - 程式碼異味 #6
-    if (!email || !password) {
-        res.status(400).json({error: 'Missing fields'});
-        return;
-    }
-    
-    // 重複的驗證邏輯 - 程式碼異味 #7
-    if (email.indexOf('@') === -1) {
-        res.status(400).json({error: 'Invalid email'});
-        return;
-    }
-    
-    if (password.length < 6) {
-        res.status(400).json({error: 'Password too short'});
-        return;
-    }
-    
-    // 檢查用戶是否已存在
-    db.query('SELECT * FROM users WHERE email = ?', [email], (err, results) => {
-        if (err) {
-            console.log(err);
-            res.status(500).json({error: 'Database error'});
-            return;
-        }
-        
-        if (results.length > 0) {
-            res.status(400).json({error: 'User already exists'});
-            return;
-        }
-        
-        // 密碼加密
-        bcrypt.hash(password, 10, (err, hashedPassword) => {
-            if (err) {
-                console.log(err);
-                res.status(500).json({error: 'Encryption error'});
-                return;
-            }
-            
-            // 插入新用戶
-            var insertQuery = 'INSERT INTO users (email, password, name, phone, address, birthdate, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)';
-            var now = moment().format('YYYY-MM-DD HH:mm:ss');
-            
-            db.query(insertQuery, [email, hashedPassword, name, phone, address, birthdate, now], (err, result) => {
-                if (err) {
-                    console.log(err);
-                    res.status(500).json({error: 'Failed to create user'});
-                    return;
-                }
+    // 複雜的嵌套邏輯
+    if (productName && quantity && price && customerType) {
+        if (quantity > 0) {
+            if (price > 0) {
+                // 重複的計算邏輯
+                var subtotal = price * quantity;
+                var tax = subtotal * TAX_RATE;
+                var shipping = SHIPPING_COST;
+                var discount = 0;
                 
-                var userId = result.insertId;
-                
-                // 建立用戶設定檔
-                var profileQuery = 'INSERT INTO user_profiles (user_id, preferences, loyalty_points) VALUES (?, ?, ?)';
-                var defaultPreferences = JSON.stringify({newsletter: true, promotions: true});
-                
-                db.query(profileQuery, [userId, defaultPreferences, 0], (err) => {
-                    if (err) {
-                        console.log(err);
-                        // 但繼續執行...
-                    }
-                    
-                    // 發送歡迎郵件
-                    var mailOptions = {
-                        from: 'admin@company.com',
-                        to: email,
-                        subject: 'Welcome to our store!',
-                        html: '<h1>Welcome!</h1><p>Thank you for registering with us.</p>'
-                    };
-                    
-                    mailTransporter.sendMail(mailOptions, (err) => {
-                        if (err) {
-                            console.log('Email failed:', err);
-                            // 但不返回錯誤...
-                        }
-                        
-                        // 記錄到分析系統
-                        var analyticsData = {
-                            event: 'user_registration',
-                            user_id: userId,
-                            timestamp: now,
-                            source: req.headers['user-agent']
-                        };
-                        
-                        // 模擬第三方 API 呼叫
-                        setTimeout(() => {
-                            console.log('Analytics sent:', analyticsData);
-                        }, 1000);
-                        
-                        // 生成 JWT token
-                        var token = jwt.sign({userId: userId, email: email}, JWT_SECRET, {expiresIn: '24h'});
-                        
-                        res.status(201).json({
-                            message: 'User created successfully',
-                            userId: userId,
-                            token: token
-                        });
-                    });
-                });
-            });
-        });
-    });
-}
-
-// 另一個超長函數 - 處理產品搜尋和篩選 - 程式碼異味 #8
-function handleProductSearch(req, res) {
-    var query = req.query.q;
-    var category = req.query.category;
-    var minPrice = req.query.min_price;
-    var maxPrice = req.query.max_price;
-    var sortBy = req.query.sort;
-    var page = req.query.page || 1;
-    var limit = req.query.limit || 10;
-    
-    // 重複的驗證邏輯 - 程式碼異味 #9
-    if (query && query.length < 2) {
-        res.status(400).json({error: 'Query too short'});
-        return;
-    }
-    
-    if (minPrice && isNaN(minPrice)) {
-        res.status(400).json({error: 'Invalid min price'});
-        return;
-    }
-    
-    if (maxPrice && isNaN(maxPrice)) {
-        res.status(400).json({error: 'Invalid max price'});
-        return;
-    }
-    
-    // 複雜的 SQL 查詢建構 - 程式碼異味 #10
-    var sqlQuery = 'SELECT p.*, c.name as category_name, AVG(r.rating) as avg_rating, COUNT(r.id) as review_count FROM products p';
-    sqlQuery += ' LEFT JOIN categories c ON p.category_id = c.id';
-    sqlQuery += ' LEFT JOIN reviews r ON p.id = r.product_id';
-    sqlQuery += ' WHERE p.active = 1';
-    
-    var params = [];
-    
-    if (query) {
-        sqlQuery += ' AND (p.name LIKE ? OR p.description LIKE ?)';
-        params.push('%' + query + '%');
-        params.push('%' + query + '%');
-    }
-    
-    if (category) {
-        sqlQuery += ' AND c.slug = ?';
-        params.push(category);
-    }
-    
-    if (minPrice) {
-        sqlQuery += ' AND p.price >= ?';
-        params.push(minPrice);
-    }
-    
-    if (maxPrice) {
-        sqlQuery += ' AND p.price <= ?';
-        params.push(maxPrice);
-    }
-    
-    sqlQuery += ' GROUP BY p.id';
-    
-    // 排序邏輯 - 重複且複雜 - 程式碼異味 #11
-    if (sortBy === 'price_asc') {
-        sqlQuery += ' ORDER BY p.price ASC';
-    } else if (sortBy === 'price_desc') {
-        sqlQuery += ' ORDER BY p.price DESC';
-    } else if (sortBy === 'name_asc') {
-        sqlQuery += ' ORDER BY p.name ASC';
-    } else if (sortBy === 'name_desc') {
-        sqlQuery += ' ORDER BY p.name DESC';
-    } else if (sortBy === 'rating') {
-        sqlQuery += ' ORDER BY avg_rating DESC';
-    } else if (sortBy === 'popularity') {
-        sqlQuery += ' ORDER BY p.sales_count DESC';
-    } else {
-        sqlQuery += ' ORDER BY p.created_at DESC';
-    }
-    
-    var offset = (page - 1) * limit;
-    sqlQuery += ' LIMIT ? OFFSET ?';
-    params.push(parseInt(limit));
-    params.push(parseInt(offset));
-    
-    db.query(sqlQuery, params, (err, results) => {
-        if (err) {
-            console.log(err);
-            res.status(500).json({error: 'Search failed'});
-            return;
-        }
-        
-        // 獲取總數的另一個查詢 - 重複邏輯 - 程式碼異味 #12
-        var countQuery = 'SELECT COUNT(DISTINCT p.id) as total FROM products p';
-        countQuery += ' LEFT JOIN categories c ON p.category_id = c.id';
-        countQuery += ' WHERE p.active = 1';
-        
-        var countParams = [];
-        
-        if (query) {
-            countQuery += ' AND (p.name LIKE ? OR p.description LIKE ?)';
-            countParams.push('%' + query + '%');
-            countParams.push('%' + query + '%');
-        }
-        
-        if (category) {
-            countQuery += ' AND c.slug = ?';
-            countParams.push(category);
-        }
-        
-        if (minPrice) {
-            countQuery += ' AND p.price >= ?';
-            countParams.push(minPrice);
-        }
-        
-        if (maxPrice) {
-            countQuery += ' AND p.price <= ?';
-            countParams.push(maxPrice);
-        }
-        
-        db.query(countQuery, countParams, (err, countResults) => {
-            if (err) {
-                console.log(err);
-                res.status(500).json({error: 'Count failed'});
-                return;
-            }
-            
-            var total = countResults[0].total;
-            var totalPages = Math.ceil(total / limit);
-            
-            // 為每個產品處理額外資料 - 程式碼異味 #13
-            var processedResults = [];
-            var completed = 0;
-            
-            if (results.length === 0) {
-                res.json({
-                    products: [],
-                    pagination: {
-                        page: parseInt(page),
-                        limit: parseInt(limit),
-                        total: total,
-                        totalPages: totalPages
-                    }
-                });
-                return;
-            }
-            
-            results.forEach((product, index) => {
-                // 獲取產品圖片
-                db.query('SELECT * FROM product_images WHERE product_id = ? ORDER BY sort_order', [product.id], (err, images) => {
-                    if (err) {
-                        console.log(err);
-                        product.images = [];
+                // 複雜的客戶類型判斷
+                if (customerType == "vip") {
+                    discount = subtotal * VIP_DISCOUNT;
+                    if (subtotal > FREE_SHIPPING_THRESHOLD) {
+                        shipping = 0;
                     } else {
-                        product.images = images;
+                        shipping = shipping * 0.5; // VIP 半價運費
                     }
+                } else if (customerType == "premium") {
+                    discount = subtotal * PREMIUM_DISCOUNT;
+                    shipping = 0; // 白金客戶免運費
                     
-                    // 獲取庫存資訊
-                    db.query('SELECT * FROM inventory WHERE product_id = ?', [product.id], (err, inventory) => {
-                        if (err) {
-                            console.log(err);
-                            product.stock = 0;
-                        } else {
-                            product.stock = inventory.reduce((sum, item) => sum + item.quantity, 0);
-                        }
-                        
-                        // 計算折扣價格
-                        db.query('SELECT * FROM discounts WHERE product_id = ? AND start_date <= NOW() AND end_date >= NOW() AND active = 1', [product.id], (err, discounts) => {
-                            if (err) {
-                                console.log(err);
-                                product.discounted_price = product.price;
+                    // 白金客戶額外優惠
+                    if (subtotal > 2000) {
+                        discount = discount + (subtotal * 0.05); // 額外5%折扣
+                    }
+                } else if (customerType == "regular") {
+                    if (subtotal > FREE_SHIPPING_THRESHOLD) {
+                        shipping = 0;
+                    }
+                    // 一般客戶小額訂單手續費
+                    if (subtotal < 200) {
+                        shipping = shipping + 30; // 小額訂單費
+                    }
+                } else {
+                    // 未知客戶類型的處理
+                    console.log("Unknown customer type");
+                    return "Error: Invalid customer type";
+                }
+                
+                var total = subtotal + tax + shipping - discount;
+                
+                // 庫存檢查邏輯混在一起
+                var productFound = false;
+                for (var i = 0; i < products.length; i++) {
+                    if (products[i].name == productName) {
+                        productFound = true;
+                        if (products[i].stock >= quantity) {
+                            products[i].stock = products[i].stock - quantity;
+                            
+                            // 直接在這裡處理訂單創建
+                            var orderId = "ORD-" + Date.now() + "-" + Math.random().toString(36).substr(2, 9);
+                            var order = {
+                                id: orderId,
+                                productName: productName,
+                                quantity: quantity,
+                                price: price,
+                                subtotal: subtotal,
+                                tax: tax,
+                                shipping: shipping,
+                                discount: discount,
+                                total: total,
+                                customerType: customerType,
+                                customerName: customerName,
+                                address: address,
+                                phone: phone,
+                                status: "pending",
+                                createdAt: new Date(),
+                                estimatedDelivery: calculateDeliveryDate(customerType, address)
+                            };
+                            
+                            orders.push(order);
+                            totalRevenue = totalRevenue + total;
+                            
+                            // 客戶資料處理也混在一起
+                            var customerExists = false;
+                            for (var j = 0; j < customers.length; j++) {
+                                if (customers[j].name == customerName) {
+                                    customerExists = true;
+                                    customers[j].totalOrders = customers[j].totalOrders + 1;
+                                    customers[j].totalSpent = customers[j].totalSpent + total;
+                                    break;
+                                }
+                            }
+                            
+                            if (!customerExists) {
+                                customers.push({
+                                    name: customerName,
+                                    type: customerType,
+                                    phone: phone,
+                                    address: address,
+                                    totalOrders: 1,
+                                    totalSpent: total,
+                                    joinDate: new Date()
+                                });
+                            }
+                            
+                            // 發送通知邏輯
+                            if (customerType == "premium" || customerType == "vip") {
+                                console.log("Sending premium notification to " + customerName);
+                                // 假設的郵件發送
+                                sendEmail(customerName, "您的訂單已確認", "訂單編號：" + orderId);
                             } else {
-                                var maxDiscount = 0;
-                                discounts.forEach(discount => {
-                                    if (discount.type === 'percentage') {
-                                        var discountAmount = product.price * (discount.value / 100);
-                                        if (discountAmount > maxDiscount) {
-                                            maxDiscount = discountAmount;
-                                        }
-                                    } else if (discount.type === 'fixed') {
-                                        if (discount.value > maxDiscount) {
-                                            maxDiscount = discount.value;
-                                        }
-                                    }
-                                });
-                                product.discounted_price = Math.max(0, product.price - maxDiscount);
+                                console.log("Sending regular notification to " + customerName);
+                                sendSMS(phone, "訂單確認：" + orderId);
                             }
                             
-                            processedResults[index] = product;
-                            completed++;
+                            // 回傳結果
+                            return {
+                                success: true,
+                                orderId: orderId,
+                                total: total,
+                                message: "訂單處理成功",
+                                details: {
+                                    subtotal: subtotal,
+                                    tax: tax,
+                                    shipping: shipping,
+                                    discount: discount,
+                                    estimatedDelivery: order.estimatedDelivery
+                                }
+                            };
                             
-                            if (completed === results.length) {
-                                res.json({
-                                    products: processedResults,
-                                    pagination: {
-                                        page: parseInt(page),
-                                        limit: parseInt(limit),
-                                        total: total,
-                                        totalPages: totalPages
-                                    }
-                                });
-                            }
-                        });
-                    });
-                });
-            });
-        });
-    });
-}
-
-// 重複的認證中介軟體 - 程式碼異味 #14
-function authenticateUser(req, res, next) {
-    var token = req.headers.authorization;
-    
-    if (!token) {
-        res.status(401).json({error: 'No token provided'});
-        return;
-    }
-    
-    if (token.startsWith('Bearer ')) {
-        token = token.slice(7);
-    }
-    
-    jwt.verify(token, JWT_SECRET, (err, decoded) => {
-        if (err) {
-            res.status(401).json({error: 'Invalid token'});
-            return;
-        }
-        
-        req.userId = decoded.userId;
-        req.userEmail = decoded.email;
-        next();
-    });
-}
-
-// 另一個認證函數 - 重複邏輯 - 程式碼異味 #15
-function checkAdminAuth(req, res, next) {
-    var token = req.headers.authorization;
-    
-    if (!token) {
-        res.status(401).json({error: 'No token provided'});
-        return;
-    }
-    
-    if (token.startsWith('Bearer ')) {
-        token = token.slice(7);
-    }
-    
-    jwt.verify(token, JWT_SECRET, (err, decoded) => {
-        if (err) {
-            res.status(401).json({error: 'Invalid token'});
-            return;
-        }
-        
-        // 檢查是否為管理員
-        db.query('SELECT role FROM users WHERE id = ?', [decoded.userId], (err, results) => {
-            if (err || results.length === 0 || results[0].role !== 'admin') {
-                res.status(403).json({error: 'Admin access required'});
-                return;
-            }
-            
-            req.userId = decoded.userId;
-            req.userEmail = decoded.email;
-            next();
-        });
-    });
-}
-
-// 超長的訂單處理函數 - 程式碼異味 #16
-function processOrder(req, res) {
-    var userId = req.userId;
-    var items = req.body.items;
-    var shippingAddress = req.body.shipping_address;
-    var paymentMethod = req.body.payment_method;
-    var couponCode = req.body.coupon_code;
-    
-    // 缺乏適當的驗證 - 程式碼異味 #17
-    if (!items || items.length === 0) {
-        res.status(400).json({error: 'No items in order'});
-        return;
-    }
-    
-    if (!shippingAddress) {
-        res.status(400).json({error: 'Shipping address required'});
-        return;
-    }
-    
-    var totalAmount = 0;
-    var validItems = [];
-    var processedItems = 0;
-    
-    // 複雜的巢狀回呼 - 回呼地獄 - 程式碼異味 #18
-    items.forEach((item, index) => {
-        db.query('SELECT * FROM products WHERE id = ? AND active = 1', [item.product_id], (err, productResults) => {
-            if (err) {
-                console.log(err);
-                res.status(500).json({error: 'Database error'});
-                return;
-            }
-            
-            if (productResults.length === 0) {
-                res.status(400).json({error: 'Product not found: ' + item.product_id});
-                return;
-            }
-            
-            var product = productResults[0];
-            
-            // 檢查庫存
-            db.query('SELECT SUM(quantity) as stock FROM inventory WHERE product_id = ?', [item.product_id], (err, stockResults) => {
-                if (err) {
-                    console.log(err);
-                    res.status(500).json({error: 'Stock check failed'});
-                    return;
-                }
-                
-                var availableStock = stockResults[0].stock || 0;
-                
-                if (availableStock < item.quantity) {
-                    res.status(400).json({error: 'Insufficient stock for product: ' + product.name});
-                    return;
-                }
-                
-                // 計算價格（包含折扣）
-                db.query('SELECT * FROM discounts WHERE product_id = ? AND start_date <= NOW() AND end_date >= NOW() AND active = 1', [item.product_id], (err, discountResults) => {
-                    if (err) {
-                        console.log(err);
-                        res.status(500).json({error: 'Discount calculation failed'});
-                        return;
-                    }
-                    
-                    var finalPrice = product.price;
-                    var maxDiscount = 0;
-                    
-                    discountResults.forEach(discount => {
-                        if (discount.type === 'percentage') {
-                            var discountAmount = product.price * (discount.value / 100);
-                            if (discountAmount > maxDiscount) {
-                                maxDiscount = discountAmount;
-                            }
-                        } else if (discount.type === 'fixed') {
-                            if (discount.value > maxDiscount) {
-                                maxDiscount = discount.value;
-                            }
+                        } else {
+                            return {
+                                success: false,
+                                message: "庫存不足，可用數量：" + products[i].stock
+                            };
                         }
-                    });
-                    
-                    finalPrice = Math.max(0, product.price - maxDiscount);
-                    
-                    validItems[index] = {
-                        product_id: item.product_id,
-                        quantity: item.quantity,
-                        unit_price: finalPrice,
-                        total_price: finalPrice * item.quantity,
-                        product_name: product.name
+                    }
+                }
+                
+                if (!productFound) {
+                    return {
+                        success: false,
+                        message: "找不到商品：" + productName
                     };
-                    
-                    totalAmount += validItems[index].total_price;
-                    processedItems++;
-                    
-                    if (processedItems === items.length) {
-                        // 所有商品都已處理，繼續訂單流程
-                        processCoupon();
-                    }
-                });
-            });
-        });
-    });
-    
-    function processCoupon() {
-        if (!couponCode) {
-            proceedWithPayment();
-            return;
-        }
-        
-        db.query('SELECT * FROM coupons WHERE code = ? AND active = 1 AND expires_at > NOW()', [couponCode], (err, couponResults) => {
-            if (err) {
-                console.log(err);
-                res.status(500).json({error: 'Coupon validation failed'});
-                return;
-            }
-            
-            if (couponResults.length === 0) {
-                res.status(400).json({error: 'Invalid or expired coupon'});
-                return;
-            }
-            
-            var coupon = couponResults[0];
-            
-            // 檢查使用次數限制
-            db.query('SELECT COUNT(*) as usage_count FROM orders WHERE coupon_code = ?', [couponCode], (err, usageResults) => {
-                if (err) {
-                    console.log(err);
-                    res.status(500).json({error: 'Coupon usage check failed'});
-                    return;
                 }
                 
-                if (coupon.usage_limit && usageResults[0].usage_count >= coupon.usage_limit) {
-                    res.status(400).json({error: 'Coupon usage limit exceeded'});
-                    return;
-                }
-                
-                // 計算優惠券折扣
-                var couponDiscount = 0;
-                if (coupon.type === 'percentage') {
-                    couponDiscount = totalAmount * (coupon.value / 100);
-                    if (coupon.max_discount && couponDiscount > coupon.max_discount) {
-                        couponDiscount = coupon.max_discount;
-                    }
-                } else if (coupon.type === 'fixed') {
-                    couponDiscount = Math.min(coupon.value, totalAmount);
-                }
-                
-                totalAmount = Math.max(0, totalAmount - couponDiscount);
-                
-                proceedWithPayment();
-            });
-        });
-    }
-    
-    function proceedWithPayment() {
-        // 模擬支付處理 - 應該是外部服務 - 程式碼異味 #19
-        setTimeout(() => {
-            var paymentSuccessful = Math.random() > 0.1; // 90% 成功率
-            
-            if (!paymentSuccessful) {
-                res.status(400).json({error: 'Payment failed'});
-                return;
+            } else {
+                return {
+                    success: false,
+                    message: "價格必須大於0"
+                };
             }
-            
-            // 建立訂單
-            var orderData = {
-                user_id: userId,
-                total_amount: totalAmount,
-                status: 'confirmed',
-                shipping_address: JSON.stringify(shippingAddress),
-                payment_method: paymentMethod,
-                coupon_code: couponCode,
-                created_at: moment().format('YYYY-MM-DD HH:mm:ss')
+        } else {
+            return {
+                success: false,
+                message: "數量必須大於0"
             };
-            
-            db.query('INSERT INTO orders SET ?', orderData, (err, orderResult) => {
-                if (err) {
-                    console.log(err);
-                    res.status(500).json({error: 'Order creation failed'});
-                    return;
-                }
-                
-                var orderId = orderResult.insertId;
-                
-                // 插入訂單項目
-                var orderItemsProcessed = 0;
-                
-                validItems.forEach(item => {
-                    if (!item) return;
-                    
-                    var orderItemData = {
-                        order_id: orderId,
-                        product_id: item.product_id,
-                        quantity: item.quantity,
-                        unit_price: item.unit_price,
-                        total_price: item.total_price
-                    };
-                    
-                    db.query('INSERT INTO order_items SET ?', orderItemData, (err) => {
-                        if (err) {
-                            console.log(err);
-                            return;
-                        }
-                        
-                        // 更新庫存
-                        db.query('UPDATE inventory SET quantity = quantity - ? WHERE product_id = ? AND quantity >= ?', 
-                                [item.quantity, item.product_id, item.quantity], (err) => {
-                            if (err) {
-                                console.log(err);
-                                return;
-                            }
-                            
-                            orderItemsProcessed++;
-                            
-                            if (orderItemsProcessed === validItems.filter(item => item).length) {
-                                // 發送確認郵件
-                                var mailOptions = {
-                                    from: 'orders@company.com',
-                                    to: req.userEmail,
-                                    subject: 'Order Confirmation #' + orderId,
-                                    html: '<h1>Order Confirmed!</h1><p>Your order #' + orderId + ' has been confirmed.</p>'
-                                };
-                                
-                                mailTransporter.sendMail(mailOptions, (err) => {
-                                    if (err) {
-                                        console.log('Email failed:', err);
-                                    }
-                                    
-                                    res.status(201).json({
-                                        message: 'Order created successfully',
-                                        orderId: orderId,
-                                        totalAmount: totalAmount
-                                    });
-                                });
-                            }
-                        });
-                    });
-                });
-            });
-        }, 2000);
+        }
+    } else {
+        return {
+            success: false,
+            message: "缺少必要參數"
+        };
     }
 }
 
-// 應用程式設定和路由 - 全部混在一起 - 程式碼異味 #20
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-// 路由定義 - 缺乏組織 - 程式碼異味 #21
-app.post('/api/register', handleUserRegistration);
-app.get('/api/products/search', handleProductSearch);
-app.post('/api/orders', authenticateUser, processOrder);
-
-// 其他混雜的路由...
-app.get('/api/users/profile', authenticateUser, (req, res) => {
-    // 又是一個長函數...
-    db.query('SELECT u.*, up.preferences, up.loyalty_points FROM users u LEFT JOIN user_profiles up ON u.id = up.user_id WHERE u.id = ?', 
-            [req.userId], (err, results) => {
-        if (err) {
-            console.log(err);
-            res.status(500).json({error: 'Database error'});
-            return;
-        }
-        
-        if (results.length === 0) {
-            res.status(404).json({error: 'User not found'});
-            return;
-        }
-        
-        var user = results[0];
-        delete user.password; // 移除密碼
-        
-        res.json(user);
-    });
-});
-
-// 啟動應用程式 - 缺乏錯誤處理 - 程式碼異味 #22
-function startServer() {
-    connectDB();
-    setupMail();
+// 重複的計算邏輯
+function calculateDeliveryDate(customerType, address) {
+    var today = new Date();
+    var deliveryDays = 7; // 預設7天
     
-    app.listen(3000, () => {
-        console.log('Server running on port 3000');
-    });
+    if (customerType == "premium") {
+        deliveryDays = 1; // 隔日到貨
+    } else if (customerType == "vip") {
+        deliveryDays = 2; // 2天到貨
+    } else {
+        deliveryDays = 7; // 一般客戶
+    }
+    
+    // 地址影響配送時間的複雜邏輯
+    if (address && (address.includes("台北") || address.includes("新北"))) {
+        deliveryDays = deliveryDays - 1;
+    } else if (address && (address.includes("花蓮") || address.includes("台東"))) {
+        deliveryDays = deliveryDays + 2;
+    } else if (address && address.includes("離島")) {
+        deliveryDays = deliveryDays + 5;
+    }
+    
+    var deliveryDate = new Date(today.getTime() + (deliveryDays * 24 * 60 * 60 * 1000));
+    return deliveryDate;
 }
 
-// 沒有優雅的關閉處理 - 程式碼異味 #23
-process.on('SIGINT', () => {
-    console.log('Server shutting down...');
-    process.exit();
-});
-
-// 直接啟動，沒有模組化 - 程式碼異味 #24
-if (require.main === module) {
-    startServer();
+// 假的郵件發送函數
+function sendEmail(customerName, subject, content) {
+    console.log("📧 Sending email to " + customerName);
+    console.log("Subject: " + subject);
+    console.log("Content: " + content);
+    return true;
 }
 
-module.exports = app;
+// 假的簡訊發送函數
+function sendSMS(phone, message) {
+    console.log("📱 Sending SMS to " + phone);
+    console.log("Message: " + message);
+    return true;
+}
+
+// 初始化假資料
+function initializeSystem() {
+    products = [
+        { name: "筆記型電腦", price: 25000, stock: 10 },
+        { name: "藍牙耳機", price: 3500, stock: 50 },
+        { name: "無線滑鼠", price: 1200, stock: 100 },
+        { name: "鍵盤", price: 2500, stock: 30 },
+        { name: "顯示器", price: 8000, stock: 15 }
+    ];
+    
+    customers = [
+        { name: "王小明", type: "vip", phone: "0912345678", address: "台北市信義區", totalOrders: 5, totalSpent: 50000, joinDate: new Date("2023-01-15") },
+        { name: "李小華", type: "premium", phone: "0987654321", address: "新北市板橋區", totalOrders: 10, totalSpent: 120000, joinDate: new Date("2022-06-20") },
+        { name: "張小美", type: "regular", phone: "0955123456", address: "台中市西屯區", totalOrders: 2, totalSpent: 15000, joinDate: new Date("2024-03-10") }
+    ];
+    
+    console.log("System initialized with " + products.length + " products and " + customers.length + " customers");
+}
+
+// 系統啟動
+initializeSystem();
+
+// 更多重複和混亂的函數...
+
+function getOrderStatus(orderId) {
+    for (var i = 0; i < orders.length; i++) {
+        if (orders[i].id == orderId) {
+            return orders[i].status;
+        }
+    }
+    return "Order not found";
+}
+
+function updateOrderStatus(orderId, newStatus) {
+    for (var i = 0; i < orders.length; i++) {
+        if (orders[i].id == orderId) {
+            orders[i].status = newStatus;
+            if (newStatus == "shipped") {
+                console.log("Order " + orderId + " has been shipped");
+                // 發送出貨通知
+                var order = orders[i];
+                if (order.customerType == "premium" || order.customerType == "vip") {
+                    sendEmail(order.customerName, "商品已出貨", "您的訂單 " + orderId + " 已出貨");
+                } else {
+                    sendSMS(order.phone, "您的訂單 " + orderId + " 已出貨");
+                }
+            }
+            return true;
+        }
+    }
+    return false;
+}
+
+// 沒有錯誤處理的函數
+function getCustomerOrders(customerName) {
+    var customerOrders = [];
+    for (var i = 0; i < orders.length; i++) {
+        if (orders[i].customerName == customerName) {
+            customerOrders.push(orders[i]);
+        }
+    }
+    return customerOrders;
+}
+
+// 效能很差的函數
+function getTopCustomers() {
+    var sortedCustomers = [];
+    for (var i = 0; i < customers.length; i++) {
+        sortedCustomers.push(customers[i]);
+    }
+    
+    // 使用最笨的排序方式
+    for (var i = 0; i < sortedCustomers.length; i++) {
+        for (var j = i + 1; j < sortedCustomers.length; j++) {
+            if (sortedCustomers[i].totalSpent < sortedCustomers[j].totalSpent) {
+                var temp = sortedCustomers[i];
+                sortedCustomers[i] = sortedCustomers[j];
+                sortedCustomers[j] = temp;
+            }
+        }
+    }
+    
+    return sortedCustomers.slice(0, 10);
+}
+
+// 全域污染
+window.processOrderGlobal = processOrder;
+window.orders = orders;
+window.customers = customers;

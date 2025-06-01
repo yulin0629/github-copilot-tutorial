@@ -348,8 +348,8 @@ github-copilot-tutorial/
     { "file": "./.github/instructions/agent-mode.instructions.md" }
   ],
   
-  // @workspace 支援
-  "chat.detectParticipant.enabled": true
+  // @workspace 支援與智能路由控制
+  "chat.detectParticipant.enabled": false               // 關閉自動路由，避免 "rerun without" 問題
 }
 ```
 
