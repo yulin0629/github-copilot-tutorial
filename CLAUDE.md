@@ -1,4 +1,4 @@
-我要做一個GitHub copilot 教學
+我要做一個GitHub copilot 教學，整個課程是2個小時
 所有內容放在一個repo
 
 readme 裡面放安裝和設定的教學 for windows
@@ -8,7 +8,7 @@ readme 裡面放安裝和設定的教學 for windows
 每個 folder 都是獨立的然後由淺入深
 也要為每個 folder 設計劇本和 demo 時的prompt
 
-要有 ask edit agent
+要有 ask edit **agent**，agent 是重點，大概佔50%的內容
 Inline chat
 聊天參與者 @ (重點：@workspace)
 
@@ -27,5 +27,5 @@ Inline chat
 
 多使用 web search and perplexity ask  查詢 github copilot 資料
 
-
-Use artifacts
+因為課程是2個小時，所以要控制內容的長度
+前面最簡單的場景不用 agent，慢慢越來越深入， agent 才會越來越多，課程的設計要由淺入深
