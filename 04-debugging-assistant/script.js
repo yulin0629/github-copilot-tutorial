@@ -14,9 +14,10 @@ function addToCart(productId, price) {
         return;
     }
     
-    // Bug 2: 沒有檢查商品是否已存在，會重複添加
+    // Bug 2: 沒有正確處理商品重複添加的數量更新
     const existingItem = cart.find(item => item.id === productId);
     if (existingItem) {
+        // Bug: 應該要更新價格或其他邏輯
         existingItem.quantity += quantity;
     } else {
         cart.push({
@@ -82,7 +83,7 @@ function updatePricing() {
     // 超過 30000 免運費，但這個邏輯被下面的代碼覆蓋了
     shipping = 150; // Bug: 永遠是 150
     
-    // Bug 5: 折扣計算有問題
+    // Bug 5: 優惠券折扣在某些情況下計算異常
     const discountAmount = subtotal * (discount / 100);
     const total = subtotal + shipping - discountAmount;
     
@@ -94,6 +95,7 @@ function updatePricing() {
 }
 
 function removeFromCart(index) {
+    // Bug 10: 移除商品時沒有確認或動畫效果
     cart.splice(index, 1);
     updateCartDisplay();
 }
@@ -128,7 +130,8 @@ function applyCoupon() {
     }
     
     document.getElementById('coupon-code').value = '';
-    updatePricing(); // Bug 8: 套用優惠券後沒有重新計算
+    // Bug 7: 沒有正確更新優惠券狀態
+    updatePricing();
 }
 
 function checkout() {
@@ -140,9 +143,9 @@ function checkout() {
     const total = document.getElementById('total').textContent;
     alert(`結帳成功！總金額：${total}`);
     
-    // Bug 9: 結帳後沒有清空購物車
+    // Bug 8: 結帳後沒有清空購物車
     // clearCart();
 }
 
-// Bug 10: 當使用者修改商品數量時，沒有自動更新購物車
+// Bug 9: 當使用者修改商品數量時，沒有自動更新購物車
 // 應該要監聽 input 事件並重新計算
