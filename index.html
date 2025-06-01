@@ -208,6 +208,139 @@
             }
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        /* Markdown 內容樣式 */
+        .markdown-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            overflow: auto;
+        }
+        
+        .markdown-content {
+            background: white;
+            margin: 50px auto;
+            padding: 40px;
+            width: 90%;
+            max-width: 900px;
+            border-radius: 10px;
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .markdown-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 30px;
+            cursor: pointer;
+            color: #666;
+            transition: color 0.3s;
+        }
+        
+        .markdown-close:hover {
+            color: #000;
+        }
+        
+        /* Markdown 渲染樣式 */
+        .markdown-content h1 {
+            color: #333;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .markdown-content h2 {
+            color: #444;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        
+        .markdown-content h3 {
+            color: #555;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .markdown-content code {
+            background: #f4f4f4;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Consolas', 'Monaco', monospace;
+        }
+        
+        .markdown-content pre {
+            background: #f8f8f8;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+        
+        .markdown-content pre code {
+            background: none;
+            padding: 0;
+        }
+        
+        .markdown-content blockquote {
+            border-left: 4px solid #667eea;
+            padding-left: 20px;
+            margin-left: 0;
+            color: #666;
+            font-style: italic;
+        }
+        
+        .markdown-content ul, .markdown-content ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .markdown-content li {
+            margin-bottom: 5px;
+            line-height: 1.6;
+        }
+        
+        .markdown-content table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 15px 0;
+        }
+        
+        .markdown-content th, .markdown-content td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        
+        .markdown-content th {
+            background: #f4f4f4;
+            font-weight: bold;
+        }
+        
+        .markdown-content strong {
+            color: #333;
+            font-weight: 600;
+        }
+        
+        .markdown-content em {
+            color: #667eea;
+            font-style: italic;
+        }
+        
+        .markdown-loading {
+            text-align: center;
+            padding: 50px;
+            color: #666;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -254,7 +387,7 @@
                         <div class="scenario-description">建立 Copilot 使用基礎，體驗傳統 Chat 功能</div>
                         <span class="agent-indicator agent-0">Agent 0%</span>
                         <div class="scenario-links">
-                            <a href="./01-first-experience/README.md" class="btn btn-doc">📚 查看教學</a>
+                            <a href="#" onclick="loadMarkdown('./01-first-experience/README.md', '場景 1：初次對話體驗'); return false;" class="btn btn-doc">📚 查看教學</a>
                             <a href="./01-first-experience/" class="btn btn-demo">🎯 實際應用</a>
                         </div>
                     </div>
@@ -265,7 +398,7 @@
                         <div class="scenario-description">掌握 @workspace 核心功能，理解專案結構</div>
                         <span class="agent-indicator agent-0">Agent 0%</span>
                         <div class="scenario-links">
-                            <a href="./02-code-explanation/README.md" class="btn btn-doc">📚 查看教學</a>
+                            <a href="#" onclick="loadMarkdown('./02-code-explanation/README.md', '場景 2：程式碼解釋實作'); return false;" class="btn btn-doc">📚 查看教學</a>
                             <a href="./02-code-explanation/" class="btn btn-demo">🎯 實際應用</a>
                         </div>
                     </div>
@@ -276,7 +409,7 @@
                         <div class="scenario-description">體驗 Agent 協助編程，對比手動 vs AI 效率</div>
                         <span class="agent-indicator agent-20">Agent 20%</span>
                         <div class="scenario-links">
-                            <a href="./03-function-generation/README.md" class="btn btn-doc">📚 查看教學</a>
+                            <a href="#" onclick="loadMarkdown('./03-function-generation/README.md', '場景 3：函數生成'); return false;" class="btn btn-doc">📚 查看教學</a>
                             <a href="./03-function-generation/" class="btn btn-demo">🎯 實際應用</a>
                         </div>
                     </div>
@@ -287,7 +420,7 @@
                         <div class="scenario-description">讓 Agent 主動發現和修復程式問題</div>
                         <span class="agent-indicator agent-30">Agent 30%</span>
                         <div class="scenario-links">
-                            <a href="./04-debugging-assistant/README.md" class="btn btn-doc">📚 查看教學</a>
+                            <a href="#" onclick="loadMarkdown('./04-debugging-assistant/README.md', '場景 4：偵錯輔助'); return false;" class="btn btn-doc">📚 查看教學</a>
                             <a href="./04-debugging-assistant/" class="btn btn-demo">🎯 實際應用</a>
                         </div>
                     </div>
@@ -298,7 +431,7 @@
                         <div class="scenario-description">Agent 自主設計測試架構和完整用例</div>
                         <span class="agent-indicator agent-50">Agent 50%</span>
                         <div class="scenario-links">
-                            <a href="./05-unit-testing/README.md" class="btn btn-doc">📚 查看教學</a>
+                            <a href="#" onclick="loadMarkdown('./05-unit-testing/README.md', '場景 5：單元測試'); return false;" class="btn btn-doc">📚 查看教學</a>
                             <a href="./05-unit-testing/" class="btn btn-demo">🎯 實際應用</a>
                         </div>
                     </div>
@@ -309,7 +442,7 @@
                         <div class="scenario-description">Agent 分析遺留代碼並執行重構策略</div>
                         <span class="agent-indicator agent-60">Agent 60%</span>
                         <div class="scenario-links">
-                            <a href="./06-code-refactoring/README.md" class="btn btn-doc">📚 查看教學</a>
+                            <a href="#" onclick="loadMarkdown('./06-code-refactoring/README.md', '場景 6：程式碼重構'); return false;" class="btn btn-doc">📚 查看教學</a>
                             <a href="./06-code-refactoring/" class="btn btn-demo">🎯 實際應用</a>
                         </div>
                     </div>
@@ -320,7 +453,7 @@
                         <div class="scenario-description">Agent 自動分析程式碼生成完整文件體系</div>
                         <span class="agent-indicator agent-80">Agent 80%</span>
                         <div class="scenario-links">
-                            <a href="./07-documentation/README.md" class="btn btn-doc">📚 查看教學</a>
+                            <a href="#" onclick="loadMarkdown('./07-documentation/README.md', '場景 7：文件生成'); return false;" class="btn btn-doc">📚 查看教學</a>
                             <a href="./07-documentation/" class="btn btn-demo">🎯 實際應用</a>
                         </div>
                     </div>
@@ -331,7 +464,7 @@
                         <div class="scenario-description">Agent 完全主導端到端開發流程</div>
                         <span class="agent-indicator agent-90">Agent 90%</span>
                         <div class="scenario-links">
-                            <a href="./08-comprehensive-project/README.md" class="btn btn-doc">📚 查看教學</a>
+                            <a href="#" onclick="loadMarkdown('./08-comprehensive-project/README.md', '場景 8：綜合專案開發'); return false;" class="btn btn-doc">📚 查看教學</a>
                             <a href="./08-comprehensive-project/" class="btn btn-demo">🎯 實際應用</a>
                         </div>
                     </div>
@@ -343,5 +476,75 @@
             <p>🎯 預期成果：完成課程後提升 30-50% 開發效率，建立團隊級 AI 輔助開發流程</p>
         </div>
     </div>
+    
+    <!-- Markdown Modal -->
+    <div id="markdownModal" class="markdown-modal">
+        <div class="markdown-content">
+            <span class="markdown-close" onclick="closeMarkdown()">&times;</span>
+            <div id="markdownBody">
+                <div class="markdown-loading">📡 載入中...</div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 載入並顯示 Markdown
+        async function loadMarkdown(path, title) {
+            const modal = document.getElementById('markdownModal');
+            const body = document.getElementById('markdownBody');
+            
+            // 顯示 Modal
+            modal.style.display = 'block';
+            body.innerHTML = '<div class="markdown-loading">📡 載入中...</div>';
+            
+            try {
+                // Fetch Markdown 檔案
+                const response = await fetch(path);
+                if (!response.ok) {
+                    throw new Error('無法載入文件');
+                }
+                
+                const markdown = await response.text();
+                
+                // 使用 marked.js 轉換 Markdown 為 HTML
+                const html = marked.parse(markdown);
+                
+                // 顯示內容
+                body.innerHTML = html;
+                
+                // 滾動到頂部
+                body.parentElement.scrollTop = 0;
+                
+            } catch (error) {
+                body.innerHTML = `
+                    <div style="text-align: center; padding: 50px; color: #f00;">
+                        <h2>❌ 載入失敗</h2>
+                        <p>無法載入教學內容</p>
+                        <p style="color: #666; font-size: 0.9rem;">${error.message}</p>
+                    </div>
+                `;
+            }
+        }
+        
+        // 關閉 Markdown Modal
+        function closeMarkdown() {
+            document.getElementById('markdownModal').style.display = 'none';
+        }
+        
+        // 點擊 Modal 外部關閉
+        window.onclick = function(event) {
+            const modal = document.getElementById('markdownModal');
+            if (event.target == modal) {
+                closeMarkdown();
+            }
+        }
+        
+        // ESC 鍵關閉
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeMarkdown();
+            }
+        });
+    </script>
 </body>
 </html>
