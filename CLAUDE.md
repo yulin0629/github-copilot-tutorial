@@ -192,21 +192,21 @@
 
 ### **教學專案分支設計**
 - **main 分支**：保持原始教學檔案，供學員下載使用
-- **pages 分支**：GitHub Pages 部署分支，教學時在此分支進行修改
+- **gh-pages 分支**：GitHub Pages 部署分支，教學時在此分支進行修改
   
 ### **分支使用流程**
 1. **課前準備**：
-   - 確保 `pages` 分支與 `main` 同步
-   - GitHub Pages 設定使用 `pages` 分支
+   - 確保 `gh-pages` 分支與 `main` 同步
+   - GitHub Pages 設定使用 `gh-pages` 分支
    
 2. **教學進行時**：
-   - 切換到 `pages` 分支進行 Live Demo
-   - 所有修改都在 `pages` 分支上進行
+   - 切換到 `gh-pages` 分支進行 Live Demo
+   - 所有修改都在 `gh-pages` 分支上進行
    - 學員仍從 `main` 分支下載原始檔案
    
 3. **課後處理**：
    - 可選擇性地將有價值的改進合併回 `main`
-   - 或保持 `pages` 作為教學歷史記錄
+   - 或保持 `gh-pages` 作為教學歷史記錄
 
 ### **優點**
 - 學員永遠能取得乾淨的初始專案
