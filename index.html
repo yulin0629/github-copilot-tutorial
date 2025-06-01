@@ -233,6 +233,34 @@
             margin-top: 30px;
         }
         
+        /* QR Code 樣式 */
+        .qr-code-section {
+            text-align: center;
+            margin: 30px 0;
+            padding: 30px;
+            background: #f0f0f0;
+            border-radius: 10px;
+        }
+        
+        .qr-code-section h3 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+        
+        #qrcode {
+            display: inline-block;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .qr-note {
+            margin-top: 15px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
         @media (max-width: 768px) {
             .header h1 {
                 font-size: 2rem;
@@ -248,6 +276,7 @@
         }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
     <style>
         /* Markdown 內容樣式 */
         .markdown-modal {
@@ -453,6 +482,12 @@
                         📖 查看完整教學指南
                     </a>
                 </div>
+            </div>
+            
+            <div class="qr-code-section">
+                <h3>📱 手機掃描 QR Code 快速存取</h3>
+                <div id="qrcode"></div>
+                <p class="qr-note">掃描 QR Code 即可在手機上瀏覽完整教學內容</p>
             </div>
             
             <div class="scenarios">
@@ -718,6 +753,22 @@
                 
                 // 添加容器到程式碼區塊
                 block.appendChild(buttonContainer);
+            });
+        }
+        
+        // 生成 QR Code
+        window.onload = function() {
+            const currentUrl = window.location.href;
+            const qrcodeContainer = document.getElementById('qrcode');
+            
+            // 生成 QR Code
+            new QRCode(qrcodeContainer, {
+                text: currentUrl,
+                width: 200,
+                height: 200,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H
             });
         }
     </script>
