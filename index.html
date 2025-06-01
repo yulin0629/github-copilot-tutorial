@@ -283,11 +283,41 @@
             padding: 15px;
             overflow-x: auto;
             margin: 15px 0;
+            position: relative;
         }
         
         .markdown-content pre code {
             background: none;
             padding: 0;
+            display: block;
+            padding-right: 50px;
+        }
+        
+        .copy-button {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            padding: 5px 10px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .markdown-content pre:hover .copy-button {
+            opacity: 1;
+        }
+        
+        .copy-button:hover {
+            background: #5a67d8;
+        }
+        
+        .copy-button.copied {
+            background: #48bb78;
         }
         
         .markdown-content blockquote {
@@ -512,6 +542,9 @@
                 // 顯示內容
                 body.innerHTML = html;
                 
+                // 為所有程式碼區塊添加複製按鈕
+                addCopyButtons();
+                
                 // 滾動到頂部
                 body.parentElement.scrollTop = 0;
                 
@@ -545,6 +578,69 @@
                 closeMarkdown();
             }
         });
+        
+        // 添加複製按鈕到程式碼區塊
+        function addCopyButtons() {
+            const codeBlocks = document.querySelectorAll('.markdown-content pre');
+            
+            codeBlocks.forEach((block, index) => {
+                // 創建複製按鈕
+                const button = document.createElement('button');
+                button.className = 'copy-button';
+                button.textContent = '複製';
+                button.setAttribute('data-code-index', index);
+                
+                // 複製功能
+                button.addEventListener('click', async function() {
+                    const code = block.querySelector('code');
+                    const textToCopy = code.textContent || code.innerText;
+                    
+                    try {
+                        await navigator.clipboard.writeText(textToCopy);
+                        
+                        // 顯示複製成功
+                        button.textContent = '✓ 已複製';
+                        button.classList.add('copied');
+                        
+                        // 2秒後恢復
+                        setTimeout(() => {
+                            button.textContent = '複製';
+                            button.classList.remove('copied');
+                        }, 2000);
+                        
+                    } catch (err) {
+                        // 降級方案：使用傳統方法
+                        const textArea = document.createElement('textarea');
+                        textArea.value = textToCopy;
+                        textArea.style.position = 'fixed';
+                        textArea.style.left = '-999999px';
+                        document.body.appendChild(textArea);
+                        textArea.select();
+                        
+                        try {
+                            document.execCommand('copy');
+                            button.textContent = '✓ 已複製';
+                            button.classList.add('copied');
+                            
+                            setTimeout(() => {
+                                button.textContent = '複製';
+                                button.classList.remove('copied');
+                            }, 2000);
+                        } catch (err) {
+                            button.textContent = '複製失敗';
+                            setTimeout(() => {
+                                button.textContent = '複製';
+                            }, 2000);
+                        }
+                        
+                        document.body.removeChild(textArea);
+                    }
+                });
+                
+                // 添加按鈕到程式碼區塊
+                block.appendChild(button);
+            });
+        }
     </script>
 </body>
 </html>
