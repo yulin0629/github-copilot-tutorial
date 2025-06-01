@@ -68,7 +68,10 @@
 2. 找到 `calculateShipping` 函數（約第 10-16 行）
 3. **選取整個函數內容**（從 function 到結尾的 }）
 4. 按 `Ctrl+I` (或 `Cmd+I` on Mac)
-5. 輸入：`改成階梯式運費：500以下60元，500-1000收30元，1000以上免運`
+5. 輸入：
+```
+改成階梯式運費：500以下60元，500-1000收30元，1000以上免運
+```
 6. 按 Enter 送出
 7. 檢視修改預覽，按 `Ctrl+Enter` 接受
 
@@ -76,7 +79,10 @@
 1. 在 `js/cart.js` 找到 `calculateTotal` 函數（約 137-146 行）
 2. **選取整個 calculateTotal 函數**
 3. 按 `Ctrl+I`
-4. 輸入：`整合剛剛寫的 calculateDiscount 函數，在運費計算前先計算折扣`
+4. 輸入：
+```
+整合剛剛寫的 calculateDiscount 函數，在運費計算前先計算折扣
+```
 5. 按 Enter，等待 AI 生成程式碼
 6. 按 `Ctrl+Enter` 接受修改
 

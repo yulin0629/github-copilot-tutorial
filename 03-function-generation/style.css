@@ -62,10 +62,6 @@ section h2 {
     background-color: #fafafa;
 }
 
-#csvFile {
-    margin-bottom: 20px;
-    padding: 10px;
-}
 
 #csvText {
     width: 100%;
@@ -87,11 +83,29 @@ section h2 {
     border-radius: 5px;
     cursor: pointer;
     transition: transform 0.2s, box-shadow 0.2s;
+    margin-right: 10px;
 }
 
 .primary-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.secondary-btn {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.secondary-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(108, 117, 125, 0.4);
+    background-color: #5a6268;
 }
 
 /* Tools Grid */
@@ -188,6 +202,140 @@ footer {
     padding: 20px;
     color: #666;
     font-size: 14px;
+}
+
+/* 步驟指引 */
+.guide-section {
+    background: #f8f9fa;
+    border-left: 4px solid #667eea;
+}
+
+.steps-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.step {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    opacity: 0.5;
+    transition: all 0.3s;
+}
+
+.step.active {
+    opacity: 1;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    transform: scale(1.05);
+}
+
+.step.completed {
+    opacity: 0.8;
+}
+
+.step-number {
+    width: 40px;
+    height: 40px;
+    background: #e0e0e0;
+    color: #666;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.step.active .step-number {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.step.completed .step-number {
+    background: #4CAF50;
+    color: white;
+}
+
+.step-content h3 {
+    margin: 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.step-content p {
+    margin: 5px 0 0 0;
+    font-size: 14px;
+    color: #666;
+}
+
+/* 改進上傳區域 */
+.quick-start {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.large-btn {
+    font-size: 18px;
+    padding: 15px 40px;
+}
+
+.divider {
+    text-align: center;
+    color: #999;
+    margin: 20px 0;
+    position: relative;
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 45%;
+    height: 1px;
+    background: #ddd;
+}
+
+.divider::before {
+    left: 0;
+}
+
+.divider::after {
+    right: 0;
+}
+
+.manual-upload {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.process-area {
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 30px;
+    border-top: 2px solid #e0e0e0;
+}
+
+.hint {
+    font-size: 14px;
+    color: #666;
+    margin-top: 10px;
+}
+
+/* 工具卡片改進 */
+.tool-card p {
+    font-size: 14px;
+    color: #666;
+    margin: 10px 0 15px 0;
 }
 
 /* Status Messages */
