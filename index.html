@@ -308,9 +308,6 @@
         }
         
         .copy-button {
-            position: absolute;
-            top: 5px;
-            right: 5px;
             padding: 5px 10px;
             background: #667eea;
             color: white;
@@ -318,11 +315,17 @@
             border-radius: 4px;
             font-size: 12px;
             cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .markdown-content pre .copy-button,
+        .markdown-content pre .lang-label {
             opacity: 0;
             transition: opacity 0.3s;
         }
         
-        .markdown-content pre:hover .copy-button {
+        .markdown-content pre:hover .copy-button,
+        .markdown-content pre:hover .lang-label {
             opacity: 1;
         }
         
@@ -603,6 +606,29 @@
             const codeBlocks = document.querySelectorAll('.markdown-content pre');
             
             codeBlocks.forEach((block, index) => {
+                // 獲取程式碼語言類型
+                const codeElement = block.querySelector('code');
+                const classList = codeElement.className.split(' ');
+                let language = '';
+                classList.forEach(cls => {
+                    if (cls.startsWith('language-')) {
+                        language = cls.replace('language-', '').toUpperCase();
+                    }
+                });
+                
+                // 創建按鈕容器
+                const buttonContainer = document.createElement('div');
+                buttonContainer.style.cssText = 'position: absolute; top: 5px; right: 5px; display: flex; gap: 5px; align-items: center;';
+                
+                // 如果有語言標示，添加語言標籤
+                if (language) {
+                    const langLabel = document.createElement('span');
+                    langLabel.className = 'lang-label';
+                    langLabel.style.cssText = 'font-size: 12px; color: #666; background: #f0f0f0; padding: 2px 8px; border-radius: 3px;';
+                    langLabel.textContent = language;
+                    buttonContainer.appendChild(langLabel);
+                }
+                
                 // 創建複製按鈕
                 const button = document.createElement('button');
                 button.className = 'copy-button';
@@ -612,7 +638,10 @@
                 // 複製功能
                 button.addEventListener('click', async function() {
                     const code = block.querySelector('code');
-                    const textToCopy = code.textContent || code.innerText;
+                    let textToCopy = code.textContent || code.innerText;
+                    
+                    // 移除多餘的空白
+                    textToCopy = textToCopy.trim();
                     
                     try {
                         await navigator.clipboard.writeText(textToCopy);
@@ -656,8 +685,11 @@
                     }
                 });
                 
-                // 添加按鈕到程式碼區塊
-                block.appendChild(button);
+                // 添加按鈕到容器
+                buttonContainer.appendChild(button);
+                
+                // 添加容器到程式碼區塊
+                block.appendChild(buttonContainer);
             });
         }
     </script>
