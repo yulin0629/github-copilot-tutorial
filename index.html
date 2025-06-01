@@ -550,8 +550,11 @@
             body.innerHTML = '<div class="markdown-loading">📡 載入中...</div>';
             
             try {
-                // Fetch Markdown 檔案
-                const response = await fetch(path);
+                // Fetch Markdown 檔案，加入防快取參數
+                const timestamp = new Date().getTime();
+                const response = await fetch(`${path}?t=${timestamp}`, {
+                    cache: 'no-cache'
+                });
                 if (!response.ok) {
                     throw new Error('無法載入文件');
                 }
