@@ -95,8 +95,8 @@
             color: white;
             padding: 20px;
             border-radius: 10px;
-            text-decoration: none;
             transition: transform 0.3s ease;
+            position: relative;
         }
         
         .scenario-item:hover {
@@ -135,6 +135,44 @@
         .agent-60 { background: rgba(233,30,99,0.3); }
         .agent-80 { background: rgba(156,39,176,0.3); }
         .agent-90 { background: rgba(103,58,183,0.3); }
+        
+        .scenario-links {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .btn-doc {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        
+        .btn-doc:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        
+        .btn-demo {
+            background: rgba(255,255,255,0.9);
+            color: #0984e3;
+            font-weight: 600;
+        }
+        
+        .btn-demo:hover {
+            background: white;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
         
         .quick-start {
             background: #e8f5e8;
@@ -210,61 +248,93 @@
             <div class="scenarios">
                 <h2>📚 8 個學習場景</h2>
                 <div class="scenario-list">
-                    <a href="./01-first-experience/" class="scenario-item">
+                    <div class="scenario-item">
                         <div class="scenario-number">01</div>
                         <div class="scenario-title">初次對話體驗</div>
                         <div class="scenario-description">建立 Copilot 使用基礎，體驗傳統 Chat 功能</div>
                         <span class="agent-indicator agent-0">Agent 0%</span>
-                    </a>
+                        <div class="scenario-links">
+                            <a href="./01-first-experience/README.md" class="btn btn-doc">📚 查看教學</a>
+                            <a href="./01-first-experience/" class="btn btn-demo">🎯 實際應用</a>
+                        </div>
+                    </div>
                     
-                    <a href="./02-code-explanation/" class="scenario-item">
+                    <div class="scenario-item">
                         <div class="scenario-number">02</div>
                         <div class="scenario-title">程式碼解釋實作</div>
                         <div class="scenario-description">掌握 @workspace 核心功能，理解專案結構</div>
                         <span class="agent-indicator agent-0">Agent 0%</span>
-                    </a>
+                        <div class="scenario-links">
+                            <a href="./02-code-explanation/README.md" class="btn btn-doc">📚 查看教學</a>
+                            <a href="./02-code-explanation/" class="btn btn-demo">🎯 實際應用</a>
+                        </div>
+                    </div>
                     
-                    <a href="./03-function-generation/" class="scenario-item">
+                    <div class="scenario-item">
                         <div class="scenario-number">03</div>
                         <div class="scenario-title">函數生成</div>
                         <div class="scenario-description">體驗 Agent 協助編程，對比手動 vs AI 效率</div>
                         <span class="agent-indicator agent-20">Agent 20%</span>
-                    </a>
+                        <div class="scenario-links">
+                            <a href="./03-function-generation/README.md" class="btn btn-doc">📚 查看教學</a>
+                            <a href="./03-function-generation/" class="btn btn-demo">🎯 實際應用</a>
+                        </div>
+                    </div>
                     
-                    <a href="./04-debugging-assistant/" class="scenario-item">
+                    <div class="scenario-item">
                         <div class="scenario-number">04</div>
                         <div class="scenario-title">偵錯輔助</div>
                         <div class="scenario-description">讓 Agent 主動發現和修復程式問題</div>
                         <span class="agent-indicator agent-30">Agent 30%</span>
-                    </a>
+                        <div class="scenario-links">
+                            <a href="./04-debugging-assistant/README.md" class="btn btn-doc">📚 查看教學</a>
+                            <a href="./04-debugging-assistant/" class="btn btn-demo">🎯 實際應用</a>
+                        </div>
+                    </div>
                     
-                    <a href="./05-unit-testing/" class="scenario-item">
+                    <div class="scenario-item">
                         <div class="scenario-number">05</div>
                         <div class="scenario-title">單元測試</div>
                         <div class="scenario-description">Agent 自主設計測試架構和完整用例</div>
                         <span class="agent-indicator agent-50">Agent 50%</span>
-                    </a>
+                        <div class="scenario-links">
+                            <a href="./05-unit-testing/README.md" class="btn btn-doc">📚 查看教學</a>
+                            <a href="./05-unit-testing/" class="btn btn-demo">🎯 實際應用</a>
+                        </div>
+                    </div>
                     
-                    <a href="./06-code-refactoring/" class="scenario-item">
+                    <div class="scenario-item">
                         <div class="scenario-number">06</div>
                         <div class="scenario-title">程式碼重構</div>
                         <div class="scenario-description">Agent 分析遺留代碼並執行重構策略</div>
                         <span class="agent-indicator agent-60">Agent 60%</span>
-                    </a>
+                        <div class="scenario-links">
+                            <a href="./06-code-refactoring/README.md" class="btn btn-doc">📚 查看教學</a>
+                            <a href="./06-code-refactoring/" class="btn btn-demo">🎯 實際應用</a>
+                        </div>
+                    </div>
                     
-                    <a href="./07-documentation/" class="scenario-item">
+                    <div class="scenario-item">
                         <div class="scenario-number">07</div>
                         <div class="scenario-title">文件生成</div>
                         <div class="scenario-description">Agent 自動分析程式碼生成完整文件體系</div>
                         <span class="agent-indicator agent-80">Agent 80%</span>
-                    </a>
+                        <div class="scenario-links">
+                            <a href="./07-documentation/README.md" class="btn btn-doc">📚 查看教學</a>
+                            <a href="./07-documentation/" class="btn btn-demo">🎯 實際應用</a>
+                        </div>
+                    </div>
                     
-                    <a href="./08-comprehensive-project/" class="scenario-item">
+                    <div class="scenario-item">
                         <div class="scenario-number">08</div>
                         <div class="scenario-title">綜合專案開發</div>
                         <div class="scenario-description">Agent 完全主導端到端開發流程</div>
                         <span class="agent-indicator agent-90">Agent 90%</span>
-                    </a>
+                        <div class="scenario-links">
+                            <a href="./08-comprehensive-project/README.md" class="btn btn-doc">📚 查看教學</a>
+                            <a href="./08-comprehensive-project/" class="btn btn-demo">🎯 實際應用</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
