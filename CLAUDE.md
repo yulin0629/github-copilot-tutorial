@@ -10,8 +10,7 @@ readme 裡面放安裝和設定的教學 for windows
 
 要有 ask edit agent
 Inline chat
-斜槓指令 /
-聊天參與者 @
+聊天參與者 @ (重點：@workspace)
 
 情境是
 初次對話體驗
