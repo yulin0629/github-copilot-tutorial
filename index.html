@@ -174,6 +174,20 @@
             box-shadow: 0 3px 10px rgba(0,0,0,0.2);
         }
         
+        .btn-primary {
+            background: #667eea !important;
+            color: white !important;
+            padding: 12px 24px !important;
+            font-size: 1rem !important;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background: #5a67d8 !important;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
         .quick-start {
             background: #e8f5e8;
             padding: 25px;
@@ -406,6 +420,11 @@
                 2. 登入 GitHub 帳號並選擇適合的訂閱方案<br>
                 3. 設定繁體中文語言環境<br>
                 4. 開始第一個場景的學習</p>
+                <div style="text-align: center; margin-top: 20px;">
+                    <a href="#" onclick="loadMarkdown('./README.md', 'GitHub Copilot 教學專案 - 完整指南'); return false;" class="btn btn-doc btn-primary">
+                        📖 查看完整教學指南
+                    </a>
+                </div>
             </div>
             
             <div class="scenarios">
