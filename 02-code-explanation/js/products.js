@@ -5,57 +5,57 @@
 const PRODUCTS = [
     {
         id: 'p001',
-        name: '無線藍牙耳機',
-        price: 2500,
-        image: 'https://via.placeholder.com/200x200/4A90E2/FFFFFF?text=藍牙耳機',
-        category: '3C',
-        stock: 15,
-        description: '高品質音效，持久續航'
+        name: '手機殼',
+        price: 299,
+        image: '📱',
+        category: '配件',
+        stock: 50,
+        description: '防摔保護，多色可選'
     },
     {
         id: 'p002',
-        name: '機械式鍵盤',
-        price: 3200,
-        image: 'https://via.placeholder.com/200x200/E24A4A/FFFFFF?text=機械鍵盤',
-        category: '3C',
-        stock: 8,
-        description: '青軸設計，打字手感極佳'
+        name: '充電線',
+        price: 199,
+        image: '🔌',
+        category: '配件',
+        stock: 35,
+        description: '快速充電，耐用材質'
     },
     {
         id: 'p003',
-        name: '人體工學滑鼠',
-        price: 1200,
-        image: 'https://via.placeholder.com/200x200/4AE290/FFFFFF?text=滑鼠',
+        name: '藍牙喇叭',
+        price: 799,
+        image: '🔊',
         category: '3C',
         stock: 20,
-        description: '符合人體工學，減少手腕負擔'
+        description: '360度環繞音效'
     },
     {
         id: 'p004',
-        name: '筆記型電腦支架',
-        price: 800,
-        image: 'https://via.placeholder.com/200x200/E2A04A/FFFFFF?text=支架',
+        name: '手機支架',
+        price: 159,
+        image: '📲',
         category: '配件',
-        stock: 25,
-        description: '可調整高度，改善姿勢'
+        stock: 45,
+        description: '多角度調整，穩固耐用'
     },
     {
         id: 'p005',
-        name: 'USB-C 集線器',
-        price: 1500,
-        image: 'https://via.placeholder.com/200x200/A04AE2/FFFFFF?text=集線器',
-        category: '配件',
-        stock: 12,
-        description: '多合一擴充，支援4K輸出'
+        name: '無線滑鼠',
+        price: 499,
+        image: '🖱️',
+        category: '3C',
+        stock: 25,
+        description: '靜音設計，續航持久'
     },
     {
         id: 'p006',
-        name: '無線充電板',
-        price: 600,
-        image: 'https://via.placeholder.com/200x200/4AE2A0/FFFFFF?text=充電板',
+        name: '螢幕保護貼',
+        price: 99,
+        image: '🛡️',
         category: '配件',
-        stock: 30,
-        description: '快速充電，支援多種裝置'
+        stock: 60,
+        description: '鋼化玻璃，防刮防爆'
     }
 ];
 
@@ -109,7 +109,7 @@ function createProductCard(product) {
     const card = document.createElement('div');
     card.className = 'product-card';
     card.innerHTML = `
-        <img src="${product.image}" alt="${product.name}">
+        <div class="product-image">${product.image}</div>
         <h3>${product.name}</h3>
         <p class="description">${product.description}</p>
         <p class="price">${formatCurrency(product.price)}</p>
