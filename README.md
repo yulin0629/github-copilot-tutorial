@@ -183,6 +183,47 @@ GitHub Copilot 於 2025 年 6 月更新方案，提供三種主要選擇：
 - 學會設計有效的 Agent 任務指令
 - 體驗 AI 驅動的自主開發流程
 
+## 🏗️ **專案結構**
+
+```
+github-copilot-tutorial/
+├── 📁 .github/                          # GitHub 配置檔案
+│   ├── copilot-instructions.md          # 🔧 全域 Copilot 指令 (自動載入)
+│   ├── instructions/                    # 📋 多指令檔案系統
+│   │   ├── javascript.instructions.md   # JavaScript 程式碼風格
+│   │   ├── testing.instructions.md      # 測試撰寫規範
+│   │   └── agent-mode.instructions.md   # Agent 模式專用指令
+│   └── prompts/                        # 🎯 可重複使用的 Prompt Files
+│       ├── react-component.prompt.md    # React 元件生成器
+│       ├── api-testing.prompt.md        # API 測試套件生成器
+│       ├── security-review.prompt.md    # 程式碼安全檢查
+│       ├── refactoring.prompt.md        # 程式碼重構指南
+│       └── README.md                   # Prompt Files 使用指南
+├── 📁 .vscode/                          # VS Code 工作區設定
+│   └── settings.json                   # 🔧 多指令檔案載入配置
+├── 📁 01-first-experience/              # 🌱 場景 1：初次對話體驗 (0% Agent)
+├── 📁 02-code-explanation/              # 🌱 場景 2：程式碼解釋實作 (0% Agent)
+├── 📁 03-function-generation/           # 🚀 場景 3：函數生成 (20% Agent)
+├── 📁 04-debugging-assistant/           # 🚀 場景 4：偵錯輔助 (30% Agent)
+├── 📁 05-unit-testing/                  # 🔥 場景 5：單元測試 (50% Agent)
+├── 📁 06-code-refactoring/              # 🔥 場景 6：程式碼重構 (60% Agent)
+├── 📁 07-documentation/                 # 🎯 場景 7：文件生成 (80% Agent)
+├── 📁 08-comprehensive-project/         # 🎯 場景 8：綜合專案開發 (90% Agent)
+├── 📄 README.md                        # 📖 主要說明檔案
+└── 📄 CLAUDE.md                        # 🤖 Claude 專案指令檔案
+```
+
+### 🔧 **配置檔案說明**
+
+#### **自訂指令系統**
+- **`.github/copilot-instructions.md`**: 專案全域指令，自動套用到每個 Copilot 請求
+- **`.github/instructions/`**: 分類管理的多個指令檔案，可組合使用
+- **`.vscode/settings.json`**: VS Code 配置，自動載入多個指令檔案
+
+#### **Prompt Files 系統**
+- **`.github/prompts/`**: 可重複使用的任務模板，支援 Agent/Edit/Ask 三種模式
+- **任務特定**: 每個 prompt file 針對特定開發任務優化
+
 ## 🎯 學習目標
 
 完成本教學後，您將能夠：
@@ -209,10 +250,11 @@ GitHub Copilot 於 2025 年 6 月更新方案，提供三種主要選擇：
 - **終端整合**：自動執行必要的命令
 
 #### 📋 **自訂指令系統** - 個人化 AI 助手
-- **專案級指令**：`.github/copilot-instructions.md` 檔案
-- **團隊共享**：與團隊成員共享開發規範
-- **程式碼風格**：自動遵循指定的編程慣例
-- **業務邏輯**：包含專案特定的業務規則
+- **全域指令**：`.github/copilot-instructions.md` 自動載入到每個請求
+- **多指令檔案**：`.github/instructions/*.instructions.md` 分類管理指令
+- **Prompt Files**：`.github/prompts/*.prompt.md` 可重複使用的任務模板
+- **團隊協作**：統一的開發規範和程式碼風格
+- **智能配置**：VS Code settings 自動載入多個指令檔案
 
 #### ⚡ **增強程式碼補全** - GPT-4.1 預設模型
 - **Ghost Text**：即時顯示 AI 建議的灰色文字
@@ -247,10 +289,11 @@ GitHub Copilot 於 2025 年 6 月更新方案，提供三種主要選擇：
 2. **使用 Tab 導航**：按 Tab 鍵快速跳轉到建議的編輯位置
 3. **信任智能預測**：NES 通常能準確預測重構和修正需求
 
-### 📋 **自訂指令設定**
-1. **建立 `.github/copilot-instructions.md`**：為專案設定開發規範
-2. **包含程式碼風格**：指定縮排、命名慣例、框架偏好
-3. **團隊協作**：與團隊共享指令檔案，確保一致性
+### 📋 **自訂指令系統**
+1. **全域指令**：`.github/copilot-instructions.md` 自動套用到所有請求
+2. **多指令檔案**：`.github/instructions/` 分類管理不同領域的指令
+3. **VS Code 配置**：`.vscode/settings.json` 設定載入多個指令檔案
+4. **Prompt Files**：`.github/prompts/` 建立可重複使用的任務模板
 
 ### ⚡ **程式碼補全優化**
 1. **善用 Ghost Text**：觀察灰色建議文字，按 Tab 接受
@@ -264,26 +307,7 @@ GitHub Copilot 於 2025 年 6 月更新方案，提供三種主要選擇：
 
 ## ⚠️ 關於斜槓指令（/ 指令）
 
-本教學**不包含斜槓指令**的使用，主要原因：
-
-### 🤖 Agent 模式讓斜槓指令變得過時
-隨著 **Agent 模式**的推出，傳統的斜槓指令已經失去優勢：
-
-- **Agent 模式**能自動判斷您的需求，無需手動指定指令類型
-- **智能決策**：Agent 會自動選擇最適合的處理方式
-- **連續對話**：Agent 能記住上下文，進行多輪對話協作
-- **自主執行**：Agent 可以主動執行多個步驟來完成複雜任務
-
-### 技術層面的問題：
-1. **穩定性問題**：指令經常失效，需要重新安裝擴充套件
-2. **功能重疊**：大部分斜槓指令的功能都能用自然語言達成
-3. **使用體驗差**：需要記憶特定語法，不如自然對話流暢
-
-### 現代化的替代方案：
-- **Agent 模式**：讓 AI 自主判斷和執行任務
-- **自然語言對話**：直接描述需求，更直觀有效
-- **@workspace 參與者**：提供精準的專案上下文協助（其他參與者實用性有限）
-- **Inline Chat**：即時在程式碼中進行協作
+**Agent 模式**的推出讓傳統斜槓指令變得過時。本教學專注於 Agent 模式和自然語言對話，不涵蓋斜槓指令的使用。
 
 ## 📞 關於聊天參與者 (@)
 
@@ -302,42 +326,52 @@ GitHub Copilot 於 2025 年 6 月更新方案，提供三種主要選擇：
 @workspace 建議如何重構這個模組的結構
 ```
 
-### ⚠️ 實用性有限的參與者
+### ⚠️ 其他參與者實用性有限
+**@terminal、@vscode、@github** 等其他參與者實用性不高，建議專注學習 **@workspace** 即可。
 
-**@terminal** - 偶爾有用，但非必要
-- 命令列相關問題
-- 大部分情況下直接問 Copilot 即可
+## ⚙️ **重要 VS Code 設定**
 
-**@vscode、@github** - 不建議花時間學習
-- 功能重疊且實用性不高
-- 直接用自然語言詢問更有效
-- 其他查詢方式（Google、官方文件）通常更準確
+### **必要核心設定**
+```json
+{
+  // 基本功能
+  "github.copilot.chat.localeOverride": "zh-TW",          // 繁體中文回應
+  
+  // Agent 模式 (重點功能)
+  "github.copilot.chat.agent.thinkingTool": true,        // Agent 思考工具
+  
+  // 自訂指令系統 (重點功能)
+  "github.copilot.chat.codeGeneration.useInstructionFiles": true,
+  "github.copilot.chat.codeGeneration.instructions": [
+    { "file": "./.github/instructions/javascript.instructions.md" },
+    { "file": "./.github/instructions/testing.instructions.md" },
+    { "file": "./.github/instructions/agent-mode.instructions.md" }
+  ],
+  
+  // @workspace 支援
+  "chat.detectParticipant.enabled": true
+}
+```
 
-### 💡 建議學習重點
-專注學習 **@workspace** 即可，這是唯一真正改變開發效率的聊天參與者。其他參與者的投資報酬率較低，不建議花時間深入了解。
-
-
-## 🔧 疑難排解
-
-### 常見問題
-- **看不到建議**：檢查是否已登入 GitHub 並選擇正確的訂閱方案
-- **建議品質不佳**：提供更清楚的註解和上下文
-- **Chat 無法開啟**：確認已安裝 GitHub Copilot Chat 擴充套件
-- **免費額度用完**：等待下個月重新計算，或升級至付費方案
-- **進階請求額度不足**：Pro/Pro+ 用戶可購買額外進階請求（$0.04/次）
-- **無法使用進階 AI 模型**：需要 Pro+ 方案才能使用 GPT-4.5、o3 等推理模型
-
-### 效能最佳化
-- 保持 VS Code 更新至最新版本
-- 定期重新啟動 VS Code 以釋放記憶體
-- 關閉不必要的擴充套件以提升效能
+### **可選增強設定**
+```json
+{
+  // 2025 新功能 (可選)
+  "github.copilot.nextEditSuggestions.enabled": true,    // 下一步編輯建議
+  "github.copilot.chat.edits.temporalContext.enabled": true, // 時間脈絡編輯
+  
+  // Chat 增強 (可選)
+  "github.copilot.chat.followUps": "always",             // 總是顯示後續問題
+  "github.copilot.chat.scopeSelection": true,            // 符號範圍提示
+  "github.copilot.chat.search.semanticTextResults": true // 語義搜尋結果
+}
+```
 
 ## 📞 支援與協助
 
 如遇到問題，請參考：
 - [GitHub Copilot 官方文件](https://docs.github.com/copilot)
 - [VS Code Copilot 指南](https://code.visualstudio.com/docs/copilot/overview)
-- 本專案的 Issues 區
 
 ---
 

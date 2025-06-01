@@ -1,31 +1,119 @@
-我要做一個GitHub copilot 教學，整個課程是2個小時
-所有內容放在一個repo
+# GitHub Copilot 教學專案 - 專案指令
 
-readme 裡面放安裝和設定的教學 for windows
+## 📋 專案概述
+建立一個完整的 GitHub Copilot 教學課程，時長 2 小時，專注於 **Agent 模式**的實際應用。
 
-然後有8個folder 就是要demon的8種不同場景
-每個folder 裡面放著初始的專案程式和文件，和問題
-每個 folder 都是獨立的然後由淺入深
-也要為每個 folder 設計劇本和 demo 時的prompt
+## 🎯 目標聽眾
+- **PM (產品經理)**：了解 AI 輔助開發如何提升產品開發效率
+- **SA (系統分析師)**：學習如何利用 AI 進行系統分析和架構設計
+- **PG (程式設計師)**：掌握 AI 輔助編程的實際技能
 
-要有 ask edit **agent**，agent 是重點，大概佔50%的內容
-Inline chat
-聊天參與者 @ (重點：@workspace)
+## 🚀 核心功能重點
 
-情境是
-初次對話體驗
-程式碼解釋實作
-函數生成
-偵錯輔助
-單元測試
-程式碼重構
-文件生成
-綜合專案開發
+### **Agent 模式 (50% 內容重點)**
+- Agent 自主開發能力
+- 多步驟任務規劃和執行
+- 跨檔案協調修改
+- 自我修正和迭代改進
 
+### **2025 年最新功能**
+- **Next Edit Suggestions (NES)**：預測下一步編輯
+- **Code Completion**：GPT-4.1 增強程式碼補全
+- **多指令檔案系統**：`.github/instructions/*.instructions.md`
+- **Prompt Files**：`.github/prompts/*.prompt.md`
 
-聽眾是PM  SA PG
+### **核心工具**
+- **@workspace**：最重要的聊天參與者
+- **Inline Chat** (`Ctrl+I`)：即時編輯輔助
+- **Ghost Text**：智能程式碼建議
 
-多使用 web search and perplexity ask  查詢 github copilot 資料
+## 📁 8 個漸進式學習場景
 
-因為課程是2個小時，所以要控制內容的長度
-前面最簡單的場景不用 agent，慢慢越來越深入， agent 才會越來越多，課程的設計要由淺入深
+### **🌱 基礎階段** (建立認知)
+1. **初次對話體驗** (0% Agent) - 傳統 Chat 功能
+2. **程式碼解釋實作** (0% Agent) - @workspace 核心應用
+
+### **🚀 進階階段** (引入 Agent)
+3. **函數生成** (20% Agent) - 體驗 Agent 協助編程
+4. **偵錯輔助** (30% Agent) - Agent 智能診斷
+
+### **🔥 專業階段** (Agent 主角)
+5. **單元測試** (50% Agent) - Agent 測試策略
+6. **程式碼重構** (60% Agent) - Agent 重構規劃
+
+### **🎯 專家階段** (Agent 主導)
+7. **文件生成** (80% Agent) - Agent 文件自動化
+8. **綜合專案開發** (90% Agent) - Agent 完全主導
+
+## 🏗️ 技術架構
+
+### **指令系統架構**
+```
+.github/
+├── copilot-instructions.md          # 全域指令 (自動載入)
+├── instructions/                    # 多指令檔案系統
+│   ├── javascript.instructions.md   # JavaScript 規範
+│   ├── testing.instructions.md      # 測試規範
+│   └── agent-mode.instructions.md   # Agent 專用指令
+└── prompts/                        # 可重複使用模板
+    ├── react-component.prompt.md    # React 元件生成
+    ├── api-testing.prompt.md        # API 測試生成
+    ├── security-review.prompt.md    # 安全檢查
+    └── refactoring.prompt.md        # 重構指南
+```
+
+### **VS Code 配置**
+```json
+{
+  "github.copilot.chat.codeGeneration.useInstructionFiles": true,
+  "github.copilot.chat.codeGeneration.instructions": [
+    { "file": "./.github/instructions/javascript.instructions.md" },
+    { "file": "./.github/instructions/testing.instructions.md" },
+    { "file": "./.github/instructions/agent-mode.instructions.md" }
+  ],
+  "github.copilot.nextEditSuggestions.enabled": true
+}
+```
+
+## 📚 課程設計原則
+
+### **由淺入深的學習路徑**
+- **前期**：建立基礎認知，不使用 Agent
+- **中期**：逐步引入 Agent，展示價值差異  
+- **後期**：深度應用 Agent，展示完整潛力
+
+### **實戰導向**
+- 每個場景都有具體的程式碼範例
+- 包含完整的 Demo 劇本和 Prompt
+- 強調效率對比：傳統方式 vs Agent 方式
+
+### **團隊協作重點**
+- 展示如何在團隊中使用指令檔案
+- 程式碼風格和開發規範的統一
+- Prompt Files 的分享和重複使用
+
+## ⚠️ 重要限制和注意事項
+
+### **Visual Studio 支援**
+- 本課程專注於 VS Code
+- Visual Studio 的 Copilot 功能相對有限
+- 可簡單提及但不作為重點
+
+### **功能穩定性**
+- 斜槓指令 (/) 有穩定性問題，不建議使用
+- 專注於自然語言對話和 Agent 模式
+- @workspace 是唯一真正有價值的聊天參與者
+
+### **時間控制**
+- 2 小時課程需要精準控制內容
+- 重點展示而非詳細教學每個功能
+- 提供實用的 takeaway 工具和模板
+
+## 🎯 預期成果
+
+學員完成課程後將能夠：
+- 熟練使用 GitHub Copilot Agent 模式
+- 建立和管理指令檔案系統
+- 設計有效的 Prompt Files
+- 在實際專案中提升 30-50% 開發效率
+- 建立團隊級的 AI 輔助開發流程

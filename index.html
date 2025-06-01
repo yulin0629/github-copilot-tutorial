@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Copilot 教學專案</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+        
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .main-content {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .feature-card {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+        }
+        
+        .feature-card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        .feature-card p {
+            color: #666;
+        }
+        
+        .scenarios {
+            margin: 40px 0;
+        }
+        
+        .scenarios h2 {
+            color: #333;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .scenario-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        
+        .scenario-item {
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+        
+        .scenario-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        .scenario-number {
+            font-size: 2rem;
+            font-weight: bold;
+            opacity: 0.7;
+        }
+        
+        .scenario-title {
+            font-size: 1.1rem;
+            margin: 10px 0;
+        }
+        
+        .scenario-description {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .agent-indicator {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-top: 10px;
+        }
+        
+        .agent-0 { background: rgba(255,255,255,0.2); }
+        .agent-20 { background: rgba(255,193,7,0.3); }
+        .agent-30 { background: rgba(255,152,0,0.3); }
+        .agent-50 { background: rgba(255,87,34,0.3); }
+        .agent-60 { background: rgba(233,30,99,0.3); }
+        .agent-80 { background: rgba(156,39,176,0.3); }
+        .agent-90 { background: rgba(103,58,183,0.3); }
+        
+        .quick-start {
+            background: #e8f5e8;
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 5px solid #28a745;
+            margin: 30px 0;
+        }
+        
+        .quick-start h3 {
+            color: #28a745;
+            margin-bottom: 15px;
+        }
+        
+        .footer {
+            text-align: center;
+            color: white;
+            opacity: 0.8;
+            margin-top: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .main-content {
+                padding: 20px;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 GitHub Copilot 教學專案</h1>
+            <p>透過 8 個實作場景，掌握 AI 輔助開發的完整技能</p>
+        </div>
+        
+        <div class="main-content">
+            <h2>📋 專案簡介</h2>
+            <p>這是一個 <strong>2小時精華版</strong> GitHub Copilot 教學專案，專注於 <strong>Agent 模式</strong>的實際應用。透過由淺入深的 8 個場景，讓您快速掌握 AI 驅動的開發流程。</p>
+            
+            <div class="features">
+                <div class="feature-card">
+                    <h3>🤖 Agent 模式核心</h3>
+                    <p>學習讓 AI 自主完成複雜開發任務，從 0% 到 90% 的漸進式應用</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>🎯 目標聽眾</h3>
+                    <p>適合 PM、SA、PG 三種角色，了解 AI 如何提升各自工作效率</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>⚡ 2025 最新功能</h3>
+                    <p>涵蓋 Next Edit Suggestions、多指令檔案系統、Prompt Files 等最新特色</p>
+                </div>
+            </div>
+            
+            <div class="quick-start">
+                <h3>🚀 快速開始</h3>
+                <p>1. 安裝 VS Code 和 GitHub Copilot 擴充套件<br>
+                2. 登入 GitHub 帳號並選擇適合的訂閱方案<br>
+                3. 設定繁體中文語言環境<br>
+                4. 開始第一個場景的學習</p>
+            </div>
+            
+            <div class="scenarios">
+                <h2>📚 8 個學習場景</h2>
+                <div class="scenario-list">
+                    <a href="./01-first-experience/" class="scenario-item">
+                        <div class="scenario-number">01</div>
+                        <div class="scenario-title">初次對話體驗</div>
+                        <div class="scenario-description">建立 Copilot 使用基礎，體驗傳統 Chat 功能</div>
+                        <span class="agent-indicator agent-0">Agent 0%</span>
+                    </a>
+                    
+                    <a href="./02-code-explanation/" class="scenario-item">
+                        <div class="scenario-number">02</div>
+                        <div class="scenario-title">程式碼解釋實作</div>
+                        <div class="scenario-description">掌握 @workspace 核心功能，理解專案結構</div>
+                        <span class="agent-indicator agent-0">Agent 0%</span>
+                    </a>
+                    
+                    <a href="./03-function-generation/" class="scenario-item">
+                        <div class="scenario-number">03</div>
+                        <div class="scenario-title">函數生成</div>
+                        <div class="scenario-description">體驗 Agent 協助編程，對比手動 vs AI 效率</div>
+                        <span class="agent-indicator agent-20">Agent 20%</span>
+                    </a>
+                    
+                    <a href="./04-debugging-assistant/" class="scenario-item">
+                        <div class="scenario-number">04</div>
+                        <div class="scenario-title">偵錯輔助</div>
+                        <div class="scenario-description">讓 Agent 主動發現和修復程式問題</div>
+                        <span class="agent-indicator agent-30">Agent 30%</span>
+                    </a>
+                    
+                    <a href="./05-unit-testing/" class="scenario-item">
+                        <div class="scenario-number">05</div>
+                        <div class="scenario-title">單元測試</div>
+                        <div class="scenario-description">Agent 自主設計測試架構和完整用例</div>
+                        <span class="agent-indicator agent-50">Agent 50%</span>
+                    </a>
+                    
+                    <a href="./06-code-refactoring/" class="scenario-item">
+                        <div class="scenario-number">06</div>
+                        <div class="scenario-title">程式碼重構</div>
+                        <div class="scenario-description">Agent 分析遺留代碼並執行重構策略</div>
+                        <span class="agent-indicator agent-60">Agent 60%</span>
+                    </a>
+                    
+                    <a href="./07-documentation/" class="scenario-item">
+                        <div class="scenario-number">07</div>
+                        <div class="scenario-title">文件生成</div>
+                        <div class="scenario-description">Agent 自動分析程式碼生成完整文件體系</div>
+                        <span class="agent-indicator agent-80">Agent 80%</span>
+                    </a>
+                    
+                    <a href="./08-comprehensive-project/" class="scenario-item">
+                        <div class="scenario-number">08</div>
+                        <div class="scenario-title">綜合專案開發</div>
+                        <div class="scenario-description">Agent 完全主導端到端開發流程</div>
+                        <span class="agent-indicator agent-90">Agent 90%</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>🎯 預期成果：完成課程後提升 30-50% 開發效率，建立團隊級 AI 輔助開發流程</p>
+        </div>
+    </div>
+</body>
+</html>
