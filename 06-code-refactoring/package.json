@@ -1,0 +1,34 @@
+{
+  "name": "ecommerce-legacy-refactoring",
+  "version": "1.0.0",
+  "description": "Legacy e-commerce system for refactoring demonstration",
+  "main": "legacy-code/monolith.js",
+  "scripts": {
+    "start": "node legacy-code/monolith.js",
+    "start:refactored": "node refactored/index.js",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "lint": "eslint . --ext .js",
+    "lint:fix": "eslint . --ext .js --fix"
+  },
+  "keywords": ["refactoring", "legacy", "ecommerce", "demo"],
+  "author": "GitHub Copilot Tutorial",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "bcrypt": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.6.0",
+    "nodemailer": "^6.9.4",
+    "moment": "^2.29.4",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "jest": "^29.6.2",
+    "eslint": "^8.46.0",
+    "nodemon": "^3.0.1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

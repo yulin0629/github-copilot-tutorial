@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSV 數據處理工具</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>CSV 數據處理工具</h1>
+            <p>使用 GitHub Copilot 生成的強大數據處理函數</p>
+        </header>
+
+        <main>
+            <section class="upload-section">
+                <h2>上傳 CSV 檔案</h2>
+                <div class="upload-area">
+                    <input type="file" id="csvFile" accept=".csv" />
+                    <p>或將 CSV 內容貼在下方：</p>
+                    <textarea id="csvText" placeholder="姓名,年齡,城市,電子郵件&#10;張三,25,台北,zhang@example.com&#10;李四,30,台中,li@example.com"></textarea>
+                    <button id="processBtn" class="primary-btn">處理數據</button>
+                </div>
+            </section>
+
+            <section class="tools-section">
+                <h2>數據處理工具</h2>
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <h3>📊 數據統計</h3>
+                        <button class="tool-btn" data-action="statistics">計算統計值</button>
+                    </div>
+                    <div class="tool-card">
+                        <h3>✅ 數據驗證</h3>
+                        <button class="tool-btn" data-action="validate">驗證電子郵件</button>
+                    </div>
+                    <div class="tool-card">
+                        <h3>🔄 格式轉換</h3>
+                        <button class="tool-btn" data-action="convert">轉換日期格式</button>
+                    </div>
+                    <div class="tool-card">
+                        <h3>📤 數據導出</h3>
+                        <button class="tool-btn" data-action="export">導出為 JSON</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="results-section">
+                <h2>處理結果</h2>
+                <div id="results" class="results-container">
+                    <p class="placeholder">處理結果將顯示在這裡...</p>
+                </div>
+            </section>
+
+            <section class="preview-section">
+                <h2>數據預覽</h2>
+                <div id="dataPreview" class="data-table-container">
+                    <p class="placeholder">上傳檔案後將顯示數據預覽...</p>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>💡 提示：這個專案的所有數據處理函數都是使用 GitHub Copilot 生成的！</p>
+        </footer>
+    </div>
+
+    <script src="data-processor.js"></script>
+</body>
+</html>

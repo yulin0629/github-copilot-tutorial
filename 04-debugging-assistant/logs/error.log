@@ -1,0 +1,10 @@
+[2024-12-18T10:30:15.123Z] ERROR: Database connection failed - ECONNREFUSED
+[2024-12-18T10:30:16.456Z] WARN: High memory usage detected - 85%
+[2024-12-18T10:30:17.789Z] ERROR: TypeError: Cannot read property 'id' of undefined at /routes/users.js:45
+[2024-12-18T10:30:18.012Z] ERROR: ValidationError: User validation failed: email is required
+[2024-12-18T10:30:19.345Z] WARN: Slow query detected - took 2.5 seconds
+[2024-12-18T10:30:20.678Z] ERROR: ReferenceError: JWT_SECRET is not defined
+[2024-12-18T10:30:21.901Z] ERROR: SyntaxError: Unexpected token 'u' in JSON at position 0
+[2024-12-18T10:30:22.234Z] WARN: Rate limit exceeded for IP 192.168.1.100
+[2024-12-18T10:30:23.567Z] ERROR: MongooseError: Operation `users.find()` buffering timed out after 10000ms
+[2024-12-18T10:30:24.890Z] ERROR: UnhandledPromiseRejectionWarning: Error: ENOENT: no such file or directory

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>簡易購物車系統</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>線上商店</h1>
+            <div class="cart-icon">
+                🛒 <span id="cartCount">0</span>
+            </div>
+        </header>
+
+        <main>
+            <section class="products">
+                <h2>商品列表</h2>
+                <div id="productList" class="product-grid">
+                    <!-- 商品會動態載入到這裡 -->
+                </div>
+            </section>
+
+            <section class="cart">
+                <h2>購物車</h2>
+                <div id="cartItems">
+                    <p class="empty-cart">購物車是空的</p>
+                </div>
+                <div class="cart-summary">
+                    <div class="subtotal">
+                        <span>小計：</span>
+                        <span id="subtotal">NT$ 0</span>
+                    </div>
+                    <div class="shipping">
+                        <span>運費：</span>
+                        <span id="shipping">NT$ 0</span>
+                    </div>
+                    <div class="total">
+                        <span>總計：</span>
+                        <span id="total">NT$ 0</span>
+                    </div>
+                    <button id="checkoutBtn" class="checkout-btn" disabled>結帳</button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/utils.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+</body>
+</html>
