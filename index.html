@@ -120,21 +120,6 @@
             opacity: 0.9;
         }
         
-        .agent-indicator {
-            display: inline-block;
-            padding: 3px 8px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            margin-top: 10px;
-        }
-        
-        .agent-0 { background: rgba(255,255,255,0.2); }
-        .agent-20 { background: rgba(255,193,7,0.3); }
-        .agent-30 { background: rgba(255,152,0,0.3); }
-        .agent-50 { background: rgba(255,87,34,0.3); }
-        .agent-60 { background: rgba(233,30,99,0.3); }
-        .agent-80 { background: rgba(156,39,176,0.3); }
-        .agent-90 { background: rgba(103,58,183,0.3); }
         
         .scenario-links {
             display: flex;
@@ -514,7 +499,7 @@
             <div class="features">
                 <div class="feature-card">
                     <h3>🤖 Agent 模式核心</h3>
-                    <p>學習讓 AI 自主完成複雜開發任務，從 0% 到 90% 的漸進式應用</p>
+                    <p>學習讓 AI 自主完成複雜開發任務，採用漸進式學習路徑</p>
                 </div>
                 
                 <div class="feature-card">
@@ -560,7 +545,6 @@
                         <div class="scenario-number">01</div>
                         <div class="scenario-title">初次對話體驗</div>
                         <div class="scenario-description">建立 Copilot 使用基礎，體驗傳統 Chat 功能</div>
-                        <span class="agent-indicator agent-0">Agent 0%</span>
                         <div class="scenario-links">
                             <a href="#" onclick="loadMarkdown('./01-first-experience/LESSON_GUIDE.md', '場景 1：初次對話體驗'); return false;" class="btn btn-doc">📚 查看教學</a>
                             <a href="./01-first-experience/" class="btn btn-demo">🎯 實際應用</a>
@@ -571,7 +555,6 @@
                         <div class="scenario-number">02</div>
                         <div class="scenario-title">程式碼解釋實作</div>
                         <div class="scenario-description">掌握 @workspace 核心功能，理解專案結構</div>
-                        <span class="agent-indicator agent-0">Agent 0%</span>
                         <div class="scenario-links">
                             <a href="#" onclick="loadMarkdown('./02-code-explanation/LESSON_GUIDE.md', '場景 2：程式碼解釋實作'); return false;" class="btn btn-doc">📚 查看教學</a>
                             <a href="./02-code-explanation/" class="btn btn-demo">🎯 實際應用</a>
@@ -582,7 +565,6 @@
                         <div class="scenario-number">03</div>
                         <div class="scenario-title">函數生成</div>
                         <div class="scenario-description">體驗 Agent 協助編程，對比手動 vs AI 效率</div>
-                        <span class="agent-indicator agent-20">Agent 20%</span>
                         <div class="scenario-links">
                             <a href="#" onclick="loadMarkdown('./03-function-generation/LESSON_GUIDE.md', '場景 3：函數生成'); return false;" class="btn btn-doc">📚 查看教學</a>
                             <a href="./03-function-generation/" class="btn btn-demo">🎯 實際應用</a>
@@ -593,7 +575,6 @@
                         <div class="scenario-number">04</div>
                         <div class="scenario-title">偵錯輔助</div>
                         <div class="scenario-description">讓 Agent 主動發現和修復程式問題</div>
-                        <span class="agent-indicator agent-30">Agent 30%</span>
                         <div class="scenario-links">
                             <a href="#" onclick="loadMarkdown('./04-debugging-assistant/LESSON_GUIDE.md', '場景 4：偵錯輔助'); return false;" class="btn btn-doc">📚 查看教學</a>
                             <a href="./04-debugging-assistant/" class="btn btn-demo">🎯 實際應用</a>
@@ -604,7 +585,6 @@
                         <div class="scenario-number">05</div>
                         <div class="scenario-title">單元測試</div>
                         <div class="scenario-description">Agent 自主設計測試架構和完整用例</div>
-                        <span class="agent-indicator agent-50">Agent 50%</span>
                         <div class="scenario-links">
                             <a href="#" onclick="loadMarkdown('./05-unit-testing/LESSON_GUIDE.md', '場景 5：單元測試'); return false;" class="btn btn-doc">📚 查看教學</a>
                             <a href="./05-unit-testing/" class="btn btn-demo">🎯 實際應用</a>
@@ -615,7 +595,6 @@
                         <div class="scenario-number">06</div>
                         <div class="scenario-title">程式碼重構</div>
                         <div class="scenario-description">Agent 分析遺留代碼並執行重構策略</div>
-                        <span class="agent-indicator agent-60">Agent 60%</span>
                         <div class="scenario-links">
                             <a href="#" onclick="loadMarkdown('./06-code-refactoring/LESSON_GUIDE.md', '場景 6：程式碼重構'); return false;" class="btn btn-doc">📚 查看教學</a>
                             <a href="./06-code-refactoring/" class="btn btn-demo">🎯 實際應用</a>
@@ -626,7 +605,6 @@
                         <div class="scenario-number">07</div>
                         <div class="scenario-title">文件生成</div>
                         <div class="scenario-description">Agent 自動分析程式碼生成完整文件體系</div>
-                        <span class="agent-indicator agent-80">Agent 80%</span>
                         <div class="scenario-links">
                             <a href="#" onclick="loadMarkdown('./07-documentation/LESSON_GUIDE.md', '場景 7：文件生成'); return false;" class="btn btn-doc">📚 查看教學</a>
                         </div>
@@ -636,7 +614,6 @@
                         <div class="scenario-number">08</div>
                         <div class="scenario-title">GitHub 自動化 Agent</div>
                         <div class="scenario-description">從 Issue 到 PR 的完整自動化流程</div>
-                        <span class="agent-indicator agent-90">Agent 90%</span>
                         <div style="margin-top: 10px; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 5px;">
                             <div style="font-size: 0.85rem; color: rgba(255,255,255,0.9); margin-bottom: 8px;">
                                 <strong>📋 練習 Issues：</strong>
