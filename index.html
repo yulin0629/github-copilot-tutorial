@@ -12,10 +12,10 @@
         }
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #1a1a1a;
+            background: #fafafa;
             min-height: 100vh;
         }
         
@@ -26,28 +26,42 @@
         }
         
         .header {
-            text-align: center;
-            color: white;
-            margin-bottom: 40px;
+            text-align: left;
+            color: #1a1a1a;
+            margin-bottom: 60px;
+            position: relative;
+            padding-top: 40px;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 120px;
+            height: 4px;
+            background: #0969da;
         }
         
         .header h1 {
-            font-size: 3rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
         }
         
         .header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
+            font-size: 1.125rem;
+            color: #656d76;
+            font-weight: 400;
         }
         
         .main-content {
             background: white;
-            border-radius: 15px;
-            padding: 40px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            margin-bottom: 30px;
+            border: 1px solid #d1d9e0;
+            border-radius: 8px;
+            padding: 48px;
+            margin-bottom: 32px;
         }
         
         .features {
@@ -58,20 +72,32 @@
         }
         
         .feature-card {
-            background: #f8f9fa;
-            padding: 25px;
-            border-radius: 10px;
-            border-left: 5px solid #667eea;
+            background: transparent;
+            padding: 24px;
+            border: 1px solid #d1d9e0;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+        
+        .feature-card:hover {
+            border-color: #0969da;
+            transform: translateY(-2px);
         }
         
         .feature-card h3 {
-            color: #667eea;
-            margin-bottom: 15px;
-            font-size: 1.3rem;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+            font-size: 1.125rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         
         .feature-card p {
-            color: #666;
+            color: #656d76;
+            font-size: 0.95rem;
+            line-height: 1.7;
         }
         
         .scenarios {
@@ -91,33 +117,55 @@
         }
         
         .scenario-item {
-            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            transition: transform 0.3s ease;
+            background: white;
+            color: #1a1a1a;
+            padding: 24px;
+            border: 1px solid #d1d9e0;
+            border-radius: 6px;
+            transition: all 0.2s ease;
             position: relative;
+            overflow: hidden;
+        }
+        
+        .scenario-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: #0969da;
+            opacity: 0;
+            transition: opacity 0.2s ease;
         }
         
         .scenario-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            border-color: #0969da;
+            transform: translateX(4px);
+        }
+        
+        .scenario-item:hover::before {
+            opacity: 1;
         }
         
         .scenario-number {
-            font-size: 2rem;
-            font-weight: bold;
-            opacity: 0.7;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #656d76;
+            font-family: 'SF Mono', Monaco, 'Courier New', monospace;
         }
         
         .scenario-title {
-            font-size: 1.1rem;
-            margin: 10px 0;
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin: 8px 0;
+            color: #1a1a1a;
         }
         
         .scenario-description {
-            font-size: 0.9rem;
-            opacity: 0.9;
+            font-size: 0.875rem;
+            color: #656d76;
+            line-height: 1.6;
         }
         
         
@@ -139,35 +187,38 @@
         }
         
         .btn-doc {
-            background: rgba(255,255,255,0.2);
-            color: white;
-            border: 1px solid rgba(255,255,255,0.3);
+            background: transparent;
+            color: #0969da;
+            border: 1px solid #d1d9e0;
         }
         
         .btn-doc:hover {
-            background: rgba(255,255,255,0.3);
+            background: #f6f8fa;
+            border-color: #0969da;
         }
         
         .btn-demo {
-            background: rgba(255,255,255,0.9);
-            color: #0984e3;
-            font-weight: 600;
+            background: #0969da;
+            color: white;
+            font-weight: 500;
+            border: 1px solid #0969da;
         }
         
         .btn-demo:hover {
-            background: white;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            background: #0860ca;
+            border-color: #0860ca;
         }
         
         .btn-repo {
-            background: rgba(128, 90, 213, 0.9);
+            background: #24292e;
             color: white;
-            font-weight: 600;
+            font-weight: 500;
+            border: 1px solid #24292e;
         }
         
         .btn-repo:hover {
-            background: rgba(107, 70, 193, 0.9);
-            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            background: #1a1e22;
+            border-color: #1a1e22;
         }
         
         /* 三個按鈕的特殊布局 */
@@ -185,51 +236,69 @@
         }
         
         .btn-primary {
-            background: #667eea !important;
+            background: #0969da !important;
             color: white !important;
             padding: 12px 24px !important;
             font-size: 1rem !important;
-            transition: all 0.3s ease;
+            font-weight: 500 !important;
+            transition: all 0.2s ease;
+            border: 1px solid #0969da !important;
         }
         
         .btn-primary:hover {
-            background: #5a67d8 !important;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+            background: #0860ca !important;
+            border-color: #0860ca !important;
+            transform: translateY(-1px);
         }
         
         .quick-start {
-            background: #e8f5e8;
-            padding: 25px;
-            border-radius: 10px;
-            border-left: 5px solid #28a745;
-            margin: 30px 0;
+            background: #f6f8fa;
+            padding: 32px;
+            border-radius: 6px;
+            border: 1px solid #d1d9e0;
+            margin: 32px 0;
+            position: relative;
+        }
+        
+        .quick-start::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: #1a7f37;
+            border-radius: 6px 0 0 6px;
         }
         
         .quick-start h3 {
-            color: #28a745;
-            margin-bottom: 15px;
+            color: #1a1a1a;
+            margin-bottom: 16px;
+            font-weight: 600;
         }
         
         .footer {
             text-align: center;
-            color: white;
-            opacity: 0.8;
-            margin-top: 30px;
+            color: #656d76;
+            margin-top: 48px;
+            padding: 24px 0;
+            border-top: 1px solid #d1d9e0;
         }
         
         /* QR Code 樣式 */
         .qr-code-section {
             text-align: center;
-            margin: 30px 0;
-            padding: 30px;
-            background: #f0f0f0;
-            border-radius: 10px;
+            margin: 32px 0;
+            padding: 32px;
+            background: #f6f8fa;
+            border: 1px solid #d1d9e0;
+            border-radius: 6px;
         }
         
         .qr-code-section h3 {
-            color: #667eea;
+            color: #1a1a1a;
             margin-bottom: 20px;
+            font-weight: 600;
         }
         
         #qrcode {
@@ -292,7 +361,7 @@
         .markdown-close {
             position: fixed;
             top: 70px;
-            right: calc(50% - 450px + 20px);
+            right: max(calc(50% - 450px + 20px), 20px);
             width: 30px;
             height: 30px;
             cursor: pointer;
@@ -359,7 +428,7 @@
         /* Markdown 渲染樣式 */
         .markdown-content h1 {
             color: #333;
-            border-bottom: 2px solid #667eea;
+            border-bottom: 2px solid #007aff;
             padding-bottom: 10px;
             margin-bottom: 20px;
         }
@@ -403,7 +472,7 @@
         
         .copy-button {
             padding: 5px 10px;
-            background: #667eea;
+            background: #007aff;
             color: white;
             border: none;
             border-radius: 4px;
@@ -432,7 +501,7 @@
         }
         
         .markdown-content blockquote {
-            border-left: 4px solid #667eea;
+            border-left: 4px solid #007aff;
             padding-left: 20px;
             margin-left: 0;
             color: #666;
@@ -481,7 +550,7 @@
         }
         
         .markdown-content em {
-            color: #667eea;
+            color: #007aff;
             font-style: italic;
         }
         
@@ -495,7 +564,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>🚀 GitHub Copilot 教學專案</h1>
+            <h1>GitHub Copilot 教學專案</h1>
             <p>透過 8 個實作場景，掌握 AI 輔助開發的完整技能</p>
         </div>
         
@@ -505,32 +574,32 @@
             
             <div class="features">
                 <div class="feature-card">
-                    <h3>🤖 Agent 模式核心</h3>
+                    <h3>Agent 模式核心</h3>
                     <p>學習讓 AI 自主完成複雜開發任務，採用漸進式學習路徑</p>
                 </div>
                 
                 <div class="feature-card">
-                    <h3>🎯 目標聽眾</h3>
+                    <h3>目標聽眾</h3>
                     <p>適合 PM、SA、PG 三種角色，了解 AI 如何提升各自工作效率</p>
                 </div>
                 
                 <div class="feature-card">
-                    <h3>⚡ 2025 最新功能</h3>
+                    <h3>2025 最新功能</h3>
                     <p>涵蓋 Next Edit Suggestions、多指令檔案系統、Prompt Files 等最新特色</p>
                 </div>
             </div>
             
             <div class="quick-start">
-                <h3>🚀 快速開始</h3>
+                <h3 style="font-size: 1.125rem; font-weight: 600; color: #1d1d1f;">快速開始</h3>
                 <p>1. 安裝 VS Code 和 GitHub Copilot 擴充套件<br>
                 2. 登入 GitHub 帳號並選擇適合的訂閱方案<br>
                 3. 設定繁體中文語言環境<br>
                 4. 開始第一個場景的學習</p>
                 
-                <details style="margin-top: 15px; background: #f0f7ff; padding: 15px; border-radius: 8px; border: 1px solid #667eea;">
-                    <summary style="cursor: pointer; font-weight: bold; color: #667eea;">🤖 Agent 快速設置指令（點擊展開）</summary>
+                <details style="margin-top: 20px; background: #f5f5f7; padding: 24px; border-radius: 16px; border: none;">
+                    <summary style="cursor: pointer; font-weight: 600; color: #007aff;">Agent 快速設置指令（點擊展開）</summary>
                     <div style="position: relative;">
-                        <button onclick="copyAgentPrompt()" style="position: absolute; top: 15px; right: 15px; padding: 5px 10px; background: #667eea; color: white; border: none; border-radius: 4px; font-size: 12px; cursor: pointer; z-index: 10;">
+                        <button onclick="copyAgentPrompt()" style="position: absolute; top: 15px; right: 15px; padding: 5px 10px; background: #007aff; color: white; border: none; border-radius: 20px; font-size: 12px; cursor: pointer; z-index: 10;">
                             複製
                         </button>
                         <pre id="agentPrompt" style="margin-top: 10px; background: white; padding: 15px; padding-right: 60px; border-radius: 5px; font-size: 0.9rem; overflow-x: auto;">請幫我設置 GitHub Copilot 教學專案環境：
@@ -558,7 +627,7 @@
                 
                 <div style="text-align: center; margin-top: 20px; display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
                     <a href="#" onclick="loadMarkdown('./README.md', 'GitHub Copilot 教學專案 - 完整指南'); return false;" class="btn btn-doc btn-primary">
-                        📖 查看完整教學指南
+                        查看完整教學指南
                     </a>
                     <a href="https://github.com/yulin0629/github-copilot-tutorial" target="_blank" class="btn btn-primary" style="background: #24292e !important;">
                         <svg style="width: 20px; height: 20px; margin-right: 8px; vertical-align: middle;" viewBox="0 0 16 16" fill="currentColor">
@@ -570,21 +639,21 @@
             </div>
             
             <div class="qr-code-section">
-                <h3>📱 手機掃描 QR Code 快速存取</h3>
+                <h3 style="font-size: 1.25rem; font-weight: 600; color: #1d1d1f;">手機掃描 QR Code 快速存取</h3>
                 <div id="qrcode"></div>
                 <p class="qr-note">掃描 QR Code 即可在手機上瀏覽完整教學內容</p>
             </div>
             
             <div class="scenarios">
-                <h2>📚 8 個學習場景</h2>
+                <h2 style="font-size: 2rem; font-weight: 600; margin-bottom: 32px;">8 個學習場景</h2>
                 <div class="scenario-list">
                     <div class="scenario-item">
                         <div class="scenario-number">01</div>
                         <div class="scenario-title">初次對話體驗</div>
                         <div class="scenario-description">建立 Copilot 使用基礎，體驗傳統 Chat 功能</div>
                         <div class="scenario-links">
-                            <a href="#" onclick="loadMarkdown('./01-first-experience/LESSON_GUIDE.md', '場景 1：初次對話體驗'); return false;" class="btn btn-doc">📚 查看教學</a>
-                            <a href="./01-first-experience/" class="btn btn-demo">🎯 實際應用</a>
+                            <a href="#" onclick="loadMarkdown('./01-first-experience/LESSON_GUIDE.md', '場景 1：初次對話體驗'); return false;" class="btn btn-doc">教學文件</a>
+                            <a href="./01-first-experience/" class="btn btn-demo">展示</a>
                         </div>
                     </div>
                     
@@ -593,8 +662,8 @@
                         <div class="scenario-title">程式碼解釋實作</div>
                         <div class="scenario-description">掌握 @workspace 核心功能，理解專案結構</div>
                         <div class="scenario-links">
-                            <a href="#" onclick="loadMarkdown('./02-code-explanation/LESSON_GUIDE.md', '場景 2：程式碼解釋實作'); return false;" class="btn btn-doc">📚 查看教學</a>
-                            <a href="./02-code-explanation/" class="btn btn-demo">🎯 實際應用</a>
+                            <a href="#" onclick="loadMarkdown('./02-code-explanation/LESSON_GUIDE.md', '場景 2：程式碼解釋實作'); return false;" class="btn btn-doc">教學文件</a>
+                            <a href="./02-code-explanation/" class="btn btn-demo">展示</a>
                         </div>
                     </div>
                     
@@ -603,8 +672,8 @@
                         <div class="scenario-title">函數生成</div>
                         <div class="scenario-description">體驗 Agent 協助編程，對比手動 vs AI 效率</div>
                         <div class="scenario-links">
-                            <a href="#" onclick="loadMarkdown('./03-function-generation/LESSON_GUIDE.md', '場景 3：函數生成'); return false;" class="btn btn-doc">📚 查看教學</a>
-                            <a href="./03-function-generation/" class="btn btn-demo">🎯 實際應用</a>
+                            <a href="#" onclick="loadMarkdown('./03-function-generation/LESSON_GUIDE.md', '場景 3：函數生成'); return false;" class="btn btn-doc">教學文件</a>
+                            <a href="./03-function-generation/" class="btn btn-demo">展示</a>
                         </div>
                     </div>
                     
@@ -613,8 +682,8 @@
                         <div class="scenario-title">偵錯輔助</div>
                         <div class="scenario-description">讓 Agent 主動發現和修復程式問題</div>
                         <div class="scenario-links">
-                            <a href="#" onclick="loadMarkdown('./04-debugging-assistant/LESSON_GUIDE.md', '場景 4：偵錯輔助'); return false;" class="btn btn-doc">📚 查看教學</a>
-                            <a href="./04-debugging-assistant/" class="btn btn-demo">🎯 實際應用</a>
+                            <a href="#" onclick="loadMarkdown('./04-debugging-assistant/LESSON_GUIDE.md', '場景 4：偵錯輔助'); return false;" class="btn btn-doc">教學文件</a>
+                            <a href="./04-debugging-assistant/" class="btn btn-demo">展示</a>
                         </div>
                     </div>
                     
@@ -623,8 +692,8 @@
                         <div class="scenario-title">單元測試</div>
                         <div class="scenario-description">Agent 自主設計測試架構和完整用例</div>
                         <div class="scenario-links">
-                            <a href="#" onclick="loadMarkdown('./05-unit-testing/LESSON_GUIDE.md', '場景 5：單元測試'); return false;" class="btn btn-doc">📚 查看教學</a>
-                            <a href="./05-unit-testing/" class="btn btn-demo">🎯 實際應用</a>
+                            <a href="#" onclick="loadMarkdown('./05-unit-testing/LESSON_GUIDE.md', '場景 5：單元測試'); return false;" class="btn btn-doc">教學文件</a>
+                            <a href="./05-unit-testing/" class="btn btn-demo">展示</a>
                         </div>
                     </div>
                     
@@ -633,8 +702,8 @@
                         <div class="scenario-title">程式碼重構</div>
                         <div class="scenario-description">Agent 分析遺留代碼並執行重構策略</div>
                         <div class="scenario-links">
-                            <a href="#" onclick="loadMarkdown('./06-code-refactoring/LESSON_GUIDE.md', '場景 6：程式碼重構'); return false;" class="btn btn-doc">📚 查看教學</a>
-                            <a href="./06-code-refactoring/" class="btn btn-demo">🎯 實際應用</a>
+                            <a href="#" onclick="loadMarkdown('./06-code-refactoring/LESSON_GUIDE.md', '場景 6：程式碼重構'); return false;" class="btn btn-doc">教學文件</a>
+                            <a href="./06-code-refactoring/" class="btn btn-demo">展示</a>
                         </div>
                     </div>
                     
@@ -643,7 +712,7 @@
                         <div class="scenario-title">文件生成</div>
                         <div class="scenario-description">Agent 自動分析程式碼生成完整文件體系</div>
                         <div class="scenario-links">
-                            <a href="#" onclick="loadMarkdown('./07-documentation/LESSON_GUIDE.md', '場景 7：文件生成'); return false;" class="btn btn-doc">📚 查看教學</a>
+                            <a href="#" onclick="loadMarkdown('./07-documentation/LESSON_GUIDE.md', '場景 7：文件生成'); return false;" class="btn btn-doc">教學文件</a>
                         </div>
                     </div>
                     
@@ -651,11 +720,11 @@
                         <div class="scenario-number">08</div>
                         <div class="scenario-title">GitHub 自動化 Agent</div>
                         <div class="scenario-description">從 Issue 到 PR 的完整自動化流程</div>
-                        <div style="margin-top: 10px; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 5px;">
-                            <div style="font-size: 0.85rem; color: rgba(255,255,255,0.9); margin-bottom: 8px;">
-                                <strong>📋 練習 Issues：</strong>
+                        <div style="margin-top: 16px; padding: 16px; background: #f5f5f7; border-radius: 8px;">
+                            <div style="font-size: 0.875rem; color: #1d1d1f; margin-bottom: 8px; font-weight: 600;">
+                                練習 Issues：
                             </div>
-                            <div style="font-size: 0.8rem; line-height: 1.4; color: rgba(255,255,255,0.8);">
+                            <div style="font-size: 0.8125rem; line-height: 1.5; color: #424245;">
                                 • #1 清除已完成任務功能<br>
                                 • #2 修復 LocalStorage Bug<br>
                                 • #3 顯示未完成任務數量<br>
@@ -663,9 +732,9 @@
                             </div>
                         </div>
                         <div class="scenario-links scenario-links-3">
-                            <a href="#" onclick="loadMarkdown('./08-comprehensive-project/LESSON_GUIDE.md', '場景 8：GitHub 自動化 Agent'); return false;" class="btn btn-doc">📚 教學</a>
-                            <a href="https://github.com/yulin0629/copilot-agent-demo-todo" target="_blank" class="btn btn-repo">💻 GitHub</a>
-                            <a href="https://yulin0629.github.io/copilot-agent-demo-todo/" target="_blank" class="btn btn-demo">🎯 Demo</a>
+                            <a href="#" onclick="loadMarkdown('./08-comprehensive-project/LESSON_GUIDE.md', '場景 8：GitHub 自動化 Agent'); return false;" class="btn btn-doc">教學</a>
+                            <a href="https://github.com/yulin0629/copilot-agent-demo-todo" target="_blank" class="btn btn-repo">GitHub</a>
+                            <a href="https://yulin0629.github.io/copilot-agent-demo-todo/" target="_blank" class="btn btn-demo">Demo</a>
                         </div>
                     </div>
                 </div>
@@ -673,7 +742,7 @@
         </div>
         
         <div class="footer">
-            <p>🎯 預期成果：完成課程後提升 30-50% 開發效率，建立團隊級 AI 輔助開發流程</p>
+            <p>預期成果：完成課程後提升 30-50% 開發效率，建立團隊級 AI 輔助開發流程</p>
         </div>
     </div>
     
@@ -701,7 +770,7 @@
                 
                 setTimeout(() => {
                     button.textContent = originalText;
-                    button.style.background = '#667eea';
+                    button.style.background = '#007aff';
                 }, 2000);
             } catch (err) {
                 // 降級方案
@@ -719,7 +788,7 @@
                     
                     setTimeout(() => {
                         button.textContent = originalText;
-                        button.style.background = '#667eea';
+                        button.style.background = '#007aff';
                     }, 2000);
                 } catch (err) {
                     button.textContent = '複製失敗';
