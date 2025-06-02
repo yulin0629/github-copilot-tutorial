@@ -133,49 +133,41 @@ GitHub Copilot 於 2025 年 6 月更新方案，提供三種主要選擇：
 
 #### 1. [初次對話體驗](./01-first-experience/) (10分鐘)
 - **傳統 Chat 功能**：基本對話和程式碼建議
-- **實作重點**：使用 ask 功能建立簡單待辦事項
-- **Agent 使用**：❌ 不使用（建立基礎認知）
+- **實作重點**：使用 ask 功能建立簡單待辦事項，建立基礎認知
 
 #### 2. [程式碼解釋與 Inline Edit](./02-code-explanation/) (15分鐘)  
 - **@workspace 核心功能 + Inline Edit**：理解專案架構並快速修改
 - **實作重點**：購物車系統分析，掌握 Inline Edit (Ctrl+I) 技巧
-- **Agent 使用**：❌ 不使用（熟悉 @workspace 和基礎編輯）
 
 #### 🚀 **進階階段** - 引入 Agent 輔助
 
 #### 3. [函數生成](./03-function-generation/) (10分鐘)
 - **Inline Chat + 初步 Agent**：體驗 Agent 協助編程
 - **實作重點**：對比手動 vs Agent 生成函數的效率差異
-- **Agent 使用**：🟡 20%（開始體驗 Agent 價值）
 
 #### 4. [靈活運用三種模式的偵錯助手](./04-debugging-assistant/) (15分鐘)
 - **Ask + Edit + Agent 模式整合**：學習三種模式的最佳使用時機
 - **實作重點**：購物車 Bug 修復，體驗模式切換的效率差異
-- **Agent 使用**：🟡 30%（開始整合多種模式協作）
 
 #### 🔥 **專業階段** - Agent 成為主角
 
 #### 5. [Agent 測試策略師](./05-unit-testing/) (15分鐘)
-- **Agent 50% 模式**：Agent 自主設計完整測試架構和策略
+- **Agent 自主設計**：Agent 制定完整測試架構和策略
 - **實作重點**：數據分析工具測試套件，Agent 主導測試規劃
-- **Agent 使用**：🟠 50%（Agent 開始主導工作流程）
 
 #### 6. [Agent 重構架構師](./06-code-refactoring/) (15分鐘)
-- **Agent 60% 模式**：Agent 主導大規模代碼重構和架構設計
+- **Agent 主導重構**：Agent 負責大規模代碼重構和架構設計
 - **實作重點**：遺留電商系統現代化改造，Agent 作為首席架構師
-- **Agent 使用**：🟠 60%（展示 Agent 在複雜任務中的能力）
 
 #### 🎯 **專家階段** - Agent 主導開發
 
 #### 7. [Agent 文檔大師](./07-documentation/) (10分鐘)
-- **Agent 80% 模式**：Agent 作為技術文檔專家，自動化文檔體系
+- **Agent 文檔專家**：Agent 作為技術文檔專家，自動化文檔體系
 - **實作重點**：任務管理 API 系統文檔生成，完整技術文檔體系
-- **Agent 使用**：🔴 80%（幾乎完全依靠 Agent）
 
 #### 8. [GitHub 自動化 Agent](./08-comprehensive-project/) (25分鐘)
 - **⭐ Agent Mode 完全主導**：從 GitHub Issue 到 Pull Request 的完整自動化流程
 - **實作重點**：Agent 自主處理 Issue 分析、功能實作、測試驗證、PR 創建
-- **Agent 使用**：🔴 100%（展示 AI 驅動的完全自動化工作流程）
 
 ### 🚀 **學習成果**
 - 掌握 Agent Mode 的核心使用方法
