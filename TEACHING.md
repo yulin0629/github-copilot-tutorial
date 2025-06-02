@@ -1,180 +1,198 @@
 # 📚 GitHub Copilot 教學分支管理指南
 
-## 🎯 教學流程
+## 🎯 分支策略
 
-### 1. 準備教學環境
+### 核心分支
+- **main**: 原始教學檔案，供學員下載使用
+- **gh-pages**: GitHub Pages 部署分支，教學時在此分支進行修改
+
+### 分支使用流程
+
+#### 1. 課前準備
 ```bash
-# 進入專案目錄
-cd github-copilot-tutorial
-
-# 建立今日教學分支
-./scripts/setup-lesson.sh demo
+# 確保 gh-pages 分支與 main 同步
+git checkout gh-pages
+git merge main
+git push origin gh-pages
 ```
 
-### 2. 開始特定場景教學
+#### 2. 教學進行時
 ```bash
-# 開始場景 4 (重構助手)
-./scripts/setup-lesson.sh start 4
+# 切換到 gh-pages 分支進行 Live Demo
+git checkout gh-pages
 
-# 開始場景 5 (測試策略)
-./scripts/setup-lesson.sh start 5
+# 所有修改都在 gh-pages 分支上進行
+# 學員仍從 main 分支下載原始檔案
 ```
 
-### 3. 教學過程中
+#### 3. 課後處理
 ```bash
-# 保存當前進度
-./scripts/setup-lesson.sh save 4
+# 可選擇性地將有價值的改進合併回 main
+git checkout main
+git merge gh-pages --no-ff -m "feat: 合併教學改進"
+git push origin main
 
-# 重置到場景初始狀態
-./scripts/setup-lesson.sh reset 4
-```
-
-### 4. 查看可用分支
-```bash
-./scripts/setup-lesson.sh list
+# 或保持 gh-pages 作為教學歷史記錄
 ```
 
 ## 🌐 GitHub Pages 配合
 
 ### 主要展示頁面
 - **主頁**: https://yulin0629.github.io/github-copilot-tutorial/
+- **場景1**: https://yulin0629.github.io/github-copilot-tutorial/01-first-experience/
+- **場景2**: https://yulin0629.github.io/github-copilot-tutorial/02-code-explanation/
+- **場景3**: https://yulin0629.github.io/github-copilot-tutorial/03-function-generation/
 - **場景4**: https://yulin0629.github.io/github-copilot-tutorial/04-debugging-assistant/
 - **場景5**: https://yulin0629.github.io/github-copilot-tutorial/05-unit-testing/
+- **場景6**: https://yulin0629.github.io/github-copilot-tutorial/06-code-refactoring/
+- **場景7**: https://yulin0629.github.io/github-copilot-tutorial/07-documentation/
+- **場景8**: https://yulin0629.github.io/github-copilot-tutorial/08-comprehensive-project/
 
-### 分支策略配合
+### GitHub Pages 設定
+- 從 `gh-pages` 分支的根目錄部署
+- 修改會即時反映在網站上
+
+## 🚀 實際教學流程
+
+### 1. 開始教學前
 ```bash
-# main 分支永遠保持完整的展示狀態
-git checkout main
-git push origin main  # 自動更新 GitHub Pages
+# 確認在 gh-pages 分支
+git checkout gh-pages
 
-# 教學分支獨立進行，不影響展示
-git checkout live-demo-20250102
-# 在這裡進行教學實驗
+# 確認與 main 同步
+git pull origin gh-pages
+
+# 開啟 Live Server 或預覽
+# VS Code: 右鍵點擊 index.html → Open with Live Server
 ```
 
-## 📋 分支說明
-
-### 核心分支
-- **main**: 完整教學內容，GitHub Pages 展示
-- **lesson-templates**: 教學模板，包含所有初始狀態
-
-### 場景分支
-- **lesson-step4-start**: 場景4初始狀態 (有Bug的購物車)
-- **lesson-step4-end**: 場景4完成狀態 (修復後的購物車)
-- **lesson-step5-start**: 場景5初始狀態 (待測試的數據工具)
-- **lesson-step5-end**: 場景5完成狀態 (完整測試套件)
-
-### 教學分支
-- **live-demo-YYYYMMDD**: 每日教學工作分支
-- **lesson-stepX-progress-YYYYMMDD**: 教學進度保存分支
-
-## 🚀 實際使用範例
-
-### 早上準備教學
+### 2. 教學過程中
 ```bash
-# 1. 建立今日教學環境
-./scripts/setup-lesson.sh demo
+# 展示場景 1：初次對話體驗
+# 開啟 01-first-experience/index.html
+# 使用 Agent 模式修改程式碼
 
-# 2. 測試場景4初始狀態
-./scripts/setup-lesson.sh start 4
-open http://localhost:8080/04-debugging-assistant/
+# 即時提交修改（可選）
+git add .
+git commit -m "demo: 場景1 待辦事項功能實作"
 ```
 
-### 教學過程中
+### 3. 切換場景
 ```bash
-# 學員體驗有Bug的購物車
-# Agent 分析和修復問題
-# 保存修復進度
-./scripts/setup-lesson.sh save 4
+# 直接開啟下一個場景的 index.html
+# 例如：02-code-explanation/index.html
 
-# 開始場景5
-./scripts/setup-lesson.sh start 5
+# 每個場景都是獨立的，不需要重置
 ```
 
-### 如果需要重來
+### 4. 展示 Agent 能力時
 ```bash
-# 重置到場景4初始狀態
-./scripts/setup-lesson.sh reset 4
+# 使用 Agent 模式進行大規模修改
+# 例如在場景 4 中修復所有 Bug
+# 學員可以即時在瀏覽器中看到效果
 ```
 
-### 教學結束後
-```bash
-# 查看今日所有進度分支
-./scripts/setup-lesson.sh list
+## 📋 教學技巧
 
-# 可選：合併優秀的修復到 main 分支
-git checkout main
-git merge live-demo-20250102 --no-ff
-git push origin main  # 更新 GitHub Pages
+### 保持原始檔案完整性
+- **main 分支**永遠保持原始狀態
+- 學員下載的是乾淨的初始專案
+- 教師的修改只在 `gh-pages` 分支
+
+### 即時展示效果
+- 使用 Live Server 即時預覽修改
+- GitHub Pages 自動部署最新改動
+- 學員可以透過網址查看完成效果
+
+### 版本控制最佳實踐
+```bash
+# 每個重要步驟都提交
+git add .
+git commit -m "demo: 完成購物車 Bug 修復"
+
+# 定期推送到遠端
+git push origin gh-pages
 ```
 
 ## 🎭 多場次教學
 
-### 場次1: 上午班
+### 重置教學環境
 ```bash
-./scripts/setup-lesson.sh demo  # 建立 live-demo-20250102
-# 教學...
-./scripts/setup-lesson.sh save 4  # 保存為 lesson-step4-progress-20250102
+# 如果需要為新場次重置
+git checkout gh-pages
+git reset --hard origin/main
+git push origin gh-pages --force-with-lease
+
+# 或建立新的教學分支
+git checkout -b workshop-20250102
 ```
 
-### 場次2: 下午班
+### 保存特定場次成果
 ```bash
-./scripts/setup-lesson.sh reset 4  # 重置到初始狀態
-# 重新開始教學...
-```
-
-## 🔧 進階技巧
-
-### 建立特定場景的分支
-```bash
-# 為特殊需求建立專用分支
-git checkout -b workshop-enterprise-20250102
-git checkout lesson-step4-start -- 04-debugging-assistant/
-# 自訂修改...
-```
-
-### 批次重置多個場景
-```bash
-for i in {4..8}; do
-    ./scripts/setup-lesson.sh reset $i
-done
-```
-
-### 備份教學成果
-```bash
-# 建立教學成果分支
-git checkout -b teaching-results-20250102
-git add .
-git commit -m "教學成果備份 - $(date)"
-git push origin teaching-results-20250102
+# 建立標籤保存重要教學成果
+git tag -a "workshop-20250102-complete" -m "2025/01/02 教學完整成果"
+git push origin --tags
 ```
 
 ## ⚠️ 注意事項
 
-1. **main 分支保護**: 永遠保持 main 分支的展示完整性
-2. **教學分支隔離**: 教學實驗在專用分支，不影響主展示
-3. **進度保存**: 重要修改記得保存到進度分支
-4. **分支清理**: 定期清理過期的教學分支
+### 1. 分支保護
+- **絕不在 main 分支上直接教學**
+- main 分支是學員的下載來源
+- 保持其原始和完整性
+
+### 2. Git 操作展示
+- 可以展示 Git 操作給學員看
+- 但強調重點是 GitHub Copilot
+- 避免過多 Git 細節分散注意力
+
+### 3. 瀏覽器快取
+```bash
+# 如果瀏覽器快取導致看不到更新
+# 使用強制重新整理：
+# Windows: Ctrl + F5
+# Mac: Cmd + Shift + R
+```
 
 ## 🆘 疑難排解
 
-### 分支衝突
-```bash
-# 強制重置到初始狀態
-git checkout lesson-step4-start -- 04-debugging-assistant/
-git add . && git commit -m "重置場景4"
-```
-
-### 找不到分支
-```bash
-# 更新遠端分支資訊
-git fetch origin
-./scripts/setup-lesson.sh list
-```
-
 ### GitHub Pages 沒更新
 ```bash
-# 確認 main 分支推送
-git checkout main
-git push origin main --force-with-lease
+# 檢查 GitHub Actions 狀態
+# 前往 repo 的 Actions 頁面查看部署狀態
+
+# 強制推送觸發重新部署
+git commit --allow-empty -m "trigger deploy"
+git push origin gh-pages
 ```
+
+### 意外修改了 main 分支
+```bash
+# 如果不小心在 main 分支修改
+git checkout main
+git reset --hard origin/main  # 小心使用！
+```
+
+### 需要比較修改前後
+```bash
+# 在瀏覽器開啟兩個分頁
+# 分頁1: main 分支版本（GitHub 網頁）
+# 分頁2: gh-pages 分支版本（GitHub Pages）
+```
+
+## 🎯 教學重點提醒
+
+1. **Agent 模式是核心**
+   - 場景 1-2：0% Agent（只用 Ask 模式）
+   - 場景 3-4：逐步引入 Agent
+   - 場景 5-8：Agent 成為主角
+
+2. **Live Demo 效果**
+   - 每次修改都能即時看到結果
+   - 強調 Agent 的自主能力
+   - 展示效率提升的對比
+
+3. **保持簡潔**
+   - 不要過度解釋 Git 操作
+   - 專注於 GitHub Copilot 功能
+   - 讓 Agent 展現其能力
