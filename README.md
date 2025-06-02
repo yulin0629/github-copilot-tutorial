@@ -33,7 +33,7 @@
    - 07-documentation/
    - 08-comprehensive-project/ (這是 git submodule)
 
-5. 在 VS Code 中開啟專案：
+5. 在 VS Code 中開啟克隆下來的專案資料夾：
    code .
 
 6. 確認已安裝必要的 VS Code 擴充套件：
