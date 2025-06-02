@@ -3,563 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#000000">
     <title>GitHub Copilot 教學專案</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.6;
-            color: #1a1a1a;
-            background: #fafafa;
-            min-height: 100vh;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        .header {
-            text-align: left;
-            color: #1a1a1a;
-            margin-bottom: 60px;
-            position: relative;
-            padding-top: 40px;
-        }
-        
-        .header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 120px;
-            height: 4px;
-            background: #0969da;
-        }
-        
-        .header h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 12px;
-            letter-spacing: -0.02em;
-        }
-        
-        .header p {
-            font-size: 1.125rem;
-            color: #656d76;
-            font-weight: 400;
-        }
-        
-        .main-content {
-            background: white;
-            border: 1px solid #d1d9e0;
-            border-radius: 8px;
-            padding: 48px;
-            margin-bottom: 32px;
-        }
-        
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin: 40px 0;
-        }
-        
-        .feature-card {
-            background: transparent;
-            padding: 24px;
-            border: 1px solid #d1d9e0;
-            border-radius: 6px;
-            transition: all 0.2s ease;
-        }
-        
-        .feature-card:hover {
-            border-color: #0969da;
-            transform: translateY(-2px);
-        }
-        
-        .feature-card h3 {
-            color: #1a1a1a;
-            margin-bottom: 12px;
-            font-size: 1.125rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .feature-card p {
-            color: #656d76;
-            font-size: 0.95rem;
-            line-height: 1.7;
-        }
-        
-        .scenarios {
-            margin: 40px 0;
-        }
-        
-        .scenarios h2 {
-            color: #333;
-            margin-bottom: 25px;
-            text-align: center;
-        }
-        
-        .scenario-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
-        
-        .scenario-item {
-            background: white;
-            color: #1a1a1a;
-            padding: 24px;
-            border: 1px solid #d1d9e0;
-            border-radius: 6px;
-            transition: all 0.2s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .scenario-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: #0969da;
-            opacity: 0;
-            transition: opacity 0.2s ease;
-        }
-        
-        .scenario-item:hover {
-            border-color: #0969da;
-            transform: translateX(4px);
-        }
-        
-        .scenario-item:hover::before {
-            opacity: 1;
-        }
-        
-        .scenario-number {
-            font-size: 0.875rem;
-            font-weight: 600;
-            color: #656d76;
-            font-family: 'SF Mono', Monaco, 'Courier New', monospace;
-        }
-        
-        .scenario-title {
-            font-size: 1.125rem;
-            font-weight: 600;
-            margin: 8px 0;
-            color: #1a1a1a;
-        }
-        
-        .scenario-description {
-            font-size: 0.875rem;
-            color: #656d76;
-            line-height: 1.6;
-        }
-        
-        
-        .scenario-links {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-        }
-        
-        .btn {
-            padding: 8px 16px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        .btn-doc {
-            background: transparent;
-            color: #0969da;
-            border: 1px solid #d1d9e0;
-        }
-        
-        .btn-doc:hover {
-            background: #f6f8fa;
-            border-color: #0969da;
-        }
-        
-        .btn-demo {
-            background: #0969da;
-            color: white;
-            font-weight: 500;
-            border: 1px solid #0969da;
-        }
-        
-        .btn-demo:hover {
-            background: #0860ca;
-            border-color: #0860ca;
-        }
-        
-        .btn-repo {
-            background: #24292e;
-            color: white;
-            font-weight: 500;
-            border: 1px solid #24292e;
-        }
-        
-        .btn-repo:hover {
-            background: #1a1e22;
-            border-color: #1a1e22;
-        }
-        
-        /* 三個按鈕的特殊布局 */
-        .scenario-links-3 {
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        
-        .scenario-links-3 .btn {
-            font-size: 0.85rem;
-            padding: 6px 12px;
-            flex: 1;
-            min-width: 70px;
-            text-align: center;
-        }
-        
-        .btn-primary {
-            background: #0969da !important;
-            color: white !important;
-            padding: 12px 24px !important;
-            font-size: 1rem !important;
-            font-weight: 500 !important;
-            transition: all 0.2s ease;
-            border: 1px solid #0969da !important;
-        }
-        
-        .btn-primary:hover {
-            background: #0860ca !important;
-            border-color: #0860ca !important;
-            transform: translateY(-1px);
-        }
-        
-        .quick-start {
-            background: #f6f8fa;
-            padding: 32px;
-            border-radius: 6px;
-            border: 1px solid #d1d9e0;
-            margin: 32px 0;
-            position: relative;
-        }
-        
-        .quick-start::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: #1a7f37;
-            border-radius: 6px 0 0 6px;
-        }
-        
-        .quick-start h3 {
-            color: #1a1a1a;
-            margin-bottom: 16px;
-            font-weight: 600;
-        }
-        
-        .footer {
-            text-align: center;
-            color: #656d76;
-            margin-top: 48px;
-            padding: 24px 0;
-            border-top: 1px solid #d1d9e0;
-        }
-        
-        /* QR Code 樣式 */
-        .qr-code-section {
-            text-align: center;
-            margin: 32px 0;
-            padding: 32px;
-            background: #f6f8fa;
-            border: 1px solid #d1d9e0;
-            border-radius: 6px;
-        }
-        
-        .qr-code-section h3 {
-            color: #1a1a1a;
-            margin-bottom: 20px;
-            font-weight: 600;
-        }
-        
-        #qrcode {
-            display: inline-block;
-            padding: 20px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        
-        .qr-note {
-            margin-top: 15px;
-            color: #666;
-            font-size: 0.9rem;
-        }
-        
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 2rem;
-            }
-            
-            .main-content {
-                padding: 20px;
-            }
-            
-            .features {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
-    <style>
-        /* Markdown 內容樣式 */
-        .markdown-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 1000;
-            overflow: auto;
-        }
-        
-        .markdown-content {
-            background: white;
-            margin: 50px auto;
-            padding: 40px;
-            width: 90%;
-            max-width: 900px;
-            border-radius: 10px;
-            position: relative;
-            max-height: 90vh;
-            overflow-y: auto;
-            overflow-x: hidden;
-        }
-        
-        .markdown-close {
-            position: fixed;
-            top: 70px;
-            right: max(calc(50% - 450px + 20px), 20px);
-            width: 30px;
-            height: 30px;
-            cursor: pointer;
-            background: rgba(142, 142, 147, 0.12);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1001;
-            transition: all 0.2s ease;
-            border: none;
-            outline: none;
-            padding: 0;
-        }
-        
-        .markdown-close::before,
-        .markdown-close::after {
-            content: '';
-            position: absolute;
-            width: 14px;
-            height: 1.5px;
-            background: rgba(60, 60, 67, 0.6);
-            border-radius: 2px;
-        }
-        
-        .markdown-close::before {
-            transform: rotate(45deg);
-        }
-        
-        .markdown-close::after {
-            transform: rotate(-45deg);
-        }
-        
-        .markdown-close:hover {
-            background: rgba(142, 142, 147, 0.2);
-        }
-        
-        .markdown-close:hover::before,
-        .markdown-close:hover::after {
-            background: rgba(60, 60, 67, 0.8);
-        }
-        
-        .markdown-close:active {
-            background: rgba(142, 142, 147, 0.3);
-            transform: scale(0.96);
-        }
-        
-        @media (max-width: 960px) {
-            .markdown-close {
-                right: 20px;
-                top: 60px;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .markdown-close {
-                right: 15px;
-                top: 15px;
-            }
-        }
-        
-        /* Markdown 渲染樣式 */
-        .markdown-content h1 {
-            color: #333;
-            border-bottom: 2px solid #007aff;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-        }
-        
-        .markdown-content h2 {
-            color: #444;
-            margin-top: 30px;
-            margin-bottom: 15px;
-        }
-        
-        .markdown-content h3 {
-            color: #555;
-            margin-top: 20px;
-            margin-bottom: 10px;
-        }
-        
-        .markdown-content code {
-            background: #f4f4f4;
-            padding: 2px 4px;
-            border-radius: 3px;
-            font-family: 'Consolas', 'Monaco', monospace;
-        }
-        
-        .markdown-content pre {
-            background: #f8f8f8;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 15px;
-            overflow-x: auto;
-            margin: 15px 0;
-            position: relative;
-            max-width: 100%;
-        }
-        
-        .markdown-content pre code {
-            background: none;
-            padding: 0;
-            display: block;
-            padding-right: 50px;
-        }
-        
-        .copy-button {
-            padding: 5px 10px;
-            background: #007aff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-size: 12px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .markdown-content pre .copy-button,
-        .markdown-content pre .lang-label {
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        
-        .markdown-content pre:hover .copy-button,
-        .markdown-content pre:hover .lang-label {
-            opacity: 1;
-        }
-        
-        .copy-button:hover {
-            background: #5a67d8;
-        }
-        
-        .copy-button.copied {
-            background: #48bb78;
-        }
-        
-        .markdown-content blockquote {
-            border-left: 4px solid #007aff;
-            padding-left: 20px;
-            margin-left: 0;
-            color: #666;
-            font-style: italic;
-        }
-        
-        .markdown-content ul, .markdown-content ol {
-            margin-left: 20px;
-            margin-bottom: 15px;
-        }
-        
-        .markdown-content li {
-            margin-bottom: 5px;
-            line-height: 1.6;
-        }
-        
-        .markdown-content table {
-            border-collapse: collapse;
-            width: 100%;
-            margin: 15px 0;
-            display: block;
-            overflow-x: auto;
-            white-space: nowrap;
-        }
-        
-        .markdown-content table td,
-        .markdown-content table th {
-            white-space: normal;
-            word-wrap: break-word;
-        }
-        
-        .markdown-content th, .markdown-content td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-        
-        .markdown-content th {
-            background: #f4f4f4;
-            font-weight: bold;
-        }
-        
-        .markdown-content strong {
-            color: #333;
-            font-weight: 600;
-        }
-        
-        .markdown-content em {
-            color: #007aff;
-            font-style: italic;
-        }
-        
-        .markdown-loading {
-            text-align: center;
-            padding: 50px;
-            color: #666;
-        }
-    </style>
 </head>
 <body>
     <div class="container">
@@ -569,35 +17,66 @@
         </div>
         
         <div class="main-content">
-            <h2>📋 專案簡介</h2>
-            <p>這是一個 <strong>2小時精華版</strong> GitHub Copilot 教學專案，專注於 <strong>Agent 模式</strong>的實際應用。透過由淺入深的 8 個場景，讓您快速掌握 AI 驅動的開發流程。</p>
+            <h2 style="font-size: 3rem; font-weight: 600; margin-bottom: 48px; text-align: center; letter-spacing: -0.015em; line-height: 1.0625;">專案簡介</h2>
+            <p style="text-align: center; font-size: 1.25rem; color: #6e6e73; max-width: 800px; margin: 0 auto 80px; line-height: 1.6;">這是一個 <strong style="color: #1d1d1f;">2小時精華版</strong> GitHub Copilot 教學專案，專注於 <strong style="color: #1d1d1f;">Agent 模式</strong>的實際應用。<br>透過由淺入深的 8 個場景，讓您快速掌握 AI 驅動的開發流程。</p>
+            
+            <div style="text-align: center; margin: 0 auto 80px; max-width: 900px;">
+                <p style="font-size: 1.125rem; color: #515154; line-height: 1.8; margin-bottom: 24px;">
+                    我們將從基礎的對話功能開始，逐步深入到讓 AI Agent 完全主導開發流程。每個場景都包含實際的程式碼範例、詳細的操作步驟，以及立即可見的成果展示。
+                </p>
+                <p style="font-size: 1rem; color: #6e6e73; line-height: 1.7;">
+                    無論您是 <strong>產品經理（PM）</strong>想了解 AI 如何加速產品迭代、<strong>系統分析師（SA）</strong>希望掌握 AI 輔助系統設計，還是<strong>程式設計師（PG）</strong>想要提升編碼效率，這個課程都能為您帶來實質的幫助。
+                </p>
+            </div>
             
             <div class="features">
                 <div class="feature-card">
                     <h3>Agent 模式核心</h3>
-                    <p>學習讓 AI 自主完成複雜開發任務，採用漸進式學習路徑</p>
+                    <p>學習讓 AI 自主完成複雜開發任務，從簡單的程式碼補全到完整的系統架構設計。採用漸進式學習路徑，讓您一步步掌握 Agent 的強大能力。</p>
+                    <ul style="margin-top: 16px; font-size: 0.875rem; color: #6e6e73; list-style: none; padding: 0;">
+                        <li style="margin-bottom: 8px;">✓ 自主分析與決策</li>
+                        <li style="margin-bottom: 8px;">✓ 多檔案協調修改</li>
+                        <li>✓ 完整專案重構</li>
+                    </ul>
                 </div>
                 
                 <div class="feature-card">
                     <h3>目標聽眾</h3>
-                    <p>適合 PM、SA、PG 三種角色，了解 AI 如何提升各自工作效率</p>
+                    <p>適合各種角色的專業人士，每個人都能找到適合自己的應用場景，大幅提升工作效率。</p>
+                    <ul style="margin-top: 16px; font-size: 0.875rem; color: #6e6e73; list-style: none; padding: 0;">
+                        <li style="margin-bottom: 8px;"><strong>PM</strong>：快速原型開發、需求驗證</li>
+                        <li style="margin-bottom: 8px;"><strong>SA</strong>：系統分析、文檔生成</li>
+                        <li><strong>PG</strong>：編碼加速、測試自動化</li>
+                    </ul>
                 </div>
                 
                 <div class="feature-card">
                     <h3>2025 最新功能</h3>
-                    <p>涵蓋 Next Edit Suggestions、多指令檔案系統、Prompt Files 等最新特色</p>
+                    <p>涵蓋 GitHub Copilot 最新發布的強大功能，讓您站在 AI 輔助開發的最前沿。</p>
+                    <ul style="margin-top: 16px; font-size: 0.875rem; color: #6e6e73; list-style: none; padding: 0;">
+                        <li style="margin-bottom: 8px;">Next Edit Suggestions</li>
+                        <li style="margin-bottom: 8px;">多指令檔案系統</li>
+                        <li>Prompt Files 模板化</li>
+                    </ul>
                 </div>
             </div>
             
             <div class="quick-start">
-                <h3 style="font-size: 1.125rem; font-weight: 600; color: #1d1d1f;">快速開始</h3>
-                <p>1. 安裝 VS Code 和 GitHub Copilot 擴充套件<br>
-                2. 登入 GitHub 帳號並選擇適合的訂閱方案<br>
-                3. 設定繁體中文語言環境<br>
-                4. 開始第一個場景的學習</p>
+                <h3 style="font-size: 1.25rem; font-weight: 600; color: #1d1d1f; margin-bottom: 20px;">快速開始</h3>
+                <p style="font-size: 1rem; line-height: 1.8; margin-bottom: 20px;">準備好開始您的 AI 輔助開發之旅了嗎？只需要簡單幾個步驟：</p>
+                <ol style="font-size: 0.9375rem; line-height: 1.8; color: #515154; margin-left: 20px;">
+                    <li style="margin-bottom: 12px;"><strong>安裝必要工具</strong><br>
+                        下載並安裝 VS Code，然後從擴充套件市場安裝 GitHub Copilot</li>
+                    <li style="margin-bottom: 12px;"><strong>設定您的帳號</strong><br>
+                        使用 GitHub 帳號登入，選擇個人版（$10/月）或商業版（$19/月）</li>
+                    <li style="margin-bottom: 12px;"><strong>語言環境設定</strong><br>
+                        將 VS Code 設定為繁體中文，獲得更好的學習體驗</li>
+                    <li><strong>開始學習旅程</strong><br>
+                        從場景 1 開始，循序漸進掌握每個功能</li>
+                </ol>
                 
-                <details style="margin-top: 20px; background: #f5f5f7; padding: 24px; border-radius: 16px; border: none;">
-                    <summary style="cursor: pointer; font-weight: 600; color: #007aff;">Agent 快速設置指令（點擊展開）</summary>
+                <details style="margin-top: 28px; background: #f5f5f7; padding: 24px; border-radius: 16px; border: none;">
+                    <summary style="cursor: pointer; font-weight: 600; color: #007aff; font-size: 1rem;">Agent 快速設置指令（點擊展開）</summary>
                     <div style="position: relative;">
                         <button onclick="copyAgentPrompt()" style="position: absolute; top: 15px; right: 15px; padding: 5px 10px; background: #007aff; color: white; border: none; border-radius: 20px; font-size: 12px; cursor: pointer; z-index: 10;">
                             複製
@@ -629,7 +108,7 @@
                     <a href="#" onclick="loadMarkdown('./README.md', 'GitHub Copilot 教學專案 - 完整指南'); return false;" class="btn btn-doc btn-primary">
                         查看完整教學指南
                     </a>
-                    <a href="https://github.com/yulin0629/github-copilot-tutorial" target="_blank" class="btn btn-primary" style="background: #24292e !important;">
+                    <a href="https://github.com/yulin0629/github-copilot-tutorial" target="_blank" class="btn btn-primary" style="background: #1d1d1f !important; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3) !important;">
                         <svg style="width: 20px; height: 20px; margin-right: 8px; vertical-align: middle;" viewBox="0 0 16 16" fill="currentColor">
                             <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
                         </svg>
@@ -639,18 +118,34 @@
             </div>
             
             <div class="qr-code-section">
-                <h3 style="font-size: 1.25rem; font-weight: 600; color: #1d1d1f;">手機掃描 QR Code 快速存取</h3>
+                <h3 style="font-size: 1.375rem; font-weight: 600; color: #1d1d1f; margin-bottom: 16px;">手機掃描 QR Code 快速存取</h3>
+                <p style="font-size: 1rem; color: #6e6e73; margin-bottom: 24px; line-height: 1.6;">
+                    想要隨時隨地查看教學內容？掃描下方 QR Code，即可在手機或平板上瀏覽完整的教學資源。
+                </p>
                 <div id="qrcode"></div>
-                <p class="qr-note">掃描 QR Code 即可在手機上瀏覽完整教學內容</p>
+                <p class="qr-note" style="margin-top: 20px;">支援所有主流瀏覽器，建議使用 Safari 或 Chrome 獲得最佳體驗</p>
             </div>
             
             <div class="scenarios">
-                <h2 style="font-size: 2rem; font-weight: 600; margin-bottom: 32px;">8 個學習場景</h2>
-                <div class="scenario-list">
+                <h2>8 個學習場景</h2>
+                <p style="text-align: center; font-size: 1.125rem; color: #6e6e73; max-width: 800px; margin: -8px auto 40px; line-height: 1.6;">
+                    從基礎到進階，每個場景都精心設計，讓您在實作中學習。左右滑動探索所有場景。
+                </p>
+                <div class="scenario-wrapper">
+                    <div class="scenario-list">
                     <div class="scenario-item">
-                        <div class="scenario-number">01</div>
+                        <div class="scenario-number">01 - 基礎</div>
                         <div class="scenario-title">初次對話體驗</div>
-                        <div class="scenario-description">建立 Copilot 使用基礎，體驗傳統 Chat 功能</div>
+                        <div class="scenario-description">建立 Copilot 使用基礎，體驗傳統 Chat 功能，了解基本操作介面</div>
+                        <div class="scenario-details">
+                            <div style="margin-bottom: 8px;"><strong>學習重點：</strong></div>
+                            <ul style="list-style: none; padding: 0; margin: 0;">
+                                <li style="margin-bottom: 4px;">• 認識 Chat 介面與基本操作</li>
+                                <li style="margin-bottom: 4px;">• 學習如何提出有效問題</li>
+                                <li style="margin-bottom: 4px;">• 理解 AI 回應的特性</li>
+                            </ul>
+                            <div style="margin-top: 12px;"><strong>預計時間：</strong>10 分鐘</div>
+                        </div>
                         <div class="scenario-links">
                             <a href="#" onclick="loadMarkdown('./01-first-experience/LESSON_GUIDE.md', '場景 1：初次對話體驗'); return false;" class="btn btn-doc">教學文件</a>
                             <a href="./01-first-experience/" class="btn btn-demo">展示</a>
@@ -658,9 +153,18 @@
                     </div>
                     
                     <div class="scenario-item">
-                        <div class="scenario-number">02</div>
+                        <div class="scenario-number">02 - 基礎</div>
                         <div class="scenario-title">程式碼解釋實作</div>
-                        <div class="scenario-description">掌握 @workspace 核心功能，理解專案結構</div>
+                        <div class="scenario-description">掌握 @workspace 核心功能，理解專案結構，學習全專案分析技巧</div>
+                        <div class="scenario-details">
+                            <div style="margin-bottom: 8px;"><strong>學習重點：</strong></div>
+                            <ul style="list-style: none; padding: 0; margin: 0;">
+                                <li style="margin-bottom: 4px;">• @workspace 的強大功能</li>
+                                <li style="margin-bottom: 4px;">• 專案結構快速分析</li>
+                                <li style="margin-bottom: 4px;">• 程式碼理解與解釋</li>
+                            </ul>
+                            <div style="margin-top: 12px;"><strong>預計時間：</strong>15 分鐘</div>
+                        </div>
                         <div class="scenario-links">
                             <a href="#" onclick="loadMarkdown('./02-code-explanation/LESSON_GUIDE.md', '場景 2：程式碼解釋實作'); return false;" class="btn btn-doc">教學文件</a>
                             <a href="./02-code-explanation/" class="btn btn-demo">展示</a>
@@ -668,9 +172,18 @@
                     </div>
                     
                     <div class="scenario-item">
-                        <div class="scenario-number">03</div>
+                        <div class="scenario-number">03 - 進階</div>
                         <div class="scenario-title">函數生成</div>
-                        <div class="scenario-description">體驗 Agent 協助編程，對比手動 vs AI 效率</div>
+                        <div class="scenario-description">體驗 Agent 協助編程，對比手動 vs AI 效率，初次接觸 Agent 模式</div>
+                        <div class="scenario-details">
+                            <div style="margin-bottom: 8px;"><strong>學習重點：</strong></div>
+                            <ul style="list-style: none; padding: 0; margin: 0;">
+                                <li style="margin-bottom: 4px;">• Agent 模式初體驗 (20%)</li>
+                                <li style="margin-bottom: 4px;">• AI 協助編寫複雜函數</li>
+                                <li style="margin-bottom: 4px;">• 效率對比：傳統 vs AI</li>
+                            </ul>
+                            <div style="margin-top: 12px;"><strong>預計時間：</strong>15 分鐘</div>
+                        </div>
                         <div class="scenario-links">
                             <a href="#" onclick="loadMarkdown('./03-function-generation/LESSON_GUIDE.md', '場景 3：函數生成'); return false;" class="btn btn-doc">教學文件</a>
                             <a href="./03-function-generation/" class="btn btn-demo">展示</a>
@@ -678,9 +191,18 @@
                     </div>
                     
                     <div class="scenario-item">
-                        <div class="scenario-number">04</div>
+                        <div class="scenario-number">04 - 進階</div>
                         <div class="scenario-title">偵錯輔助</div>
-                        <div class="scenario-description">讓 Agent 主動發現和修復程式問題</div>
+                        <div class="scenario-description">讓 Agent 主動發現和修復程式問題，學習三種模式的靈活運用</div>
+                        <div class="scenario-details">
+                            <div style="margin-bottom: 8px;"><strong>學習重點：</strong></div>
+                            <ul style="list-style: none; padding: 0; margin: 0;">
+                                <li style="margin-bottom: 4px;">• Agent 智能診斷 (30%)</li>
+                                <li style="margin-bottom: 4px;">• Ask、Edit、Agent 模式組合</li>
+                                <li style="margin-bottom: 4px;">• 修復 10 個真實 Bug</li>
+                            </ul>
+                            <div style="margin-top: 12px;"><strong>預計時間：</strong>20 分鐘</div>
+                        </div>
                         <div class="scenario-links">
                             <a href="#" onclick="loadMarkdown('./04-debugging-assistant/LESSON_GUIDE.md', '場景 4：偵錯輔助'); return false;" class="btn btn-doc">教學文件</a>
                             <a href="./04-debugging-assistant/" class="btn btn-demo">展示</a>
@@ -688,9 +210,18 @@
                     </div>
                     
                     <div class="scenario-item">
-                        <div class="scenario-number">05</div>
+                        <div class="scenario-number">05 - 專業</div>
                         <div class="scenario-title">單元測試</div>
-                        <div class="scenario-description">Agent 自主設計測試架構和完整用例</div>
+                        <div class="scenario-description">Agent 自主設計測試架構和完整用例，成為測試策略師</div>
+                        <div class="scenario-details">
+                            <div style="margin-bottom: 8px;"><strong>學習重點：</strong></div>
+                            <ul style="list-style: none; padding: 0; margin: 0;">
+                                <li style="margin-bottom: 4px;">• Agent 策略制定 (50%)</li>
+                                <li style="margin-bottom: 4px;">• 自主設計測試框架</li>
+                                <li style="margin-bottom: 4px;">• 完整測試覆蓋率</li>
+                            </ul>
+                            <div style="margin-top: 12px;"><strong>預計時間：</strong>15 分鐘</div>
+                        </div>
                         <div class="scenario-links">
                             <a href="#" onclick="loadMarkdown('./05-unit-testing/LESSON_GUIDE.md', '場景 5：單元測試'); return false;" class="btn btn-doc">教學文件</a>
                             <a href="./05-unit-testing/" class="btn btn-demo">展示</a>
@@ -698,9 +229,18 @@
                     </div>
                     
                     <div class="scenario-item">
-                        <div class="scenario-number">06</div>
+                        <div class="scenario-number">06 - 專業</div>
                         <div class="scenario-title">程式碼重構</div>
-                        <div class="scenario-description">Agent 分析遺留代碼並執行重構策略</div>
+                        <div class="scenario-description">Agent 分析遺留代碼並執行重構策略，擔任架構師角色</div>
+                        <div class="scenario-details">
+                            <div style="margin-bottom: 8px;"><strong>學習重點：</strong></div>
+                            <ul style="list-style: none; padding: 0; margin: 0;">
+                                <li style="margin-bottom: 4px;">• Agent 架構決策 (60%)</li>
+                                <li style="margin-bottom: 4px;">• 300+ 行代碼重構</li>
+                                <li style="margin-bottom: 4px;">• 現代化架構設計</li>
+                            </ul>
+                            <div style="margin-top: 12px;"><strong>預計時間：</strong>15 分鐘</div>
+                        </div>
                         <div class="scenario-links">
                             <a href="#" onclick="loadMarkdown('./06-code-refactoring/LESSON_GUIDE.md', '場景 6：程式碼重構'); return false;" class="btn btn-doc">教學文件</a>
                             <a href="./06-code-refactoring/" class="btn btn-demo">展示</a>
@@ -708,27 +248,38 @@
                     </div>
                     
                     <div class="scenario-item">
-                        <div class="scenario-number">07</div>
+                        <div class="scenario-number">07 - 專家</div>
                         <div class="scenario-title">文件生成</div>
-                        <div class="scenario-description">Agent 自動分析程式碼生成完整文件體系</div>
+                        <div class="scenario-description">Agent 自動分析程式碼生成完整文件體系，成為文檔專家</div>
+                        <div class="scenario-details">
+                            <div style="margin-bottom: 8px;"><strong>學習重點：</strong></div>
+                            <ul style="list-style: none; padding: 0; margin: 0;">
+                                <li style="margin-bottom: 4px;">• Agent 文檔專家 (80%)</li>
+                                <li style="margin-bottom: 4px;">• API、指南、架構文檔</li>
+                                <li style="margin-bottom: 4px;">• 10x 文檔生成速度</li>
+                            </ul>
+                            <div style="margin-top: 12px;"><strong>預計時間：</strong>10 分鐘</div>
+                        </div>
                         <div class="scenario-links">
                             <a href="#" onclick="loadMarkdown('./07-documentation/LESSON_GUIDE.md', '場景 7：文件生成'); return false;" class="btn btn-doc">教學文件</a>
                         </div>
                     </div>
                     
                     <div class="scenario-item">
-                        <div class="scenario-number">08</div>
+                        <div class="scenario-number">08 - 專家</div>
                         <div class="scenario-title">GitHub 自動化 Agent</div>
-                        <div class="scenario-description">從 Issue 到 PR 的完整自動化流程</div>
-                        <div style="margin-top: 16px; padding: 16px; background: #f5f5f7; border-radius: 8px;">
-                            <div style="font-size: 0.875rem; color: #1d1d1f; margin-bottom: 8px; font-weight: 600;">
-                                練習 Issues：
-                            </div>
-                            <div style="font-size: 0.8125rem; line-height: 1.5; color: #424245;">
-                                • #1 清除已完成任務功能<br>
-                                • #2 修復 LocalStorage Bug<br>
-                                • #3 顯示未完成任務數量<br>
-                                • #4 添加鍵盤快捷鍵
+                        <div class="scenario-description">從 Issue 到 PR 的完整自動化流程，Agent 完全主導開發</div>
+                        <div class="scenario-details">
+                            <div style="margin-bottom: 8px;"><strong>練習 Issues：</strong></div>
+                            <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.8125rem;">
+                                <li style="margin-bottom: 3px;">• #1 清除已完成任務功能</li>
+                                <li style="margin-bottom: 3px;">• #2 修復 LocalStorage Bug</li>
+                                <li style="margin-bottom: 3px;">• #3 顯示未完成任務數量</li>
+                                <li>• #4 添加鍵盤快捷鍵</li>
+                            </ul>
+                            <div style="margin-top: 12px;"><strong>預計時間：</strong>15 分鐘</div>
+                            <div style="margin-top: 8px; font-size: 0.8125rem; color: #007aff;">
+                                Agent 100% 主導
                             </div>
                         </div>
                         <div class="scenario-links scenario-links-3">
@@ -738,11 +289,47 @@
                         </div>
                     </div>
                 </div>
+                <div class="scroll-indicator">
+                    <span class="scroll-dot active" data-index="0"></span>
+                    <span class="scroll-dot" data-index="1"></span>
+                    <span class="scroll-dot" data-index="2"></span>
+                    <span class="scroll-dot" data-index="3"></span>
+                    <span class="scroll-dot" data-index="4"></span>
+                    <span class="scroll-dot" data-index="5"></span>
+                    <span class="scroll-dot" data-index="6"></span>
+                    <span class="scroll-dot" data-index="7"></span>
+                </div>
+                </div>
             </div>
         </div>
         
         <div class="footer">
-            <p>預期成果：完成課程後提升 30-50% 開發效率，建立團隊級 AI 輔助開發流程</p>
+            <h3 style="font-size: 1.5rem; font-weight: 600; color: #1d1d1f; margin-bottom: 20px;">預期成果</h3>
+            <p style="font-size: 1.125rem; line-height: 1.8; max-width: 800px; margin: 0 auto 20px;">
+                完成這 2 小時的精華課程後，您將能夠：
+            </p>
+            <div style="display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin: 32px 0;">
+                <div style="text-align: center;">
+                    <div style="font-size: 2.5rem; font-weight: 700; color: #007aff; margin-bottom: 8px;">30-50%</div>
+                    <div style="font-size: 0.875rem; color: #6e6e73;">開發效率提升</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 2.5rem; font-weight: 700; color: #007aff; margin-bottom: 8px;">80%</div>
+                    <div style="font-size: 0.875rem; color: #6e6e73;">重複工作減少</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 2.5rem; font-weight: 700; color: #007aff; margin-bottom: 8px;">10x</div>
+                    <div style="font-size: 0.875rem; color: #6e6e73;">文檔生成速度</div>
+                </div>
+            </div>
+            <p style="font-size: 1rem; color: #6e6e73; max-width: 700px; margin: 0 auto;">
+                更重要的是，您將建立起團隊級的 AI 輔助開發流程，讓整個團隊都能受益於這項革命性的技術。
+            </p>
+            <div style="margin-top: 40px; padding-top: 32px; border-top: 1px solid #d1d9e0;">
+                <p style="font-size: 0.875rem; color: #86868b;">
+                    Created by Yulin Wang • Powered by GitHub Copilot
+                </p>
+            </div>
         </div>
     </div>
     
@@ -751,284 +338,11 @@
         <div class="markdown-content">
             <button class="markdown-close" onclick="closeMarkdown()" aria-label="關閉"></button>
             <div id="markdownBody">
-                <div class="markdown-loading">📡 載入中...</div>
+                <div class="markdown-loading">載入中...</div>
             </div>
         </div>
     </div>
     
-    <script>
-        // 複製 Agent 設置指令
-        async function copyAgentPrompt() {
-            const promptElement = document.getElementById('agentPrompt');
-            const button = event.target;
-            const originalText = button.textContent;
-            
-            try {
-                await navigator.clipboard.writeText(promptElement.textContent);
-                button.textContent = '✓ 已複製';
-                button.style.background = '#48bb78';
-                
-                setTimeout(() => {
-                    button.textContent = originalText;
-                    button.style.background = '#007aff';
-                }, 2000);
-            } catch (err) {
-                // 降級方案
-                const textArea = document.createElement('textarea');
-                textArea.value = promptElement.textContent;
-                textArea.style.position = 'fixed';
-                textArea.style.left = '-999999px';
-                document.body.appendChild(textArea);
-                textArea.select();
-                
-                try {
-                    document.execCommand('copy');
-                    button.textContent = '✓ 已複製';
-                    button.style.background = '#48bb78';
-                    
-                    setTimeout(() => {
-                        button.textContent = originalText;
-                        button.style.background = '#007aff';
-                    }, 2000);
-                } catch (err) {
-                    button.textContent = '複製失敗';
-                    setTimeout(() => {
-                        button.textContent = originalText;
-                    }, 2000);
-                }
-                
-                document.body.removeChild(textArea);
-            }
-        }
-        
-        // 儲存和取得捲動位置
-        function saveScrollPosition(path, position) {
-            localStorage.setItem(`scroll_${path}`, position);
-        }
-        
-        function getScrollPosition(path) {
-            return parseInt(localStorage.getItem(`scroll_${path}`) || '0');
-        }
-        
-        // 儲存當前文件路徑
-        let currentMarkdownPath = '';
-        
-        // 載入並顯示 Markdown
-        async function loadMarkdown(path, title) {
-            const modal = document.getElementById('markdownModal');
-            const body = document.getElementById('markdownBody');
-            const container = body.parentElement;
-            
-            // 儲存當前路徑
-            currentMarkdownPath = path;
-            
-            // 顯示 Modal
-            modal.style.display = 'block';
-            body.innerHTML = '<div class="markdown-loading">📡 載入中...</div>';
-            
-            try {
-                // Fetch Markdown 檔案，加入防快取參數
-                const timestamp = new Date().getTime();
-                const response = await fetch(`${path}?t=${timestamp}`, {
-                    cache: 'no-cache'
-                });
-                if (!response.ok) {
-                    throw new Error('無法載入文件');
-                }
-                
-                const markdown = await response.text();
-                
-                // 使用 marked.js 轉換 Markdown 為 HTML
-                const html = marked.parse(markdown);
-                
-                // 顯示內容
-                body.innerHTML = html;
-                
-                // 為所有程式碼區塊添加複製按鈕
-                addCopyButtons();
-                
-                // 恢復上次的捲動位置
-                const savedPosition = getScrollPosition(path);
-                if (savedPosition > 0) {
-                    // 使用 setTimeout 確保內容已經渲染
-                    setTimeout(() => {
-                        container.scrollTop = savedPosition;
-                    }, 100);
-                } else {
-                    // 如果沒有儲存的位置，滾動到頂部
-                    container.scrollTop = 0;
-                }
-                
-                // 監聽捲動事件，儲存位置
-                container.onscroll = debounce(() => {
-                    if (currentMarkdownPath) {
-                        saveScrollPosition(currentMarkdownPath, container.scrollTop);
-                    }
-                }, 300);
-                
-            } catch (error) {
-                body.innerHTML = `
-                    <div style="text-align: center; padding: 50px; color: #f00;">
-                        <h2>❌ 載入失敗</h2>
-                        <p>無法載入教學內容</p>
-                        <p style="color: #666; font-size: 0.9rem;">${error.message}</p>
-                    </div>
-                `;
-            }
-        }
-        
-        // 防抖函數
-        function debounce(func, wait) {
-            let timeout;
-            return function executedFunction(...args) {
-                const later = () => {
-                    clearTimeout(timeout);
-                    func(...args);
-                };
-                clearTimeout(timeout);
-                timeout = setTimeout(later, wait);
-            };
-        }
-        
-        // 關閉 Markdown Modal
-        function closeMarkdown() {
-            const modal = document.getElementById('markdownModal');
-            const container = document.getElementById('markdownBody').parentElement;
-            
-            // 儲存最後的捲動位置
-            if (currentMarkdownPath) {
-                saveScrollPosition(currentMarkdownPath, container.scrollTop);
-            }
-            
-            // 清理事件監聽器
-            container.onscroll = null;
-            
-            // 關閉 Modal
-            modal.style.display = 'none';
-        }
-        
-        // 點擊 Modal 外部關閉
-        window.onclick = function(event) {
-            const modal = document.getElementById('markdownModal');
-            if (event.target == modal) {
-                closeMarkdown();
-            }
-        }
-        
-        // ESC 鍵關閉
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                closeMarkdown();
-            }
-        });
-        
-        // 添加複製按鈕到程式碼區塊
-        function addCopyButtons() {
-            const codeBlocks = document.querySelectorAll('.markdown-content pre');
-            
-            codeBlocks.forEach((block, index) => {
-                // 獲取程式碼語言類型
-                const codeElement = block.querySelector('code');
-                const classList = codeElement.className.split(' ');
-                let language = '';
-                classList.forEach(cls => {
-                    if (cls.startsWith('language-')) {
-                        language = cls.replace('language-', '').toUpperCase();
-                    }
-                });
-                
-                // 創建按鈕容器
-                const buttonContainer = document.createElement('div');
-                buttonContainer.style.cssText = 'position: absolute; top: 5px; right: 5px; display: flex; gap: 5px; align-items: center;';
-                
-                // 如果有語言標示，添加語言標籤
-                if (language) {
-                    const langLabel = document.createElement('span');
-                    langLabel.className = 'lang-label';
-                    langLabel.style.cssText = 'font-size: 12px; color: #666; background: #f0f0f0; padding: 2px 8px; border-radius: 3px;';
-                    langLabel.textContent = language;
-                    buttonContainer.appendChild(langLabel);
-                }
-                
-                // 創建複製按鈕
-                const button = document.createElement('button');
-                button.className = 'copy-button';
-                button.textContent = '複製';
-                button.setAttribute('data-code-index', index);
-                
-                // 複製功能
-                button.addEventListener('click', async function() {
-                    const code = block.querySelector('code');
-                    let textToCopy = code.textContent || code.innerText;
-                    
-                    // 移除多餘的空白
-                    textToCopy = textToCopy.trim();
-                    
-                    try {
-                        await navigator.clipboard.writeText(textToCopy);
-                        
-                        // 顯示複製成功
-                        button.textContent = '✓ 已複製';
-                        button.classList.add('copied');
-                        
-                        // 2秒後恢復
-                        setTimeout(() => {
-                            button.textContent = '複製';
-                            button.classList.remove('copied');
-                        }, 2000);
-                        
-                    } catch (err) {
-                        // 降級方案：使用傳統方法
-                        const textArea = document.createElement('textarea');
-                        textArea.value = textToCopy;
-                        textArea.style.position = 'fixed';
-                        textArea.style.left = '-999999px';
-                        document.body.appendChild(textArea);
-                        textArea.select();
-                        
-                        try {
-                            document.execCommand('copy');
-                            button.textContent = '✓ 已複製';
-                            button.classList.add('copied');
-                            
-                            setTimeout(() => {
-                                button.textContent = '複製';
-                                button.classList.remove('copied');
-                            }, 2000);
-                        } catch (err) {
-                            button.textContent = '複製失敗';
-                            setTimeout(() => {
-                                button.textContent = '複製';
-                            }, 2000);
-                        }
-                        
-                        document.body.removeChild(textArea);
-                    }
-                });
-                
-                // 添加按鈕到容器
-                buttonContainer.appendChild(button);
-                
-                // 添加容器到程式碼區塊
-                block.appendChild(buttonContainer);
-            });
-        }
-        
-        // 生成 QR Code
-        window.onload = function() {
-            const currentUrl = window.location.href;
-            const qrcodeContainer = document.getElementById('qrcode');
-            
-            // 生成 QR Code
-            new QRCode(qrcodeContainer, {
-                text: currentUrl,
-                width: 200,
-                height: 200,
-                colorDark: "#000000",
-                colorLight: "#ffffff",
-                correctLevel: QRCode.CorrectLevel.H
-            });
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
