@@ -447,16 +447,6 @@ body {
     box-shadow: 0 4px 20px rgba(0,0,0,0.08);
 }
 
-.quick-start::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 4px;
-    height: 100%;
-    background: linear-gradient(180deg, #34c759 0%, #30d158 100%);
-    border-radius: 18px 0 0 18px;
-}
 
 .quick-start h3 {
     color: #1a1a1a;

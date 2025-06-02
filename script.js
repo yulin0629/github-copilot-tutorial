@@ -6,7 +6,7 @@ async function copyAgentPrompt() {
     
     try {
         await navigator.clipboard.writeText(promptElement.textContent);
-        button.textContent = '✓ 已複製';
+        button.textContent = '已複製';
         button.style.background = '#48bb78';
         
         setTimeout(() => {
@@ -24,7 +24,7 @@ async function copyAgentPrompt() {
         
         try {
             document.execCommand('copy');
-            button.textContent = '✓ 已複製';
+            button.textContent = '已複製';
             button.style.background = '#48bb78';
             
             setTimeout(() => {
@@ -65,7 +65,7 @@ async function loadMarkdown(path, title) {
     
     // 顯示 Modal
     modal.style.display = 'block';
-    body.innerHTML = '<div class="markdown-loading">📡 載入中...</div>';
+    body.innerHTML = '<div class="markdown-loading">載入中...</div>';
     
     try {
         // Fetch Markdown 檔案，加入防快取參數
@@ -110,7 +110,7 @@ async function loadMarkdown(path, title) {
     } catch (error) {
         body.innerHTML = `
             <div style="text-align: center; padding: 50px; color: #f00;">
-                <h2>❌ 載入失敗</h2>
+                <h2>載入失敗</h2>
                 <p>無法載入教學內容</p>
                 <p style="color: #666; font-size: 0.9rem;">${error.message}</p>
             </div>
@@ -209,7 +209,7 @@ function addCopyButtons() {
                 await navigator.clipboard.writeText(textToCopy);
                 
                 // 顯示複製成功
-                button.textContent = '✓ 已複製';
+                button.textContent = '已複製';
                 button.classList.add('copied');
                 
                 // 2秒後恢復
@@ -229,7 +229,7 @@ function addCopyButtons() {
                 
                 try {
                     document.execCommand('copy');
-                    button.textContent = '✓ 已複製';
+                    button.textContent = '已複製';
                     button.classList.add('copied');
                     
                     setTimeout(() => {
