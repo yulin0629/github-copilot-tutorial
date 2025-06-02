@@ -290,9 +290,9 @@
         }
         
         .markdown-close {
-            position: absolute;
-            top: 20px;
-            right: 20px;
+            position: fixed;
+            top: 70px;
+            right: calc(50% - 450px + 20px);
             width: 30px;
             height: 30px;
             cursor: pointer;
@@ -340,6 +340,13 @@
         .markdown-close:active {
             background: rgba(142, 142, 147, 0.3);
             transform: scale(0.96);
+        }
+        
+        @media (max-width: 960px) {
+            .markdown-close {
+                right: 20px;
+                top: 60px;
+            }
         }
         
         @media (max-width: 768px) {
