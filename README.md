@@ -293,9 +293,10 @@ github-copilot-tutorial/
 3. **上下文提供**：清楚的註解和變數命名提升建議品質
 
 ### 🎯 **功能組合使用**
-1. **@workspace + Agent**：讓 Agent 分析整個專案並執行複雜任務
-2. **自訂指令 + NES**：指令確保風格一致，NES 提升編輯效率
-3. **Chat + Inline**：大方向用 Chat 討論，具體實作用 Inline Chat
+1. **Ask 模式 + @workspace**：深入分析整個專案結構和關係
+2. **Agent 模式 + 檔案選擇**：針對特定檔案執行複雜任務
+3. **自訂指令 + NES**：指令確保風格一致，NES 提升編輯效率
+4. **Chat + Inline**：大方向用 Chat 討論，具體實作用 Inline Chat
 
 ## ⚠️ 關於斜槓指令（/ 指令）
 
@@ -320,6 +321,11 @@ github-copilot-tutorial/
 
 ### ⚠️ 其他參與者實用性有限
 **@terminal、@vscode、@github** 等其他參與者實用性不高，建議專注學習 **@workspace** 即可。
+
+### ⚠️ **重要限制**
+- **Agent 和 Edit 模式不支援 @workspace**
+- 只有 **Ask 模式**可以使用 @workspace 進行全專案分析
+- Agent/Edit 模式需要透過 📎 明確選擇要處理的檔案
 
 ## ⚙️ **重要 VS Code 設定**
 
