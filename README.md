@@ -114,7 +114,7 @@ git submodule update --init --recursive
 3. 選擇「Download ZIP」
 4. 解壓縮到您想要的資料夾
 
-> ⚠️ **注意**：如果使用 ZIP 下載，場景 8 需要另外處理（因為它是 git submodule）：
+> **注意**：如果使用 ZIP 下載，場景 8 需要另外處理（因為它是 git submodule）：
 > - 前往 [場景 8 範例專案](https://github.com/yulin0629/copilot-agent-demo-todo)
 > - 下載 ZIP 並解壓縮，覆蓋 `08-comprehensive-project` 整個資料夾
 
@@ -164,7 +164,7 @@ GitHub Copilot 於 2025 年 6 月更新方案，提供三種主要選擇：
 - 驗證身份後可免費使用（相當於 Pro 方案）
 - 前往 [GitHub Education](https://education.github.com/) 申請
 
-> ⚠️ **重要更新**：自 2025 年 6 月 4 日起，所有方案的「進階請求」正式開始計費和限制。
+> **重要更新**：自 2025 年 6 月 4 日起，所有方案的「進階請求」正式開始計費和限制。
 
 ### 步驟 3：安裝 GitHub Copilot 擴充套件
 
@@ -224,7 +224,7 @@ GitHub Copilot 於 2025 年 6 月更新方案，提供三種主要選擇：
 
 ### 步驟 7：驗證安裝
 
-✅ **檢查清單：**
+**檢查清單：**
 - 右下角狀態列出現 Copilot 圖示且顯示為已啟用
 - 新建一個 `.js` 或 `.py` 檔案，開始輸入程式碼時會看到自動建議
 - 按下 `Ctrl+Alt+I` (`Cmd+Option+I`) 可以開啟 Copilot Chat 視窗
@@ -281,7 +281,7 @@ GitHub Copilot 於 2025 年 6 月更新方案，提供三種主要選擇：
 - **實作重點**：任務管理 API 系統文檔生成，完整技術文檔體系
 
 #### 8. [GitHub 自動化 Agent](./08-comprehensive-project/LESSON_GUIDE.md) (25分鐘)
-- **⭐ Agent Mode 完全主導**：從 GitHub Issue 到 Pull Request 的完整自動化流程
+- **Agent Mode 完全主導**：從 GitHub Issue 到 Pull Request 的完整自動化流程
 - **實作重點**：Agent 自主處理 Issue 分析、功能實作、測試驗證、PR 創建
 
 ### **學習成果**
@@ -334,11 +334,11 @@ github-copilot-tutorial/
 ## 學習目標
 
 完成本教學後，您將能夠：
-- ✅ 熟練使用 GitHub Copilot 的各種功能
-- ✅ 提升開發效率 30-50%
-- ✅ 撰寫更高品質的程式碼
-- ✅ 快速理解和維護既有專案
-- ✅ 自動化重複性工作
+- 熟練使用 GitHub Copilot 的各種功能
+- 提升開發效率 30-50%
+- 撰寫更高品質的程式碼
+- 快速理解和維護既有專案
+- 自動化重複性工作
 
 ## Copilot 功能總覽
 
@@ -413,13 +413,13 @@ github-copilot-tutorial/
 3. **自訂指令 + NES**：指令確保風格一致，NES 提升編輯效率
 4. **Chat + Inline**：大方向用 Chat 討論，具體實作用 Inline Chat
 
-## ⚠️ 關於斜槓指令（/ 指令）
+## 關於斜槓指令（/ 指令）
 
 **Agent 模式**的推出讓傳統斜槓指令變得過時。本教學專注於 Agent 模式和自然語言對話，不涵蓋斜槓指令的使用。
 
 ## 關於聊天參與者 (@)
 
-### ✅ 值得學習的參與者
+### 值得學習的參與者
 
 **@workspace** - **唯一重點掌握的參與者**
 - 分析整個專案結構和程式碼關係
@@ -434,13 +434,13 @@ github-copilot-tutorial/
 @workspace 建議如何重構這個模組的結構
 ```
 
-### ⚠️ 其他參與者實用性有限
+### 其他參與者實用性有限
 **@terminal、@vscode、@github** 等其他參與者實用性不高，建議專注學習 **@workspace** 即可。
 
-### ⚠️ **重要限制**
+### **重要限制**
 - **Agent 和 Edit 模式不支援 @workspace**
 - 只有 **Ask 模式**可以使用 @workspace 進行全專案分析
-- Agent/Edit 模式需要透過 📎 明確選擇要處理的檔案
+- Agent/Edit 模式需要透過選擇要處理的檔案
 
 ## **重要 VS Code 設定**
 

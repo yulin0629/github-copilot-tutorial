@@ -2,7 +2,7 @@
 
 這個目錄包含了可重複使用的 GitHub Copilot prompt files，用於常見的開發任務。
 
-## 📋 **Prompt Files vs Instructions 差異**
+##  **Prompt Files vs Instructions 差異**
 
 ### Instructions Files (`.github/copilot-instructions.md`)
 - **用途**：全專案的通用設定，自動套用到每個 Chat 請求
@@ -76,7 +76,7 @@ Chat: New Prompt File
 }
 ```
 
-## 💡 **最佳實踐**
+##  **最佳實踐**
 
 ### 撰寫 Prompt Files
 1. **明確的描述**: 在 frontmatter 中提供清楚的 description

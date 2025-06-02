@@ -1,6 +1,6 @@
 # GitHub Copilot 教學分支管理指南
 
-## 🎯 分支策略
+## 分支策略
 
 ### 核心分支
 - **main**: 原始教學檔案，供學員下載使用
@@ -180,7 +180,7 @@ git reset --hard origin/main  # 小心使用！
 # 分頁2: gh-pages 分支版本（GitHub Pages）
 ```
 
-## 🎯 教學重點提醒
+## 教學重點提醒
 
 1. **Agent 模式是核心**
    - 場景 1-2：0% Agent（只用 Ask 模式）
