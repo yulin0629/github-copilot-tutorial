@@ -660,24 +660,23 @@ body {
 }
 
 .markdown-close {
-    position: sticky;
-    top: 15px;
-    float: right;
-    margin: -30px -30px 20px 20px;
-    width: 30px;
-    height: 30px;
+    position: fixed;
+    top: 70px;
+    right: 20px;
+    width: 36px;
+    height: 36px;
     cursor: pointer;
-    background: rgba(60, 60, 67, 0.9);
-    border-radius: 15px;
+    background: rgba(60, 60, 67, 0.95);
+    border-radius: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 1001;
+    z-index: 1002;
     transition: all 0.2s ease;
     border: none;
     outline: none;
     padding: 0;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
     font-size: 0;
     line-height: 0;
 }
@@ -715,6 +714,22 @@ body {
     transform: scale(0.96);
 }
 
+@media (max-width: 768px) {
+    .markdown-close {
+        top: 20px;
+        right: 15px;
+        width: 32px;
+        height: 32px;
+        border-radius: 16px;
+    }
+    
+    .markdown-content {
+        margin: 20px auto;
+        padding: 30px 20px;
+        width: 95%;
+        max-height: 95vh;
+    }
+}
 
 /* Markdown 渲染樣式 */
 .markdown-content h1 {
