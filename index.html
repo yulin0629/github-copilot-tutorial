@@ -529,7 +529,11 @@
                 
                 <details style="margin-top: 15px; background: #f0f7ff; padding: 15px; border-radius: 8px; border: 1px solid #667eea;">
                     <summary style="cursor: pointer; font-weight: bold; color: #667eea;">🤖 Agent 快速設置指令（點擊展開）</summary>
-                    <pre style="margin-top: 10px; background: white; padding: 15px; border-radius: 5px; font-size: 0.9rem; overflow-x: auto;">請幫我設置 GitHub Copilot 教學專案環境：
+                    <div style="position: relative;">
+                        <button onclick="copyAgentPrompt()" style="position: absolute; top: 15px; right: 15px; padding: 5px 10px; background: #667eea; color: white; border: none; border-radius: 4px; font-size: 12px; cursor: pointer; z-index: 10;">
+                            複製
+                        </button>
+                        <pre id="agentPrompt" style="margin-top: 10px; background: white; padding: 15px; padding-right: 60px; border-radius: 5px; font-size: 0.9rem; overflow-x: auto;">請幫我設置 GitHub Copilot 教學專案環境：
 
 1. 首先檢查目前位置並決定克隆位置：
    - 如果在 VS Code 中已有開啟的專案，請詢問我是否要在當前目錄的父目錄克隆
@@ -556,6 +560,7 @@
 7. 檢查並設定 VS Code 的 Copilot 語言為繁體中文
 
 完成後請告訴我設置狀態，並直接開啟 index.html 預覽教學內容。</pre>
+                    </div>
                 </details>
                 
                 <div style="text-align: center; margin-top: 20px; display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
@@ -690,6 +695,50 @@
     </div>
     
     <script>
+        // 複製 Agent 設置指令
+        async function copyAgentPrompt() {
+            const promptElement = document.getElementById('agentPrompt');
+            const button = event.target;
+            const originalText = button.textContent;
+            
+            try {
+                await navigator.clipboard.writeText(promptElement.textContent);
+                button.textContent = '✓ 已複製';
+                button.style.background = '#48bb78';
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = '#667eea';
+                }, 2000);
+            } catch (err) {
+                // 降級方案
+                const textArea = document.createElement('textarea');
+                textArea.value = promptElement.textContent;
+                textArea.style.position = 'fixed';
+                textArea.style.left = '-999999px';
+                document.body.appendChild(textArea);
+                textArea.select();
+                
+                try {
+                    document.execCommand('copy');
+                    button.textContent = '✓ 已複製';
+                    button.style.background = '#48bb78';
+                    
+                    setTimeout(() => {
+                        button.textContent = originalText;
+                        button.style.background = '#667eea';
+                    }, 2000);
+                } catch (err) {
+                    button.textContent = '複製失敗';
+                    setTimeout(() => {
+                        button.textContent = originalText;
+                    }, 2000);
+                }
+                
+                document.body.removeChild(textArea);
+            }
+        }
+        
         // 儲存和取得捲動位置
         function saveScrollPosition(path, position) {
             localStorage.setItem(`scroll_${path}`, position);
