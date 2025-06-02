@@ -42,6 +42,21 @@ async function copyAgentPrompt() {
     }
 }
 
+// 監聽 details 元素的開啟/關閉
+document.addEventListener('DOMContentLoaded', function() {
+    const detailsElement = document.querySelector('details');
+    const copyButton = detailsElement.querySelector('button[onclick="copyAgentPrompt()"]');
+    
+    // 監聽 toggle 事件
+    detailsElement.addEventListener('toggle', function() {
+        if (detailsElement.open) {
+            copyButton.style.display = 'block';
+        } else {
+            copyButton.style.display = 'none';
+        }
+    });
+});
+
 // 儲存和取得捲動位置
 function saveScrollPosition(path, position) {
     localStorage.setItem(`scroll_${path}`, position);

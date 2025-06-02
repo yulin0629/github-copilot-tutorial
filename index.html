@@ -78,7 +78,7 @@
                 <details style="margin-top: 28px; background: #f5f5f7; padding: 24px; border-radius: 16px; border: none;">
                     <summary style="cursor: pointer; font-weight: 600; color: #007aff; font-size: 1rem;">Agent 快速設置指令（點擊展開）</summary>
                     <div style="position: relative;">
-                        <button onclick="copyAgentPrompt()" style="position: absolute; top: 15px; right: 15px; padding: 5px 10px; background: #007aff; color: white; border: none; border-radius: 20px; font-size: 12px; cursor: pointer; z-index: 10;">
+                        <button onclick="copyAgentPrompt()" style="position: fixed; top: auto; bottom: 20px; right: 20px; padding: 8px 16px; background: #007aff; color: white; border: none; border-radius: 20px; font-size: 12px; cursor: pointer; z-index: 1000; box-shadow: 0 4px 12px rgba(0, 122, 255, 0.3); display: none;">
                             複製
                         </button>
                         <pre id="agentPrompt" style="margin-top: 10px; background: white; padding: 15px; padding-right: 60px; border-radius: 5px; font-size: 0.9rem; overflow-x: auto;">請幫我設置 GitHub Copilot 教學專案環境：
