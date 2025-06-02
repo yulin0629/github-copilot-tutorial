@@ -40,9 +40,17 @@
 ### 階段 1：Agent 功能分析 (3分鐘)
 
 #### 步驟 1：讓 Agent 全面分析項目 (Agent)
+1. 開啟 Copilot Chat，選擇 **Agent 模式**
+2. 點擊 📎 圖示，選擇以下檔案：
+   - `src/calculator.js`
+   - `src/dataProcessor.js`
+   - `src/utils.js`
+   - `src/validator.js`
+3. 輸入：
 ```
-@workspace 請分析這個數據分析工具，理解所有功能模組，並評估測試的複雜度和挑戰。給我一個完整的功能地圖。
+請分析這個數據分析工具，理解所有功能模組，並評估測試的複雜度和挑戰。給我一個完整的功能地圖。
 ```
+💡 **使用模式：Agent**
 
 **⚡ 觀察重點**：
 - Agent 會主動讀取所有檔案

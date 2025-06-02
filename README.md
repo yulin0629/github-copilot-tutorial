@@ -15,6 +15,35 @@ cd github-copilot-tutorial
 - Visual Studio Code（最新版本）
 - GitHub 帳號
 - 網路連線
+- Git（用於下載專案）
+
+## 📥 下載教學專案
+
+### 方法 1：使用 Git Clone（推薦）
+```bash
+# 克隆專案（包含場景 8 的 submodule）
+git clone --recursive https://github.com/yulin0629/github-copilot-tutorial.git
+
+# 如果已經克隆但忘記加 --recursive，執行以下命令
+cd github-copilot-tutorial
+git submodule update --init --recursive
+```
+
+### 方法 2：下載 ZIP 檔案
+1. 前往 [專案頁面](https://github.com/yulin0629/github-copilot-tutorial)
+2. 點擊綠色的「Code」按鈕
+3. 選擇「Download ZIP」
+4. 解壓縮到您想要的資料夾
+
+> ⚠️ **注意**：如果使用 ZIP 下載，場景 8 需要另外處理（因為它是 git submodule）：
+> - 前往 [場景 8 範例專案](https://github.com/yulin0629/copilot-agent-demo-todo)
+> - 下載 ZIP 並解壓縮，覆蓋 `08-comprehensive-project` 整個資料夾
+
+### 💡 關於場景 8 的特殊說明
+場景 8 使用 git submodule 連結到獨立的 GitHub repository，這是為了：
+- 展示真實的 GitHub 工作流程（Issue → PR）
+- 讓學員體驗完整的 AI 自動化開發
+- 可以在獨立 repo 中預置測試用的 Issues
 
 ## 🚀 安裝與設定指南（Windows）
 
@@ -300,9 +329,10 @@ github-copilot-tutorial/
 3. **上下文提供**：清楚的註解和變數命名提升建議品質
 
 ### 🎯 **功能組合使用**
-1. **@workspace + Agent**：讓 Agent 分析整個專案並執行複雜任務
-2. **自訂指令 + NES**：指令確保風格一致，NES 提升編輯效率
-3. **Chat + Inline**：大方向用 Chat 討論，具體實作用 Inline Chat
+1. **Ask 模式 + @workspace**：深入分析整個專案結構和關係
+2. **Agent 模式 + 檔案選擇**：針對特定檔案執行複雜任務
+3. **自訂指令 + NES**：指令確保風格一致，NES 提升編輯效率
+4. **Chat + Inline**：大方向用 Chat 討論，具體實作用 Inline Chat
 
 ## ⚠️ 關於斜槓指令（/ 指令）
 
@@ -327,6 +357,11 @@ github-copilot-tutorial/
 
 ### ⚠️ 其他參與者實用性有限
 **@terminal、@vscode、@github** 等其他參與者實用性不高，建議專注學習 **@workspace** 即可。
+
+### ⚠️ **重要限制**
+- **Agent 和 Edit 模式不支援 @workspace**
+- 只有 **Ask 模式**可以使用 @workspace 進行全專案分析
+- Agent/Edit 模式需要透過 📎 明確選擇要處理的檔案
 
 ## ⚙️ **重要 VS Code 設定**
 
