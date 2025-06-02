@@ -165,12 +165,16 @@ body {
     display: flex;
     gap: 20px;
     overflow-x: auto;
+    overflow-y: hidden;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
     padding: 20px 0;
     margin: 0;
     cursor: grab;
+    /* Safari 優化 */
+    -webkit-transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
 }
 
 .scenario-list::-webkit-scrollbar {
@@ -191,6 +195,16 @@ body {
 
 .scenario-item:last-child {
     margin-right: 20px;
+}
+
+@media (max-width: 768px) {
+    .scenario-item:first-child {
+        margin-left: calc((100vw - 75vw) / 2);
+    }
+    
+    .scenario-item:last-child {
+        margin-right: calc((100vw - 75vw) / 2);
+    }
 }
 
 @media (min-width: 769px) {
@@ -222,8 +236,9 @@ body {
 
 @media (max-width: 768px) {
     .scenario-item {
-        flex: 0 0 280px;
-        padding: 32px;
+        flex: 0 0 75vw;
+        padding: 20px;
+        min-height: 400px;
     }
 }
 
@@ -274,6 +289,18 @@ body {
     line-height: 1.5;
     letter-spacing: -0.01em;
     margin-bottom: 24px;
+}
+
+@media (max-width: 768px) {
+    .scenario-title {
+        font-size: 1.375rem;
+    }
+    
+    .scenario-description {
+        font-size: 0.875rem;
+        line-height: 1.4;
+        margin-bottom: 16px;
+    }
 }
 
 
@@ -481,8 +508,8 @@ body {
     top: 20px;
     right: 0;
     bottom: 20px;
-    width: 60px;
-    background: linear-gradient(to left, #ffffff 0%, transparent 100%);
+    width: 40px;
+    background: linear-gradient(to left, #ffffff 0%, rgba(255,255,255,0) 100%);
     pointer-events: none;
     z-index: 1;
     opacity: 1;
@@ -495,8 +522,8 @@ body {
     top: 20px;
     left: 0;
     bottom: 20px;
-    width: 60px;
-    background: linear-gradient(to right, #ffffff 0%, transparent 100%);
+    width: 40px;
+    background: linear-gradient(to right, #ffffff 0%, rgba(255,255,255,0) 100%);
     pointer-events: none;
     z-index: 1;
     opacity: 0;
@@ -518,6 +545,24 @@ body {
     opacity: 0;
 }
 
+/* 場景卡片內容細節樣式 */
+.scenario-details {
+    margin: 16px 0;
+    font-size: 0.875rem;
+    color: #6e6e73;
+}
+
+@media (max-width: 768px) {
+    .scenario-details {
+        font-size: 0.8125rem;
+    }
+    
+    .scenario-details ul li {
+        margin-bottom: 2px !important;
+        font-size: 0.75rem;
+    }
+}
+
 @media (max-width: 768px) {
     .header h1 {
         font-size: 2rem;
@@ -531,6 +576,10 @@ body {
         grid-template-columns: 1fr;
     }
     
+    .scenario-wrapper::after,
+    .scenario-wrapper::before {
+        width: 20px;
+    }
 }
 
 /* Markdown 內容樣式 */
