@@ -11,6 +11,26 @@
             box-sizing: border-box;
         }
         
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             line-height: 1.6;
@@ -26,62 +46,95 @@
         }
         
         .header {
-            text-align: left;
-            color: #1a1a1a;
-            margin-bottom: 60px;
+            text-align: center;
+            margin: 120px 0 100px;
             position: relative;
-            padding-top: 40px;
-        }
-        
-        .header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 120px;
-            height: 4px;
-            background: #0969da;
+            animation: fadeInUp 1s ease-out;
         }
         
         .header h1 {
-            font-size: 2.5rem;
+            font-size: 5rem;
             font-weight: 700;
-            margin-bottom: 12px;
-            letter-spacing: -0.02em;
+            margin-bottom: 32px;
+            letter-spacing: -0.04em;
+            line-height: 1;
+            background: linear-gradient(180deg, #000000 0%, #333333 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 3rem;
+            }
         }
         
         .header p {
-            font-size: 1.125rem;
-            color: #656d76;
+            font-size: 1.75rem;
+            color: #6e6e73;
             font-weight: 400;
+            letter-spacing: -0.02em;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.4;
+            animation: fadeIn 1.2s ease-out 0.2s both;
         }
         
         .main-content {
-            background: white;
-            border: 1px solid #d1d9e0;
-            border-radius: 8px;
-            padding: 48px;
-            margin-bottom: 32px;
+            background: transparent;
+            padding: 0;
+            margin-bottom: 120px;
         }
         
         .features {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin: 40px 0;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 32px;
+            margin: 60px 0;
         }
         
         .feature-card {
-            background: transparent;
-            padding: 24px;
-            border: 1px solid #d1d9e0;
-            border-radius: 6px;
-            transition: all 0.2s ease;
+            background: linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
+            padding: 48px 40px;
+            border: 1px solid rgba(0,0,0,0.04);
+            border-radius: 28px;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            animation: fadeInUp 0.8s ease-out;
+            animation-fill-mode: both;
+        }
+        
+        .feature-card:nth-child(1) { animation-delay: 0.1s; }
+        .feature-card:nth-child(2) { animation-delay: 0.2s; }
+        .feature-card:nth-child(3) { animation-delay: 0.3s; }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: -100%;
+            width: 300%;
+            height: 300%;
+            background: radial-gradient(circle at center, rgba(0, 122, 255, 0.06) 0%, transparent 60%);
+            transition: all 0.6s ease;
+            opacity: 0;
         }
         
         .feature-card:hover {
-            border-color: #0969da;
-            transform: translateY(-2px);
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.12);
+            border-color: rgba(0,0,0,0.08);
+        }
+        
+        .feature-card:hover::before {
+            opacity: 1;
+            top: -50%;
+            left: -50%;
         }
         
         .feature-card h3 {
@@ -117,14 +170,15 @@
         }
         
         .scenario-item {
-            background: white;
-            color: #1a1a1a;
-            padding: 24px;
-            border: 1px solid #d1d9e0;
-            border-radius: 6px;
-            transition: all 0.2s ease;
+            background: linear-gradient(145deg, #ffffff 0%, #fbfbfd 100%);
+            color: #1d1d1f;
+            padding: 56px 48px;
+            border: 1px solid rgba(0,0,0,0.04);
+            border-radius: 28px;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
             overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
         }
         
         .scenario-item::before {
@@ -132,16 +186,18 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 4px;
-            height: 100%;
-            background: #0969da;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgba(0, 122, 255, 0.06), transparent 40%);
             opacity: 0;
-            transition: opacity 0.2s ease;
+            transition: opacity 0.3s;
+            pointer-events: none;
         }
         
         .scenario-item:hover {
-            border-color: #0969da;
-            transform: translateX(4px);
+            transform: translateY(-16px) scale(1.01);
+            box-shadow: 0 30px 80px rgba(0,0,0,0.12);
+            border-color: rgba(0,0,0,0.08);
         }
         
         .scenario-item:hover::before {
@@ -149,23 +205,29 @@
         }
         
         .scenario-number {
-            font-size: 0.875rem;
-            font-weight: 600;
-            color: #656d76;
+            font-size: 0.8125rem;
+            font-weight: 500;
+            color: #86868b;
             font-family: 'SF Mono', Monaco, 'Courier New', monospace;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            opacity: 0.8;
         }
         
         .scenario-title {
-            font-size: 1.125rem;
+            font-size: 1.5rem;
             font-weight: 600;
-            margin: 8px 0;
-            color: #1a1a1a;
+            margin: 12px 0 16px;
+            color: #1d1d1f;
+            letter-spacing: -0.02em;
         }
         
         .scenario-description {
-            font-size: 0.875rem;
-            color: #656d76;
-            line-height: 1.6;
+            font-size: 1rem;
+            color: #6e6e73;
+            line-height: 1.5;
+            letter-spacing: -0.01em;
+            margin-bottom: 24px;
         }
         
         
@@ -176,37 +238,64 @@
         }
         
         .btn {
-            padding: 8px 16px;
-            border-radius: 5px;
+            padding: 14px 28px;
+            border-radius: 980px;
             text-decoration: none;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
+            font-size: 1rem;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             display: inline-flex;
             align-items: center;
-            gap: 5px;
+            gap: 8px;
+            font-weight: 500;
+            letter-spacing: -0.01em;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .btn:active::after {
+            width: 300px;
+            height: 300px;
         }
         
         .btn-doc {
-            background: transparent;
-            color: #0969da;
-            border: 1px solid #d1d9e0;
+            background: rgba(0, 122, 255, 0.08);
+            color: #007aff;
+            border: none;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
         }
         
         .btn-doc:hover {
-            background: #f6f8fa;
-            border-color: #0969da;
+            background: rgba(0, 122, 255, 0.15);
+            transform: scale(1.05);
+            box-shadow: 0 4px 20px rgba(0, 122, 255, 0.25);
         }
         
         .btn-demo {
-            background: #0969da;
+            background: linear-gradient(135deg, #007aff 0%, #0051d5 100%);
             color: white;
             font-weight: 500;
-            border: 1px solid #0969da;
+            border: none;
+            box-shadow: 0 4px 15px rgba(0, 122, 255, 0.3);
         }
         
         .btn-demo:hover {
-            background: #0860ca;
-            border-color: #0860ca;
+            background: linear-gradient(135deg, #0051d5 0%, #003d9e 100%);
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 122, 255, 0.4);
         }
         
         .btn-repo {
@@ -236,19 +325,21 @@
         }
         
         .btn-primary {
-            background: #0969da !important;
+            background: #000000 !important;
             color: white !important;
-            padding: 12px 24px !important;
-            font-size: 1rem !important;
+            padding: 18px 40px !important;
+            font-size: 1.125rem !important;
             font-weight: 500 !important;
-            transition: all 0.2s ease;
-            border: 1px solid #0969da !important;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            border: none !important;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2) !important;
+            letter-spacing: -0.01em !important;
         }
         
         .btn-primary:hover {
-            background: #0860ca !important;
-            border-color: #0860ca !important;
-            transform: translateY(-1px);
+            background: #1d1d1f !important;
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3) !important;
         }
         
         .quick-start {
@@ -569,8 +660,8 @@
         </div>
         
         <div class="main-content">
-            <h2>📋 專案簡介</h2>
-            <p>這是一個 <strong>2小時精華版</strong> GitHub Copilot 教學專案，專注於 <strong>Agent 模式</strong>的實際應用。透過由淺入深的 8 個場景，讓您快速掌握 AI 驅動的開發流程。</p>
+            <h2 style="font-size: 3.5rem; font-weight: 700; margin-bottom: 48px; text-align: center; letter-spacing: -0.03em;">專案簡介</h2>
+            <p style="text-align: center; font-size: 1.25rem; color: #6e6e73; max-width: 800px; margin: 0 auto 80px; line-height: 1.6;">這是一個 <strong style="color: #1d1d1f;">2小時精華版</strong> GitHub Copilot 教學專案，專注於 <strong style="color: #1d1d1f;">Agent 模式</strong>的實際應用。<br>透過由淺入深的 8 個場景，讓您快速掌握 AI 驅動的開發流程。</p>
             
             <div class="features">
                 <div class="feature-card">
@@ -629,7 +720,7 @@
                     <a href="#" onclick="loadMarkdown('./README.md', 'GitHub Copilot 教學專案 - 完整指南'); return false;" class="btn btn-doc btn-primary">
                         查看完整教學指南
                     </a>
-                    <a href="https://github.com/yulin0629/github-copilot-tutorial" target="_blank" class="btn btn-primary" style="background: #24292e !important;">
+                    <a href="https://github.com/yulin0629/github-copilot-tutorial" target="_blank" class="btn btn-primary" style="background: #333333 !important;">
                         <svg style="width: 20px; height: 20px; margin-right: 8px; vertical-align: middle;" viewBox="0 0 16 16" fill="currentColor">
                             <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
                         </svg>
