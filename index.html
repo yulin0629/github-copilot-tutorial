@@ -301,35 +301,61 @@
             position: relative;
             max-height: 90vh;
             overflow-y: auto;
+            overflow-x: hidden;
         }
         
         .markdown-close {
             position: fixed;
-            top: 65px;
-            right: calc((100% - 900px) / 2 + 20px);
-            font-size: 30px;
+            top: 70px;
+            right: calc((100% - 900px) / 2 + 30px);
+            width: 36px;
+            height: 36px;
             cursor: pointer;
-            color: #666;
-            transition: color 0.3s;
-            background: white;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
             z-index: 1001;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.08);
+        }
+        
+        .markdown-close::before,
+        .markdown-close::after {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 2px;
+            background: #666;
+            border-radius: 1px;
+            transition: background 0.3s;
+        }
+        
+        .markdown-close::before {
+            transform: rotate(45deg);
+        }
+        
+        .markdown-close::after {
+            transform: rotate(-45deg);
+        }
+        
+        .markdown-close:hover {
+            background: #667eea;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+            transform: scale(1.1);
+        }
+        
+        .markdown-close:hover::before,
+        .markdown-close:hover::after {
+            background: white;
         }
         
         @media (max-width: 900px) {
             .markdown-close {
                 right: 20px;
             }
-        }
-        
-        .markdown-close:hover {
-            color: #000;
         }
         
         /* Markdown 渲染樣式 */
@@ -367,6 +393,7 @@
             overflow-x: auto;
             margin: 15px 0;
             position: relative;
+            max-width: 100%;
         }
         
         .markdown-content pre code {
@@ -428,6 +455,15 @@
             border-collapse: collapse;
             width: 100%;
             margin: 15px 0;
+            display: block;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+        
+        .markdown-content table td,
+        .markdown-content table th {
+            white-space: normal;
+            word-wrap: break-word;
         }
         
         .markdown-content th, .markdown-content td {
@@ -618,7 +654,7 @@
     <!-- Markdown Modal -->
     <div id="markdownModal" class="markdown-modal">
         <div class="markdown-content">
-            <span class="markdown-close" onclick="closeMarkdown()">&times;</span>
+            <span class="markdown-close" onclick="closeMarkdown()"></span>
             <div id="markdownBody">
                 <div class="markdown-loading">📡 載入中...</div>
             </div>
