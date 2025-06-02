@@ -177,6 +177,13 @@ body {
     -webkit-backface-visibility: hidden;
 }
 
+@media (max-width: 768px) {
+    .scenario-list {
+        gap: 15px;
+        padding: 20px 0;
+    }
+}
+
 .scenario-list::-webkit-scrollbar {
     height: 0;
 }
@@ -236,9 +243,10 @@ body {
 
 @media (max-width: 768px) {
     .scenario-item {
-        flex: 0 0 85vw;
+        flex: 0 0 calc(100vw - 60px);
         padding: 20px;
         min-height: 400px;
+        max-width: 320px;
     }
 }
 
