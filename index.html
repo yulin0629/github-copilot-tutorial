@@ -203,6 +203,9 @@
             box-shadow: none;
             flex: 0 0 320px;
             scroll-snap-align: start;
+            min-height: 320px;
+            display: flex;
+            flex-direction: column;
         }
         
         @media (max-width: 768px) {
@@ -265,7 +268,8 @@
         .scenario-links {
             display: flex;
             gap: 10px;
-            margin-top: 15px;
+            margin-top: auto;
+            padding-top: 20px;
         }
         
         .btn {
