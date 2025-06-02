@@ -67,7 +67,36 @@
 
 ### **🎯 專家階段** (Agent 主導)
 7. **文件生成** (80% Agent) - Agent 文件自動化
-8. **綜合專案開發** (90% Agent) - Agent 完全主導
+8. **GitHub 自動化 Agent** (100% Agent) - 完全自動化的 GitHub 工作流程
+
+### **⚠️ 場景 8 特殊架構設計**
+場景 8 使用**獨立的 GitHub Repository** (`copilot-agent-demo-todo`)：
+
+#### **為什麼需要獨立 Repo？**
+- **真實 GitHub 工作流程**：展示完整的 Issue → PR 流程
+- **避免污染主專案**：教學修改不影響學員下載的原始檔案
+- **預置測試 Issues**：可以準備 3-5 個實際的功能需求和 Bug
+- **完整 GitHub 體驗**：學員看到真實的 GitHub 操作和自動化
+
+#### **獨立 Repo 設定**
+```
+copilot-agent-demo-todo/
+├── .github/
+│   ├── copilot-instructions.md    # Agent 自動讀取的專案規範
+│   └── instructions/              # 詳細指令檔案
+├── index.html                     # 待辦事項應用
+├── app.js                         # 核心邏輯
+├── style.css                      # 樣式檔案
+└── README.md                      # 專案說明
+```
+
+#### **教學流程**
+1. **展示預置 Issues**：瀏覽器開啟獨立 repo 的 Issues 頁面
+2. **Agent 完全接管**：從讀取 Issue 到創建 PR 的完整自動化
+3. **真實 PR 審核**：學員看到實際的 Pull Request
+4. **GitHub Pages 部署**：修改後的應用立即上線展示
+
+這種設計讓學員體驗**真正的 AI 驅動開發工作流程**，而不只是本地檔案修改。
 
 ## 🏗️ 技術架構
 
@@ -213,6 +242,24 @@
 - 教師可以自由修改而不影響學員體驗
 - GitHub Pages 即時展示修改效果
 - 保留教學過程的完整記錄
+
+### **⚠️ Git Commit 作者規範**
+
+#### **重要：所有 commit 的作者必須是專案擁有者**
+- **Author**: Yulin Wang <yulin@example.com>
+- **純淨的 commit**：不添加額外的工具標註
+
+#### **標準 Commit 格式**
+```bash
+git commit -m "feat: 功能描述
+
+詳細說明..."
+```
+
+#### **為什麼這樣設計？**
+- **專案擁有權明確**：Yulin Wang 是專案的唯一負責人和作者
+- **保持簡潔**：commit 訊息專注於變更內容本身
+- **專業呈現**：乾淨的 git 歷史記錄
 
 ## 🎯 預期成果
 
