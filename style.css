@@ -485,6 +485,13 @@ body {
     box-shadow: 0 4px 20px rgba(0,0,0,0.08);
 }
 
+@media (max-width: 768px) {
+    .qr-code-section {
+        margin: 40px 20px;
+        padding: 24px 16px;
+    }
+}
+
 .qr-code-section h3 {
     color: #1a1a1a;
     margin-bottom: 20px;
@@ -499,6 +506,14 @@ body {
     box-shadow: 0 8px 30px rgba(0,0,0,0.12);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
+    margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+    #qrcode {
+        padding: 16px;
+        margin: 0 auto;
+    }
 }
 
 .qr-note {
