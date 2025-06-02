@@ -2,6 +2,13 @@
 
 這是一個 GitHub Copilot 完整教學專案，透過 8 個由淺入深的實作場景，讓您掌握 GitHub Copilot 的各種功能。
 
+## 🔗 取得教學專案
+
+```bash
+git clone https://github.com/yulin0629/github-copilot-tutorial.git
+cd github-copilot-tutorial
+```
+
 ## 📋 前置需求
 
 - Windows 10/11, Mac 作業系統
