@@ -149,19 +149,46 @@
         }
         
         .scenarios {
-            margin: 40px 0;
+            margin: 80px 0;
+            position: relative;
         }
         
         .scenarios h2 {
-            color: #333;
-            margin-bottom: 25px;
+            color: #1d1d1f;
+            margin-bottom: 32px;
             text-align: center;
+            font-size: 2.5rem;
+            font-weight: 600;
+            letter-spacing: -0.03em;
+        }
+        
+        .scenario-wrapper {
+            position: relative;
+            margin: 0 -20px;
+            padding: 0 20px;
         }
         
         .scenario-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            display: flex;
             gap: 20px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            padding: 20px 0;
+            margin: -20px 0;
+            cursor: grab;
+        }
+        
+        .scenario-list::-webkit-scrollbar {
+            height: 0;
+        }
+        
+        @media (min-width: 769px) {
+            .scenario-list {
+                padding: 20px calc(max((100vw - 1200px) / 2, 20px));
+                margin: -20px calc(min((100vw - 1200px) / -2, -20px));
+            }
         }
         
         .scenario-item {
@@ -174,6 +201,15 @@
             position: relative;
             overflow: hidden;
             box-shadow: none;
+            flex: 0 0 320px;
+            scroll-snap-align: start;
+        }
+        
+        @media (max-width: 768px) {
+            .scenario-item {
+                flex: 0 0 280px;
+                padding: 32px;
+            }
         }
         
         .scenario-item::before {
@@ -399,6 +435,66 @@
             font-size: 0.9rem;
         }
         
+        /* 滾動指示器 */
+        .scroll-indicator {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 32px;
+            padding: 20px;
+        }
+        
+        .scroll-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .scroll-dot.active {
+            background: #1d1d1f;
+            transform: scale(1.2);
+        }
+        
+        /* 添加滑動提示漸變 */
+        .scenario-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            right: 0;
+            bottom: 20px;
+            width: 100px;
+            background: linear-gradient(to left, #ffffff 0%, transparent 100%);
+            pointer-events: none;
+            z-index: 1;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+        
+        .scenario-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 0;
+            bottom: 20px;
+            width: 100px;
+            background: linear-gradient(to right, #ffffff 0%, transparent 100%);
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .scenario-wrapper.scrolled::before {
+            opacity: 1;
+        }
+        
+        .scenario-wrapper.scrolled-end::after {
+            opacity: 0;
+        }
+        
         @media (max-width: 768px) {
             .header h1 {
                 font-size: 2rem;
@@ -410,6 +506,10 @@
             
             .features {
                 grid-template-columns: 1fr;
+            }
+            
+            .scenario-wrapper::after {
+                width: 50px;
             }
         }
     </style>
@@ -727,8 +827,9 @@
             </div>
             
             <div class="scenarios">
-                <h2 style="font-size: 2rem; font-weight: 600; margin-bottom: 32px;">8 個學習場景</h2>
-                <div class="scenario-list">
+                <h2>8 個學習場景</h2>
+                <div class="scenario-wrapper">
+                    <div class="scenario-list">
                     <div class="scenario-item">
                         <div class="scenario-number">01</div>
                         <div class="scenario-title">初次對話體驗</div>
@@ -819,6 +920,17 @@
                             <a href="https://yulin0629.github.io/copilot-agent-demo-todo/" target="_blank" class="btn btn-demo">Demo</a>
                         </div>
                     </div>
+                </div>
+                <div class="scroll-indicator">
+                    <span class="scroll-dot active" data-index="0"></span>
+                    <span class="scroll-dot" data-index="1"></span>
+                    <span class="scroll-dot" data-index="2"></span>
+                    <span class="scroll-dot" data-index="3"></span>
+                    <span class="scroll-dot" data-index="4"></span>
+                    <span class="scroll-dot" data-index="5"></span>
+                    <span class="scroll-dot" data-index="6"></span>
+                    <span class="scroll-dot" data-index="7"></span>
+                </div>
                 </div>
             </div>
         </div>
@@ -1109,6 +1221,105 @@
                 colorDark: "#000000",
                 colorLight: "#ffffff",
                 correctLevel: QRCode.CorrectLevel.H
+            });
+            
+            // 初始化場景滾動
+            initScenarioScroll();
+        }
+        
+        // 場景滾動功能
+        function initScenarioScroll() {
+            const scenarioList = document.querySelector('.scenario-list');
+            const scrollDots = document.querySelectorAll('.scroll-dot');
+            const scenarioItems = document.querySelectorAll('.scenario-item');
+            const scenarioWrapper = document.querySelector('.scenario-wrapper');
+            
+            if (!scenarioList || !scrollDots.length || !scenarioItems.length) return;
+            
+            // 計算每個項目的寬度和間距
+            const itemWidth = scenarioItems[0].offsetWidth + 20; // 包含 gap
+            
+            // 更新滾動指示器
+            function updateScrollIndicator() {
+                const scrollLeft = scenarioList.scrollLeft;
+                const scrollWidth = scenarioList.scrollWidth;
+                const clientWidth = scenarioList.clientWidth;
+                
+                // 計算當前顯示的場景索引
+                const currentIndex = Math.round(scrollLeft / itemWidth);
+                
+                // 更新指示器狀態
+                scrollDots.forEach((dot, index) => {
+                    if (index === currentIndex) {
+                        dot.classList.add('active');
+                    } else {
+                        dot.classList.remove('active');
+                    }
+                });
+                
+                // 檢查滾動位置，控制左右漸變
+                if (scrollLeft > 10) {
+                    scenarioWrapper.classList.add('scrolled');
+                } else {
+                    scenarioWrapper.classList.remove('scrolled');
+                }
+                
+                if (scrollLeft + clientWidth >= scrollWidth - 10) {
+                    scenarioWrapper.classList.add('scrolled-end');
+                } else {
+                    scenarioWrapper.classList.remove('scrolled-end');
+                }
+            }
+            
+            // 監聽滾動事件
+            let scrollTimeout;
+            scenarioList.addEventListener('scroll', () => {
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(updateScrollIndicator, 50);
+            });
+            
+            // 點擊指示器滾動到對應場景
+            scrollDots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    const targetScroll = index * itemWidth;
+                    scenarioList.scrollTo({
+                        left: targetScroll,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+            
+            // 初始化指示器狀態
+            updateScrollIndicator();
+            
+            // 添加觸摸滑動支持
+            let startX = 0;
+            let scrollLeftStart = 0;
+            let isDragging = false;
+            
+            scenarioList.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                startX = e.pageX - scenarioList.offsetLeft;
+                scrollLeftStart = scenarioList.scrollLeft;
+                scenarioList.style.cursor = 'grabbing';
+            });
+            
+            scenarioList.addEventListener('mouseleave', () => {
+                isDragging = false;
+                scenarioList.style.cursor = 'grab';
+            });
+            
+            scenarioList.addEventListener('mouseup', () => {
+                isDragging = false;
+                scenarioList.style.cursor = 'grab';
+            });
+            
+            scenarioList.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                e.preventDefault();
+                const x = e.pageX - scenarioList.offsetLeft;
+                const walk = (x - startX) * 1.5;
+                scenarioList.scrollLeft = scrollLeftStart - walk;
             });
         }
     </script>
