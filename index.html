@@ -528,37 +528,31 @@
                 4. 開始第一個場景的學習</p>
                 
                 <details style="margin-top: 15px; background: #f0f7ff; padding: 15px; border-radius: 8px; border: 1px solid #667eea;">
-                    <summary style="cursor: pointer; font-weight: bold; color: #667eea;">🤖 Agent 快速設置（點擊展開）</summary>
-                    <div style="margin-top: 15px;">
-                        <p style="margin-bottom: 10px; color: #666;">將以下內容儲存為 <code>setup-copilot-tutorial.txt</code> 檔案：</p>
-                        <div style="position: relative;">
-                            <button onclick="copySetupFile()" style="position: absolute; top: 10px; right: 10px; padding: 5px 10px; background: #667eea; color: white; border: none; border-radius: 4px; font-size: 12px; cursor: pointer; z-index: 10;">
-                                複製檔案內容
-                            </button>
-                            <pre id="setupFile" style="background: white; padding: 15px; padding-right: 60px; border-radius: 5px; font-size: 0.9rem; overflow-x: auto;">GitHub Copilot 教學專案 - 快速設置檔案
-=====================================
+                    <summary style="cursor: pointer; font-weight: bold; color: #667eea;">🤖 Agent 快速設置指令（點擊展開）</summary>
+                    <div style="position: relative;">
+                        <button onclick="copyAgentPrompt()" style="position: absolute; top: 15px; right: 15px; padding: 5px 10px; background: #667eea; color: white; border: none; border-radius: 4px; font-size: 12px; cursor: pointer; z-index: 10;">
+                            複製
+                        </button>
+                        <pre id="agentPrompt" style="margin-top: 10px; background: white; padding: 15px; padding-right: 60px; border-radius: 5px; font-size: 0.9rem; overflow-x: auto;">請幫我設置 GitHub Copilot 教學專案環境：
 
-專案資訊：
-- Repository: https://github.com/yulin0629/github-copilot-tutorial
-- 包含 8 個漸進式學習場景
-- 場景 8 為獨立的 git submodule
+1. 首先檢查目前位置並決定克隆位置：
+   - 如果在 VS Code 中已有開啟的專案，請詢問我是否要在當前目錄的父目錄克隆
+   - 如果沒有開啟專案，請詢問我想要克隆到哪個目錄
+   - 建議的位置：~/projects/ 或 ~/Github/
 
-設置步驟：
-1. 克隆專案到 ~/projects/ 或 ~/Github/ 目錄
-2. 使用 --recursive 參數確保 submodule 正確下載
-3. 在編輯器中開啟專案資料夾
-4. 確認 GitHub Copilot 擴充套件已安裝
-5. 開啟 index.html 預覽教學內容
+2. 克隆專案（包含 submodule）：
+   cd [選定的目錄]
+   git clone --recursive https://github.com/yulin0629/github-copilot-tutorial.git
+   cd github-copilot-tutorial
 
-如需檢查專案完整性：
-- 應有 8 個場景資料夾（01-first-experience 到 08-comprehensive-project）
-- 場景 8 應為完整的 git submodule
-- 存在 .github/copilot-instructions.md 檔案</pre>
-                        </div>
-                        <div style="margin-top: 15px; padding: 15px; background: #e8f5e8; border-radius: 5px; border-left: 3px solid #28a745;">
-                            <p style="margin: 0; font-weight: bold; color: #28a745;">💡 使用方式：</p>
-                            <p style="margin: 5px 0 0 0; color: #666; font-size: 0.9rem;">儲存檔案後，在 VS Code 中使用 Agent 模式，將檔案拖曳到對話框即可開始設置。</p>
-                        </div>
+3. 如果場景 8 的 submodule 沒有正確下載，請執行：
+   git submodule update --init --recursive
+
+4. 檢查專案結構是否完整（應有 8 個場景資料夾）
+
+5. 完成後請使用 VS Code 開啟專案資料夾：
+   - 使用 File > Open Folder 選單
+   - 選擇剛剛克隆的 github-copilot-tutorial 資料夾</pre>
                     </div>
                 </details>
                 
@@ -694,14 +688,14 @@
     </div>
     
     <script>
-        // 複製設置檔案內容
-        async function copySetupFile() {
-            const fileContent = document.getElementById('setupFile').textContent;
+        // 複製 Agent 設置指令
+        async function copyAgentPrompt() {
+            const promptElement = document.getElementById('agentPrompt');
             const button = event.target;
             const originalText = button.textContent;
             
             try {
-                await navigator.clipboard.writeText(fileContent);
+                await navigator.clipboard.writeText(promptElement.textContent);
                 button.textContent = '✓ 已複製';
                 button.style.background = '#48bb78';
                 
@@ -712,7 +706,7 @@
             } catch (err) {
                 // 降級方案
                 const textArea = document.createElement('textarea');
-                textArea.value = fileContent;
+                textArea.value = promptElement.textContent;
                 textArea.style.position = 'fixed';
                 textArea.style.left = '-999999px';
                 document.body.appendChild(textArea);
