@@ -10,14 +10,20 @@
 ```
 請幫我設置 GitHub Copilot 教學專案環境：
 
-1. 克隆專案（包含 submodule）：
+1. 首先檢查目前位置並決定克隆位置：
+   - 如果在 VS Code 中已有開啟的專案，請詢問我是否要在當前目錄的父目錄克隆
+   - 如果沒有開啟專案，請詢問我想要克隆到哪個目錄
+   - 建議的位置：~/projects/ 或 ~/Documents/GitHub/
+
+2. 克隆專案（包含 submodule）：
+   cd [選定的目錄]
    git clone --recursive https://github.com/yulin0629/github-copilot-tutorial.git
    cd github-copilot-tutorial
 
-2. 如果場景 8 的 submodule 沒有正確下載，請執行：
+3. 如果場景 8 的 submodule 沒有正確下載，請執行：
    git submodule update --init --recursive
 
-3. 檢查專案結構是否完整（應有 8 個場景資料夾）：
+4. 檢查專案結構是否完整（應有 8 個場景資料夾）：
    - 01-first-experience/
    - 02-code-explanation/
    - 03-function-generation/
@@ -27,18 +33,22 @@
    - 07-documentation/
    - 08-comprehensive-project/ (這是 git submodule)
 
-4. 在 VS Code 中開啟專案：
+5. 在 VS Code 中開啟專案：
    code .
 
-5. 確認已安裝必要的 VS Code 擴充套件：
+6. 確認已安裝必要的 VS Code 擴充套件：
    - GitHub Copilot
    - GitHub Copilot Chat
+   如果未安裝，請協助安裝
 
-6. 設定 VS Code 的 Copilot 語言為繁體中文：
-   在 settings.json 中加入：
-   "github.copilot.chat.localeOverride": "zh-TW"
+7. 檢查並設定 VS Code 的 Copilot 語言為繁體中文：
+   檢查 settings.json 是否已有設定
+   如果沒有，加入："github.copilot.chat.localeOverride": "zh-TW"
 
-完成後請告訴我設置狀態，並開啟 index.html 預覽教學內容。
+完成後請：
+- 告訴我設置狀態
+- 直接開啟 index.html 預覽教學內容
+- 確認所有場景資料夾都正確載入
 ```
 
 </details>
