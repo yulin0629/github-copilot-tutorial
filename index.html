@@ -526,6 +526,32 @@
                 2. 登入 GitHub 帳號並選擇適合的訂閱方案<br>
                 3. 設定繁體中文語言環境<br>
                 4. 開始第一個場景的學習</p>
+                
+                <details style="margin-top: 15px; background: #f0f7ff; padding: 15px; border-radius: 8px; border: 1px solid #667eea;">
+                    <summary style="cursor: pointer; font-weight: bold; color: #667eea;">🤖 Agent 快速設置指令（點擊展開）</summary>
+                    <pre style="margin-top: 10px; background: white; padding: 15px; border-radius: 5px; font-size: 0.9rem; overflow-x: auto;">請幫我設置 GitHub Copilot 教學專案環境：
+
+1. 克隆專案（包含 submodule）：
+   git clone --recursive https://github.com/yulin0629/github-copilot-tutorial.git
+   cd github-copilot-tutorial
+
+2. 如果場景 8 的 submodule 沒有正確下載，請執行：
+   git submodule update --init --recursive
+
+3. 檢查專案結構是否完整（應有 8 個場景資料夾）
+
+4. 在 VS Code 中開啟專案：
+   code .
+
+5. 確認已安裝必要的 VS Code 擴充套件：
+   - GitHub Copilot
+   - GitHub Copilot Chat
+
+6. 設定 VS Code 的 Copilot 語言為繁體中文
+
+完成後請告訴我設置狀態，並開啟 index.html 預覽教學內容。</pre>
+                </details>
+                
                 <div style="text-align: center; margin-top: 20px; display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
                     <a href="#" onclick="loadMarkdown('./README.md', 'GitHub Copilot 教學專案 - 完整指南'); return false;" class="btn btn-doc btn-primary">
                         📖 查看完整教學指南

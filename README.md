@@ -2,6 +2,47 @@
 
 這是一個 GitHub Copilot 完整教學專案，透過 8 個由淺入深的實作場景，讓您掌握 GitHub Copilot 的各種功能。
 
+## 🤖 Agent 快速設置 (複製整段給 Agent)
+
+<details>
+<summary>📋 點擊展開 Agent 設置指令</summary>
+
+```
+請幫我設置 GitHub Copilot 教學專案環境：
+
+1. 克隆專案（包含 submodule）：
+   git clone --recursive https://github.com/yulin0629/github-copilot-tutorial.git
+   cd github-copilot-tutorial
+
+2. 如果場景 8 的 submodule 沒有正確下載，請執行：
+   git submodule update --init --recursive
+
+3. 檢查專案結構是否完整（應有 8 個場景資料夾）：
+   - 01-first-experience/
+   - 02-code-explanation/
+   - 03-function-generation/
+   - 04-debugging-assistant/
+   - 05-unit-testing/
+   - 06-code-refactoring/
+   - 07-documentation/
+   - 08-comprehensive-project/ (這是 git submodule)
+
+4. 在 VS Code 中開啟專案：
+   code .
+
+5. 確認已安裝必要的 VS Code 擴充套件：
+   - GitHub Copilot
+   - GitHub Copilot Chat
+
+6. 設定 VS Code 的 Copilot 語言為繁體中文：
+   在 settings.json 中加入：
+   "github.copilot.chat.localeOverride": "zh-TW"
+
+完成後請告訴我設置狀態，並開啟 index.html 預覽教學內容。
+```
+
+</details>
+
 ## 🔗 取得教學專案
 
 ```bash
