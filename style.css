@@ -660,13 +660,13 @@ body {
 }
 
 .markdown-close {
-    position: fixed;
-    top: 70px;
-    right: max(calc(50% - 450px + 20px), 20px);
+    position: absolute;
+    top: -15px;
+    right: -15px;
     width: 30px;
     height: 30px;
     cursor: pointer;
-    background: rgba(142, 142, 147, 0.12);
+    background: rgba(60, 60, 67, 0.8);
     border-radius: 15px;
     display: flex;
     align-items: center;
@@ -676,6 +676,7 @@ body {
     border: none;
     outline: none;
     padding: 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 
 .markdown-close::before,
@@ -684,7 +685,7 @@ body {
     position: absolute;
     width: 14px;
     height: 1.5px;
-    background: rgba(60, 60, 67, 0.6);
+    background: white;
     border-radius: 2px;
 }
 
@@ -697,32 +698,20 @@ body {
 }
 
 .markdown-close:hover {
-    background: rgba(142, 142, 147, 0.2);
+    background: rgba(60, 60, 67, 1);
+    transform: scale(1.1);
 }
 
 .markdown-close:hover::before,
 .markdown-close:hover::after {
-    background: rgba(60, 60, 67, 0.8);
+    background: white;
 }
 
 .markdown-close:active {
-    background: rgba(142, 142, 147, 0.3);
+    background: rgba(40, 40, 47, 1);
     transform: scale(0.96);
 }
 
-@media (max-width: 960px) {
-    .markdown-close {
-        right: 20px;
-        top: 60px;
-    }
-}
-
-@media (max-width: 768px) {
-    .markdown-close {
-        right: 15px;
-        top: 15px;
-    }
-}
 
 /* Markdown 渲染樣式 */
 .markdown-content h1 {
