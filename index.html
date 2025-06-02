@@ -164,8 +164,8 @@
         
         .scenario-wrapper {
             position: relative;
-            margin: 0 -20px;
-            padding: 0 20px;
+            margin: 0;
+            padding: 0;
         }
         
         .scenario-list {
@@ -176,7 +176,7 @@
             scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch;
             padding: 20px 0;
-            margin: -20px 0;
+            margin: 0;
             cursor: grab;
         }
         
@@ -188,6 +188,25 @@
             .scenario-list {
                 padding: 20px calc(max((100vw - 1200px) / 2, 20px));
                 margin: -20px calc(min((100vw - 1200px) / -2, -20px));
+            }
+        }
+        
+        /* 確保第一個和最後一個項目有足夠的空間 */
+        .scenario-item:first-child {
+            margin-left: 20px;
+        }
+        
+        .scenario-item:last-child {
+            margin-right: 20px;
+        }
+        
+        @media (min-width: 769px) {
+            .scenario-item:first-child {
+                margin-left: 0;
+            }
+            
+            .scenario-item:last-child {
+                margin-right: 0;
             }
         }
         
@@ -469,7 +488,7 @@
             top: 20px;
             right: 0;
             bottom: 20px;
-            width: 100px;
+            width: 60px;
             background: linear-gradient(to left, #ffffff 0%, transparent 100%);
             pointer-events: none;
             z-index: 1;
@@ -483,12 +502,19 @@
             top: 20px;
             left: 0;
             bottom: 20px;
-            width: 100px;
+            width: 60px;
             background: linear-gradient(to right, #ffffff 0%, transparent 100%);
             pointer-events: none;
             z-index: 1;
             opacity: 0;
             transition: opacity 0.3s ease;
+        }
+        
+        @media (min-width: 769px) {
+            .scenario-wrapper::after,
+            .scenario-wrapper::before {
+                width: 100px;
+            }
         }
         
         .scenario-wrapper.scrolled::before {
@@ -512,9 +538,6 @@
                 grid-template-columns: 1fr;
             }
             
-            .scenario-wrapper::after {
-                width: 50px;
-            }
         }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -758,32 +781,63 @@
             <h2 style="font-size: 3.5rem; font-weight: 700; margin-bottom: 48px; text-align: center; letter-spacing: -0.03em;">專案簡介</h2>
             <p style="text-align: center; font-size: 1.25rem; color: #6e6e73; max-width: 800px; margin: 0 auto 80px; line-height: 1.6;">這是一個 <strong style="color: #1d1d1f;">2小時精華版</strong> GitHub Copilot 教學專案，專注於 <strong style="color: #1d1d1f;">Agent 模式</strong>的實際應用。<br>透過由淺入深的 8 個場景，讓您快速掌握 AI 驅動的開發流程。</p>
             
+            <div style="text-align: center; margin: 0 auto 80px; max-width: 900px;">
+                <p style="font-size: 1.125rem; color: #515154; line-height: 1.8; margin-bottom: 24px;">
+                    我們將從基礎的對話功能開始，逐步深入到讓 AI Agent 完全主導開發流程。每個場景都包含實際的程式碼範例、詳細的操作步驟，以及立即可見的成果展示。
+                </p>
+                <p style="font-size: 1rem; color: #6e6e73; line-height: 1.7;">
+                    無論您是 <strong>產品經理（PM）</strong>想了解 AI 如何加速產品迭代、<strong>系統分析師（SA）</strong>希望掌握 AI 輔助系統設計，還是<strong>程式設計師（PG）</strong>想要提升編碼效率，這個課程都能為您帶來實質的幫助。
+                </p>
+            </div>
+            
             <div class="features">
                 <div class="feature-card">
-                    <h3>Agent 模式核心</h3>
-                    <p>學習讓 AI 自主完成複雜開發任務，採用漸進式學習路徑</p>
+                    <h3>🤖 Agent 模式核心</h3>
+                    <p>學習讓 AI 自主完成複雜開發任務，從簡單的程式碼補全到完整的系統架構設計。採用漸進式學習路徑，讓您一步步掌握 Agent 的強大能力。</p>
+                    <ul style="margin-top: 16px; font-size: 0.875rem; color: #6e6e73; list-style: none; padding: 0;">
+                        <li style="margin-bottom: 8px;">✓ 自主分析與決策</li>
+                        <li style="margin-bottom: 8px;">✓ 多檔案協調修改</li>
+                        <li>✓ 完整專案重構</li>
+                    </ul>
                 </div>
                 
                 <div class="feature-card">
-                    <h3>目標聽眾</h3>
-                    <p>適合 PM、SA、PG 三種角色，了解 AI 如何提升各自工作效率</p>
+                    <h3>👥 目標聽眾</h3>
+                    <p>適合各種角色的專業人士，每個人都能找到適合自己的應用場景，大幅提升工作效率。</p>
+                    <ul style="margin-top: 16px; font-size: 0.875rem; color: #6e6e73; list-style: none; padding: 0;">
+                        <li style="margin-bottom: 8px;">📊 <strong>PM</strong>：快速原型開發、需求驗證</li>
+                        <li style="margin-bottom: 8px;">🔍 <strong>SA</strong>：系統分析、文檔生成</li>
+                        <li>💻 <strong>PG</strong>：編碼加速、測試自動化</li>
+                    </ul>
                 </div>
                 
                 <div class="feature-card">
-                    <h3>2025 最新功能</h3>
-                    <p>涵蓋 Next Edit Suggestions、多指令檔案系統、Prompt Files 等最新特色</p>
+                    <h3>🚀 2025 最新功能</h3>
+                    <p>涵蓋 GitHub Copilot 最新發布的強大功能，讓您站在 AI 輔助開發的最前沿。</p>
+                    <ul style="margin-top: 16px; font-size: 0.875rem; color: #6e6e73; list-style: none; padding: 0;">
+                        <li style="margin-bottom: 8px;">⚡ Next Edit Suggestions</li>
+                        <li style="margin-bottom: 8px;">📁 多指令檔案系統</li>
+                        <li>📝 Prompt Files 模板化</li>
+                    </ul>
                 </div>
             </div>
             
             <div class="quick-start">
-                <h3 style="font-size: 1.125rem; font-weight: 600; color: #1d1d1f;">快速開始</h3>
-                <p>1. 安裝 VS Code 和 GitHub Copilot 擴充套件<br>
-                2. 登入 GitHub 帳號並選擇適合的訂閱方案<br>
-                3. 設定繁體中文語言環境<br>
-                4. 開始第一個場景的學習</p>
+                <h3 style="font-size: 1.25rem; font-weight: 600; color: #1d1d1f; margin-bottom: 20px;">🚀 快速開始</h3>
+                <p style="font-size: 1rem; line-height: 1.8; margin-bottom: 20px;">準備好開始您的 AI 輔助開發之旅了嗎？只需要簡單幾個步驟：</p>
+                <ol style="font-size: 0.9375rem; line-height: 1.8; color: #515154; margin-left: 20px;">
+                    <li style="margin-bottom: 12px;"><strong>安裝必要工具</strong><br>
+                        下載並安裝 VS Code，然後從擴充套件市場安裝 GitHub Copilot</li>
+                    <li style="margin-bottom: 12px;"><strong>設定您的帳號</strong><br>
+                        使用 GitHub 帳號登入，選擇個人版（$10/月）或商業版（$19/月）</li>
+                    <li style="margin-bottom: 12px;"><strong>語言環境設定</strong><br>
+                        將 VS Code 設定為繁體中文，獲得更好的學習體驗</li>
+                    <li><strong>開始學習旅程</strong><br>
+                        從場景 1 開始，循序漸進掌握每個功能</li>
+                </ol>
                 
-                <details style="margin-top: 20px; background: #f5f5f7; padding: 24px; border-radius: 16px; border: none;">
-                    <summary style="cursor: pointer; font-weight: 600; color: #007aff;">Agent 快速設置指令（點擊展開）</summary>
+                <details style="margin-top: 28px; background: #f5f5f7; padding: 24px; border-radius: 16px; border: none;">
+                    <summary style="cursor: pointer; font-weight: 600; color: #007aff; font-size: 1rem;">🎯 Agent 快速設置指令（點擊展開）</summary>
                     <div style="position: relative;">
                         <button onclick="copyAgentPrompt()" style="position: absolute; top: 15px; right: 15px; padding: 5px 10px; background: #007aff; color: white; border: none; border-radius: 20px; font-size: 12px; cursor: pointer; z-index: 10;">
                             複製
@@ -825,13 +879,19 @@
             </div>
             
             <div class="qr-code-section">
-                <h3 style="font-size: 1.25rem; font-weight: 600; color: #1d1d1f;">手機掃描 QR Code 快速存取</h3>
+                <h3 style="font-size: 1.375rem; font-weight: 600; color: #1d1d1f; margin-bottom: 16px;">📱 手機掃描 QR Code 快速存取</h3>
+                <p style="font-size: 1rem; color: #6e6e73; margin-bottom: 24px; line-height: 1.6;">
+                    想要隨時隨地查看教學內容？掃描下方 QR Code，即可在手機或平板上瀏覽完整的教學資源。
+                </p>
                 <div id="qrcode"></div>
-                <p class="qr-note">掃描 QR Code 即可在手機上瀏覽完整教學內容</p>
+                <p class="qr-note" style="margin-top: 20px;">支援所有主流瀏覽器，建議使用 Safari 或 Chrome 獲得最佳體驗</p>
             </div>
             
             <div class="scenarios">
                 <h2>8 個學習場景</h2>
+                <p style="text-align: center; font-size: 1.125rem; color: #6e6e73; max-width: 800px; margin: -8px auto 40px; line-height: 1.6;">
+                    從基礎到進階，每個場景都精心設計，讓您在實作中學習。左右滑動探索所有場景。
+                </p>
                 <div class="scenario-wrapper">
                     <div class="scenario-list">
                     <div class="scenario-item">
@@ -940,7 +1000,32 @@
         </div>
         
         <div class="footer">
-            <p>預期成果：完成課程後提升 30-50% 開發效率，建立團隊級 AI 輔助開發流程</p>
+            <h3 style="font-size: 1.5rem; font-weight: 600; color: #1d1d1f; margin-bottom: 20px;">🎯 預期成果</h3>
+            <p style="font-size: 1.125rem; line-height: 1.8; max-width: 800px; margin: 0 auto 20px;">
+                完成這 2 小時的精華課程後，您將能夠：
+            </p>
+            <div style="display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin: 32px 0;">
+                <div style="text-align: center;">
+                    <div style="font-size: 2.5rem; font-weight: 700; color: #007aff; margin-bottom: 8px;">30-50%</div>
+                    <div style="font-size: 0.875rem; color: #6e6e73;">開發效率提升</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 2.5rem; font-weight: 700; color: #007aff; margin-bottom: 8px;">80%</div>
+                    <div style="font-size: 0.875rem; color: #6e6e73;">重複工作減少</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 2.5rem; font-weight: 700; color: #007aff; margin-bottom: 8px;">10x</div>
+                    <div style="font-size: 0.875rem; color: #6e6e73;">文檔生成速度</div>
+                </div>
+            </div>
+            <p style="font-size: 1rem; color: #6e6e73; max-width: 700px; margin: 0 auto;">
+                更重要的是，您將建立起團隊級的 AI 輔助開發流程，讓整個團隊都能受益於這項革命性的技術。
+            </p>
+            <div style="margin-top: 40px; padding-top: 32px; border-top: 1px solid #d1d9e0;">
+                <p style="font-size: 0.875rem; color: #86868b;">
+                    Created with ❤️ by Yulin Wang • Powered by GitHub Copilot
+                </p>
+            </div>
         </div>
     </div>
     
