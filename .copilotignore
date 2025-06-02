@@ -1,0 +1,13 @@
+# GitHub Copilot 忽略設定
+# 防止 Copilot 讀取教學文件，避免 AI 混淆
+
+# 忽略所有教學指南文件
+**/LESSON_GUIDE.md
+TEACHING.md
+
+# 忽略場景 8 的教學文件
+08-comprehensive-project/LESSON_GUIDE.md
+
+# 忽略其他教學相關文件
+**/教學說明.md
+**/*教學*.md

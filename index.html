@@ -304,13 +304,28 @@
         }
         
         .markdown-close {
-            position: absolute;
-            top: 15px;
-            right: 20px;
+            position: fixed;
+            top: 65px;
+            right: calc((100% - 900px) / 2 + 20px);
             font-size: 30px;
             cursor: pointer;
             color: #666;
             transition: color 0.3s;
+            background: white;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            z-index: 1001;
+        }
+        
+        @media (max-width: 900px) {
+            .markdown-close {
+                right: 20px;
+            }
         }
         
         .markdown-close:hover {
@@ -499,7 +514,7 @@
                         <div class="scenario-description">建立 Copilot 使用基礎，體驗傳統 Chat 功能</div>
                         <span class="agent-indicator agent-0">Agent 0%</span>
                         <div class="scenario-links">
-                            <a href="#" onclick="loadMarkdown('./01-first-experience/README.md', '場景 1：初次對話體驗'); return false;" class="btn btn-doc">📚 查看教學</a>
+                            <a href="#" onclick="loadMarkdown('./01-first-experience/LESSON_GUIDE.md', '場景 1：初次對話體驗'); return false;" class="btn btn-doc">📚 查看教學</a>
                             <a href="./01-first-experience/" class="btn btn-demo">🎯 實際應用</a>
                         </div>
                     </div>
@@ -510,7 +525,7 @@
                         <div class="scenario-description">掌握 @workspace 核心功能，理解專案結構</div>
                         <span class="agent-indicator agent-0">Agent 0%</span>
                         <div class="scenario-links">
-                            <a href="#" onclick="loadMarkdown('./02-code-explanation/README.md', '場景 2：程式碼解釋實作'); return false;" class="btn btn-doc">📚 查看教學</a>
+                            <a href="#" onclick="loadMarkdown('./02-code-explanation/LESSON_GUIDE.md', '場景 2：程式碼解釋實作'); return false;" class="btn btn-doc">📚 查看教學</a>
                             <a href="./02-code-explanation/" class="btn btn-demo">🎯 實際應用</a>
                         </div>
                     </div>
@@ -521,7 +536,7 @@
                         <div class="scenario-description">體驗 Agent 協助編程，對比手動 vs AI 效率</div>
                         <span class="agent-indicator agent-20">Agent 20%</span>
                         <div class="scenario-links">
-                            <a href="#" onclick="loadMarkdown('./03-function-generation/README.md', '場景 3：函數生成'); return false;" class="btn btn-doc">📚 查看教學</a>
+                            <a href="#" onclick="loadMarkdown('./03-function-generation/LESSON_GUIDE.md', '場景 3：函數生成'); return false;" class="btn btn-doc">📚 查看教學</a>
                             <a href="./03-function-generation/" class="btn btn-demo">🎯 實際應用</a>
                         </div>
                     </div>
@@ -532,7 +547,7 @@
                         <div class="scenario-description">讓 Agent 主動發現和修復程式問題</div>
                         <span class="agent-indicator agent-30">Agent 30%</span>
                         <div class="scenario-links">
-                            <a href="#" onclick="loadMarkdown('./04-debugging-assistant/README.md', '場景 4：偵錯輔助'); return false;" class="btn btn-doc">📚 查看教學</a>
+                            <a href="#" onclick="loadMarkdown('./04-debugging-assistant/LESSON_GUIDE.md', '場景 4：偵錯輔助'); return false;" class="btn btn-doc">📚 查看教學</a>
                             <a href="./04-debugging-assistant/" class="btn btn-demo">🎯 實際應用</a>
                         </div>
                     </div>
@@ -543,7 +558,7 @@
                         <div class="scenario-description">Agent 自主設計測試架構和完整用例</div>
                         <span class="agent-indicator agent-50">Agent 50%</span>
                         <div class="scenario-links">
-                            <a href="#" onclick="loadMarkdown('./05-unit-testing/README.md', '場景 5：單元測試'); return false;" class="btn btn-doc">📚 查看教學</a>
+                            <a href="#" onclick="loadMarkdown('./05-unit-testing/LESSON_GUIDE.md', '場景 5：單元測試'); return false;" class="btn btn-doc">📚 查看教學</a>
                             <a href="./05-unit-testing/" class="btn btn-demo">🎯 實際應用</a>
                         </div>
                     </div>
@@ -554,7 +569,7 @@
                         <div class="scenario-description">Agent 分析遺留代碼並執行重構策略</div>
                         <span class="agent-indicator agent-60">Agent 60%</span>
                         <div class="scenario-links">
-                            <a href="#" onclick="loadMarkdown('./06-code-refactoring/README.md', '場景 6：程式碼重構'); return false;" class="btn btn-doc">📚 查看教學</a>
+                            <a href="#" onclick="loadMarkdown('./06-code-refactoring/LESSON_GUIDE.md', '場景 6：程式碼重構'); return false;" class="btn btn-doc">📚 查看教學</a>
                             <a href="./06-code-refactoring/" class="btn btn-demo">🎯 實際應用</a>
                         </div>
                     </div>
@@ -565,7 +580,7 @@
                         <div class="scenario-description">Agent 自動分析程式碼生成完整文件體系</div>
                         <span class="agent-indicator agent-80">Agent 80%</span>
                         <div class="scenario-links">
-                            <a href="#" onclick="loadMarkdown('./07-documentation/README.md', '場景 7：文件生成'); return false;" class="btn btn-doc">📚 查看教學</a>
+                            <a href="#" onclick="loadMarkdown('./07-documentation/LESSON_GUIDE.md', '場景 7：文件生成'); return false;" class="btn btn-doc">📚 查看教學</a>
                         </div>
                     </div>
                     
@@ -586,7 +601,7 @@
                             </div>
                         </div>
                         <div class="scenario-links scenario-links-3">
-                            <a href="#" onclick="loadMarkdown('./08-comprehensive-project/TEACHING_GUIDE.md', '場景 8：GitHub 自動化 Agent'); return false;" class="btn btn-doc">📚 教學</a>
+                            <a href="#" onclick="loadMarkdown('./08-comprehensive-project/LESSON_GUIDE.md', '場景 8：GitHub 自動化 Agent'); return false;" class="btn btn-doc">📚 教學</a>
                             <a href="https://github.com/yulin0629/copilot-agent-demo-todo" target="_blank" class="btn btn-repo">💻 GitHub</a>
                             <a href="https://yulin0629.github.io/copilot-agent-demo-todo/" target="_blank" class="btn btn-demo">🎯 Demo</a>
                         </div>
@@ -611,10 +626,26 @@
     </div>
     
     <script>
+        // 儲存和取得捲動位置
+        function saveScrollPosition(path, position) {
+            localStorage.setItem(`scroll_${path}`, position);
+        }
+        
+        function getScrollPosition(path) {
+            return parseInt(localStorage.getItem(`scroll_${path}`) || '0');
+        }
+        
+        // 儲存當前文件路徑
+        let currentMarkdownPath = '';
+        
         // 載入並顯示 Markdown
         async function loadMarkdown(path, title) {
             const modal = document.getElementById('markdownModal');
             const body = document.getElementById('markdownBody');
+            const container = body.parentElement;
+            
+            // 儲存當前路徑
+            currentMarkdownPath = path;
             
             // 顯示 Modal
             modal.style.display = 'block';
@@ -641,8 +672,24 @@
                 // 為所有程式碼區塊添加複製按鈕
                 addCopyButtons();
                 
-                // 滾動到頂部
-                body.parentElement.scrollTop = 0;
+                // 恢復上次的捲動位置
+                const savedPosition = getScrollPosition(path);
+                if (savedPosition > 0) {
+                    // 使用 setTimeout 確保內容已經渲染
+                    setTimeout(() => {
+                        container.scrollTop = savedPosition;
+                    }, 100);
+                } else {
+                    // 如果沒有儲存的位置，滾動到頂部
+                    container.scrollTop = 0;
+                }
+                
+                // 監聽捲動事件，儲存位置
+                container.onscroll = debounce(() => {
+                    if (currentMarkdownPath) {
+                        saveScrollPosition(currentMarkdownPath, container.scrollTop);
+                    }
+                }, 300);
                 
             } catch (error) {
                 body.innerHTML = `
@@ -655,9 +702,34 @@
             }
         }
         
+        // 防抖函數
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+        
         // 關閉 Markdown Modal
         function closeMarkdown() {
-            document.getElementById('markdownModal').style.display = 'none';
+            const modal = document.getElementById('markdownModal');
+            const container = document.getElementById('markdownBody').parentElement;
+            
+            // 儲存最後的捲動位置
+            if (currentMarkdownPath) {
+                saveScrollPosition(currentMarkdownPath, container.scrollTop);
+            }
+            
+            // 清理事件監聽器
+            container.onscroll = null;
+            
+            // 關閉 Modal
+            modal.style.display = 'none';
         }
         
         // 點擊 Modal 外部關閉
