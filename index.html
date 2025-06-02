@@ -308,53 +308,64 @@
             position: fixed;
             top: 70px;
             right: calc((100% - 900px) / 2 + 30px);
-            width: 36px;
-            height: 36px;
+            width: 32px;
+            height: 32px;
             cursor: pointer;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 18px;
+            background: transparent;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
             z-index: 1001;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(0,0,0,0.08);
-        }
-        
-        .markdown-close::before,
-        .markdown-close::after {
-            content: '';
-            position: absolute;
-            width: 18px;
-            height: 2px;
-            background: #666;
-            border-radius: 1px;
-            transition: background 0.3s;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+            outline: none;
+            padding: 0;
+            opacity: 0.6;
         }
         
         .markdown-close::before {
-            transform: rotate(45deg);
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 50%;
+            transform: scale(0);
+            transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
-        .markdown-close::after {
-            transform: rotate(-45deg);
+        .markdown-close svg {
+            width: 16px;
+            height: 16px;
+            stroke: #333;
+            stroke-width: 2.5;
+            transition: all 0.2s ease;
+            position: relative;
+            z-index: 1;
         }
         
         .markdown-close:hover {
-            background: #667eea;
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
-            transform: scale(1.1);
+            opacity: 1;
         }
         
-        .markdown-close:hover::before,
-        .markdown-close:hover::after {
-            background: white;
+        .markdown-close:hover::before {
+            transform: scale(1);
+        }
+        
+        .markdown-close:hover svg {
+            stroke: #000;
+            transform: rotate(90deg);
+        }
+        
+        .markdown-close:active {
+            transform: scale(0.95);
         }
         
         @media (max-width: 900px) {
             .markdown-close {
                 right: 20px;
+                top: 60px;
             }
         }
         
@@ -654,7 +665,11 @@
     <!-- Markdown Modal -->
     <div id="markdownModal" class="markdown-modal">
         <div class="markdown-content">
-            <span class="markdown-close" onclick="closeMarkdown()"></span>
+            <button class="markdown-close" onclick="closeMarkdown()" aria-label="關閉">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
             <div id="markdownBody">
                 <div class="markdown-loading">📡 載入中...</div>
             </div>
