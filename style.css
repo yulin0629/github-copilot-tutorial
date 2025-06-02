@@ -660,13 +660,14 @@ body {
 }
 
 .markdown-close {
-    position: absolute;
+    position: sticky;
     top: 15px;
-    right: 15px;
+    float: right;
+    margin: -30px -30px 20px 20px;
     width: 30px;
     height: 30px;
     cursor: pointer;
-    background: rgba(60, 60, 67, 0.8);
+    background: rgba(60, 60, 67, 0.9);
     border-radius: 15px;
     display: flex;
     align-items: center;
