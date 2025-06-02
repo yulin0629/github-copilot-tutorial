@@ -8,49 +8,75 @@
 <summary>📋 點擊展開 Agent 設置指令</summary>
 
 ```
-請幫我設置 GitHub Copilot 教學專案環境：
+請使用 GitHub Copilot Agent 模式幫我設置教學專案環境：
 
-1. 首先檢查目前位置並決定克隆位置：
-   - 如果在 VS Code 中已有開啟的專案，請詢問我是否要在當前目錄的父目錄克隆
-   - 如果沒有開啟專案，請詢問我想要克隆到哪個目錄
-   - 建議的位置：~/projects/ 或 ~/Github/
+1. 首先確認目前的工作目錄：
+   - 執行 pwd 命令查看當前位置
+   - 建議克隆位置：~/projects/ 或 ~/Github/
+   - 請問我想要克隆到哪個目錄
 
-2. 克隆專案（包含 submodule）：
+2. 克隆專案（需要您確認終端命令）：
+   mkdir -p [選定的目錄]
    cd [選定的目錄]
    git clone --recursive https://github.com/yulin0629/github-copilot-tutorial.git
-   cd github-copilot-tutorial
 
-3. 如果場景 8 的 submodule 沒有正確下載，請執行：
+3. 檢查專案是否完整克隆：
+   cd github-copilot-tutorial
+   ls -la
+   確認有 8 個場景資料夾和 .gitmodules 檔案
+
+4. 如果場景 8 (submodule) 沒有內容，執行：
    git submodule update --init --recursive
 
-4. 檢查專案結構是否完整（應有 8 個場景資料夾）：
-   - 01-first-experience/
-   - 02-code-explanation/
-   - 03-function-generation/
-   - 04-debugging-assistant/
-   - 05-unit-testing/
-   - 06-code-refactoring/
-   - 07-documentation/
-   - 08-comprehensive-project/ (這是 git submodule)
+5. 讀取並顯示 index.html 的前 20 行，確認專案正確
 
-5. 在 VS Code 中開啟克隆下來的專案資料夾：
-   - 使用命令面板 (Ctrl/Cmd+Shift+P)
-   - 執行「File: Open Folder」或「檔案: 開啟資料夾」
-   - 選擇剛剛克隆的 github-copilot-tutorial 資料夾
+6. 使用命令開啟新的編輯器視窗（需要您確認）：
+   - VS Code: code github-copilot-tutorial
+   - VS Code Insiders: code-insiders github-copilot-tutorial
+   - Cursor: cursor github-copilot-tutorial
+   
+   如果命令不存在，請先安裝：
+   - VS Code: 在命令面板執行 "Shell Command: Install 'code' command in PATH"
+   - Cursor: 在設定中啟用命令行工具
 
-6. 確認已安裝必要的 VS Code 擴充套件：
-   - GitHub Copilot
-   - GitHub Copilot Chat
-   如果未安裝，請協助安裝
+7. 在新視窗中完成後續設定：
+   請在新開啟的視窗中繼續以下步驟：
+   - 開啟新的 Copilot Chat
+   - 確認 GitHub Copilot 擴充套件已安裝
+   - 設定語言偏好：修改 settings.json 加入 "github.copilot.chat.localeOverride": "zh-TW"
+   - 開啟 index.html 預覽教學內容
 
-7. 檢查並設定 VS Code 的 Copilot 語言為繁體中文：
-   檢查 settings.json 是否已有設定
-   如果沒有，加入："github.copilot.chat.localeOverride": "zh-TW"
+注意事項：
+- Agent 模式執行終端命令需要您的確認
+- 新視窗開啟後，原視窗的 Chat 對話將無法控制新視窗
+- 請在新視窗中開始教學課程
 
-完成後請：
-- 告訴我設置狀態
-- 直接開啟 index.html 預覽教學內容
-- 確認所有場景資料夾都正確載入
+---
+
+### 🎯 新視窗初始化提示詞
+
+在新視窗開啟後，複製以下提示詞到 Copilot Chat：
+
+```
+請使用 Agent 模式幫我初始化 GitHub Copilot 教學專案環境：
+
+1. 檢查專案結構完整性：
+   - 確認有 8 個場景資料夾（01-first-experience 到 08-comprehensive-project）
+   - 檢查場景 8 是否為完整的 git submodule
+   - 如果有缺失，請提醒我需要執行的命令
+
+2. 設定開發環境：
+   - 確認 GitHub Copilot 擴充套件已啟用
+   - 檢查語言設定是否為繁體中文（github.copilot.chat.localeOverride: zh-TW）
+   - 確認 .github/copilot-instructions.md 存在
+
+3. 準備教學環境：
+   - 開啟 index.html 在瀏覽器中預覽
+   - 顯示專案的基本資訊和結構
+   - 提供開始學習的建議順序
+
+完成後請給我一個簡短的狀態報告，並建議從哪個場景開始學習。
+```
 ```
 
 </details>

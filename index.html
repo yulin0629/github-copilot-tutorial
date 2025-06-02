@@ -550,16 +550,40 @@
 
 4. 檢查專案結構是否完整（應有 8 個場景資料夾）
 
-5. 在 VS Code 中開啟克隆下來的專案資料夾：
-   - 使用命令面板 (Ctrl/Cmd+Shift+P)
-   - 執行「File: Open Folder」或「檔案: 開啟資料夾」
-   - 選擇剛剛克隆的 github-copilot-tutorial 資料夾
+5. 在編輯器中開啟克隆下來的專案資料夾：
+   - 請執行開啟資料夾的命令，選擇 github-copilot-tutorial 資料夾
+   - 或使用 VS Code API：vscode.openFolder 命令
 
-6. 確認已安裝必要的 VS Code 擴充套件，如果未安裝請協助安裝
+6. 確認已安裝必要的擴充套件：
+   - VS Code/VS Code Insiders：需要 GitHub Copilot 擴充套件
+   - Cursor AI：內建 AI 功能，無需額外安裝
 
-7. 檢查並設定 VS Code 的 Copilot 語言為繁體中文
+7. 設定語言偏好為繁體中文（如果需要）
 
-完成後請告訴我設置狀態，並直接開啟 index.html 預覽教學內容。</pre>
+完成後請告訴我設置狀態，並直接開啟 index.html 預覽教學內容。
+
+---
+
+🎯 新視窗初始化提示詞（在新視窗開啟後使用）：
+
+請使用 Agent 模式幫我初始化 GitHub Copilot 教學專案環境：
+
+1. 檢查專案結構完整性：
+   - 確認有 8 個場景資料夾（01-first-experience 到 08-comprehensive-project）
+   - 檢查場景 8 是否為完整的 git submodule
+   - 如果有缺失，請提醒我需要執行的命令
+
+2. 設定開發環境：
+   - 確認 GitHub Copilot 擴充套件已啟用
+   - 檢查語言設定是否為繁體中文（github.copilot.chat.localeOverride: zh-TW）
+   - 確認 .github/copilot-instructions.md 存在
+
+3. 準備教學環境：
+   - 開啟 index.html 在瀏覽器中預覽
+   - 顯示專案的基本資訊和結構
+   - 提供開始學習的建議順序
+
+完成後請給我一個簡短的狀態報告，並建議從哪個場景開始學習。</pre>
                     </div>
                 </details>
                 
