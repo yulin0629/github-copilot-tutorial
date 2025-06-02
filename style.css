@@ -660,7 +660,7 @@ body {
 }
 
 .markdown-close {
-    position: fixed;
+    position: absolute;
     top: 70px;
     right: 20px;
     width: 36px;
@@ -800,6 +800,9 @@ body {
 .markdown-content pre .lang-label {
     opacity: 0;
     transition: opacity 0.3s;
+    position: absolute;
+    top: 20px;
+    right: 20px;
 }
 
 .markdown-content pre:hover .copy-button,
