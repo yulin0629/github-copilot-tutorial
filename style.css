@@ -199,11 +199,11 @@ body {
 
 @media (max-width: 768px) {
     .scenario-item:first-child {
-        margin-left: calc((100vw - 75vw) / 2);
+        margin-left: 20px;
     }
     
     .scenario-item:last-child {
-        margin-right: calc((100vw - 75vw) / 2);
+        margin-right: 20px;
     }
 }
 
@@ -236,7 +236,7 @@ body {
 
 @media (max-width: 768px) {
     .scenario-item {
-        flex: 0 0 75vw;
+        flex: 0 0 85vw;
         padding: 20px;
         min-height: 400px;
     }
@@ -508,7 +508,7 @@ body {
     top: 20px;
     right: 0;
     bottom: 20px;
-    width: 40px;
+    width: 30px;
     background: linear-gradient(to left, #ffffff 0%, rgba(255,255,255,0) 100%);
     pointer-events: none;
     z-index: 1;
@@ -522,7 +522,7 @@ body {
     top: 20px;
     left: 0;
     bottom: 20px;
-    width: 40px;
+    width: 30px;
     background: linear-gradient(to right, #ffffff 0%, rgba(255,255,255,0) 100%);
     pointer-events: none;
     z-index: 1;
@@ -578,7 +578,7 @@ body {
     
     .scenario-wrapper::after,
     .scenario-wrapper::before {
-        width: 20px;
+        display: none;
     }
 }
 
