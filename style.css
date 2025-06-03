@@ -661,16 +661,15 @@ body {
 
 .markdown-close {
     position: sticky;
-    top: 20px;
+    top: 1rem;
     float: right;
-    margin-top: -20px;
-    margin-right: -20px;
-    margin-bottom: 20px;
-    width: 36px;
-    height: 36px;
+    clear: both;
+    margin: -1.5rem -1.5rem 1.5rem auto;
+    width: 2.25rem;
+    height: 2.25rem;
     cursor: pointer;
     background: rgba(60, 60, 67, 0.95);
-    border-radius: 18px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -688,10 +687,10 @@ body {
 .markdown-close::after {
     content: '';
     position: absolute;
-    width: 14px;
-    height: 1.5px;
+    width: 0.875rem;
+    height: 0.125rem;
     background: white;
-    border-radius: 2px;
+    border-radius: 1px;
 }
 
 .markdown-close::before {
@@ -719,12 +718,10 @@ body {
 
 @media (max-width: 768px) {
     .markdown-close {
-        top: 15px;
-        margin-top: -10px;
-        margin-right: -10px;
-        width: 32px;
-        height: 32px;
-        border-radius: 16px;
+        top: 0.75rem;
+        margin: -0.75rem -0.75rem 1rem auto;
+        width: 2rem;
+        height: 2rem;
     }
     
     .markdown-content {
