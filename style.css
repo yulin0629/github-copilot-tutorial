@@ -660,9 +660,11 @@ body {
 }
 
 .markdown-close {
-    position: fixed;
-    top: 70px;
-    right: calc(5% + 20px);
+    position: sticky;
+    top: 20px;
+    float: right;
+    margin-left: 20px;
+    margin-bottom: 20px;
     width: 36px;
     height: 36px;
     cursor: pointer;
