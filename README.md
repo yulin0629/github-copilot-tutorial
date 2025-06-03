@@ -2,6 +2,12 @@
 
 這是一個 GitHub Copilot 完整教學專案，透過 8 個由淺入深的實作場景，讓您掌握 GitHub Copilot 的各種功能。
 
+## 線上教學網站
+
+**線上瀏覽教學內容**：[https://yulin0629.github.io/github-copilot-tutorial/](https://yulin0629.github.io/github-copilot-tutorial/)
+
+您可以直接透過瀏覽器查看完整的教學內容，無需下載專案即可開始學習。
+
 ## Agent 快速設置 (複製整段給 Agent)
 
 <details>
