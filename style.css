@@ -661,10 +661,12 @@ body {
 
 .markdown-close {
     position: sticky;
-    top: 20px;
+    top: 10px;
     float: right;
     margin-left: 20px;
     margin-bottom: 20px;
+    margin-top: -10px;
+    margin-right: -10px;
     width: 36px;
     height: 36px;
     cursor: pointer;
@@ -718,8 +720,9 @@ body {
 
 @media (max-width: 768px) {
     .markdown-close {
-        top: 20px;
-        right: 15px;
+        top: 5px;
+        margin-right: -5px;
+        margin-top: -5px;
         width: 32px;
         height: 32px;
         border-radius: 16px;
