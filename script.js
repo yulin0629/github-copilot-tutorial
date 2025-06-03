@@ -291,17 +291,74 @@ window.onload = function() {
     initScenarioScroll();
 }
 
+// 場景導航功能
+function scrollScenarios(direction) {
+    const scenarioList = document.querySelector('.scenario-list');
+    const scenarioItems = document.querySelectorAll('.scenario-item');
+    
+    if (!scenarioList || !scenarioItems.length) return;
+    
+    // 計算每個項目的寬度和間距
+    const itemWidth = scenarioItems[0].offsetWidth + 20; // 包含 gap
+    const currentScroll = scenarioList.scrollLeft;
+    const maxScroll = scenarioList.scrollWidth - scenarioList.clientWidth;
+    
+    let targetScroll;
+    
+    if (direction === 'prev') {
+        targetScroll = Math.max(0, currentScroll - itemWidth);
+    } else {
+        targetScroll = Math.min(maxScroll, currentScroll + itemWidth);
+    }
+    
+    scenarioList.scrollTo({
+        left: targetScroll,
+        behavior: 'smooth'
+    });
+    
+    // 更新按鈕狀態
+    setTimeout(updateNavButtons, 300);
+}
+
+// 更新導航按鈕狀態
+function updateNavButtons() {
+    const scenarioList = document.querySelector('.scenario-list');
+    const prevBtn = document.querySelector('.scenario-nav-btn.prev');
+    const nextBtn = document.querySelector('.scenario-nav-btn.next');
+    
+    if (!scenarioList || !prevBtn || !nextBtn) return;
+    
+    const scrollLeft = scenarioList.scrollLeft;
+    const maxScroll = scenarioList.scrollWidth - scenarioList.clientWidth;
+    
+    // 更新上一個按鈕
+    if (scrollLeft <= 10) {
+        prevBtn.classList.add('disabled');
+    } else {
+        prevBtn.classList.remove('disabled');
+    }
+    
+    // 更新下一個按鈕
+    if (scrollLeft >= maxScroll - 10) {
+        nextBtn.classList.add('disabled');
+    } else {
+        nextBtn.classList.remove('disabled');
+    }
+}
+
 // 場景滾動功能
 function initScenarioScroll() {
     const scenarioList = document.querySelector('.scenario-list');
     const scrollDots = document.querySelectorAll('.scroll-dot');
     const scenarioItems = document.querySelectorAll('.scenario-item');
     const scenarioWrapper = document.querySelector('.scenario-wrapper');
+    const scenariosSection = document.querySelector('.scenarios');
     
     if (!scenarioList || !scrollDots.length || !scenarioItems.length) return;
     
     // 計算每個項目的寬度和間距
     const itemWidth = scenarioItems[0].offsetWidth + 20; // 包含 gap
+    
     
     // 更新滾動指示器
     function updateScrollIndicator() {
@@ -339,7 +396,10 @@ function initScenarioScroll() {
     let scrollTimeout;
     scenarioList.addEventListener('scroll', () => {
         clearTimeout(scrollTimeout);
-        scrollTimeout = setTimeout(updateScrollIndicator, 50);
+        scrollTimeout = setTimeout(() => {
+            updateScrollIndicator();
+            updateNavButtons();
+        }, 50);
     });
     
     // 點擊指示器滾動到對應場景
@@ -355,6 +415,7 @@ function initScenarioScroll() {
     
     // 初始化指示器狀態
     updateScrollIndicator();
+    updateNavButtons();
     
     // 添加觸摸滑動支持
     let startX = 0;
