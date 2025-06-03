@@ -774,8 +774,7 @@ body {
     background: rgba(142, 142, 147, 0.08);
     border: none;
     border-radius: 12px;
-    padding: 15px;
-    padding-top: 45px;
+    padding: 20px;
     overflow-x: auto;
     margin: 20px 0;
     position: relative;
@@ -804,8 +803,13 @@ body {
 
 .markdown-content pre .copy-button,
 .markdown-content pre .lang-label {
-    opacity: 1;
+    opacity: 0;
     transition: opacity 0.3s;
+}
+
+.markdown-content pre:hover .copy-button,
+.markdown-content pre:hover .lang-label {
+    opacity: 1;
 }
 
 
