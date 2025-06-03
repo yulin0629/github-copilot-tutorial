@@ -183,6 +183,8 @@ function addCopyButtons() {
     const codeBlocks = document.querySelectorAll('.markdown-content pre');
     
     codeBlocks.forEach((block, index) => {
+        // 確保 pre 元素是 relative 定位
+        block.style.position = 'relative';
         // 獲取程式碼語言類型
         const codeElement = block.querySelector('code');
         const classList = codeElement.className.split(' ');
