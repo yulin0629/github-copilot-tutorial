@@ -12,5 +12,6 @@
     { "file": "./.github/instructions/javascript.instructions.md" },
     { "file": "./.github/instructions/testing.instructions.md" },
     { "file": "./.github/instructions/agent-mode.instructions.md" }
-  ]
+  ],
+  "liveServer.settings.port": 5501
 }
