@@ -243,11 +243,34 @@ copilot-agent-demo-todo/
 - GitHub Pages 即時展示修改效果
 - 保留教學過程的完整記錄
 
-### **Git Commit 作者規範**
+### **重要分支管理原則**
+#### **工作流程記憶事項**
+1. **主要在 gh-pages 分支工作**：所有修改都先在 gh-pages 進行
+2. **同步更新 main 分支**：重要更新必須同步到 main 分支
+3. **完成後切回 gh-pages**：推送完成後要切回 gh-pages 繼續工作
 
-#### **重要：所有 commit 的作者必須是專案擁有者**
-- **Author**: Yulin Wang <yulin@example.com>
-- **純淨的 commit**：不添加額外的工具標註
+#### **執行順序**
+```bash
+# 1. 在 gh-pages 分支上工作和提交
+git add .
+git commit -m "描述"
+git push origin gh-pages
+
+# 2. 合併到 main 分支
+git checkout main
+git merge gh-pages
+git push origin main
+
+# 3. 切回 gh-pages 繼續工作
+git checkout gh-pages
+```
+
+### **Git Commit 規範**
+
+#### **重要：不需要在 commit message 中添加作者資訊**
+- Git 已經記錄了作者資訊，不需要重複
+- 不要使用 Co-Authored-By 或其他作者標註
+- 保持 commit message 簡潔專注於變更內容
 
 #### **標準 Commit 格式**
 ```bash
@@ -257,7 +280,7 @@ git commit -m "feat: 功能描述
 ```
 
 #### **為什麼這樣設計？**
-- **專案擁有權明確**：Yulin Wang 是專案的唯一負責人和作者
+- **避免冗餘**：Git 本身已有完整的作者記錄
 - **保持簡潔**：commit 訊息專注於變更內容本身
 - **專業呈現**：乾淨的 git 歷史記錄
 
@@ -269,3 +292,10 @@ git commit -m "feat: 功能描述
 - 設計有效的 Prompt Files
 - 在實際專案中提升 30-50% 開發效率
 - 建立團隊級的 AI 輔助開發流程
+
+## 文件撰寫規範
+
+### **重要：保持簡潔專業的風格**
+- **避免使用 emoji**：除非使用者明確要求，否則不使用表情符號
+- **保持專業語調**：使用清晰、直接的文字表達
+- **簡潔為上**：避免不必要的裝飾性元素
