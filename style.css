@@ -661,12 +661,12 @@ body {
 
 .markdown-close {
     position: sticky;
-    top: 10px;
+    top: 15px;
     float: right;
     margin-left: 20px;
     margin-bottom: 20px;
-    margin-top: -10px;
-    margin-right: -10px;
+    margin-top: -20px;
+    margin-right: -20px;
     width: 36px;
     height: 36px;
     cursor: pointer;
@@ -720,9 +720,9 @@ body {
 
 @media (max-width: 768px) {
     .markdown-close {
-        top: 5px;
-        margin-right: -5px;
-        margin-top: -5px;
+        top: 10px;
+        margin-right: -10px;
+        margin-top: -10px;
         width: 32px;
         height: 32px;
         border-radius: 16px;
@@ -774,7 +774,8 @@ body {
     background: rgba(142, 142, 147, 0.08);
     border: none;
     border-radius: 12px;
-    padding: 20px;
+    padding: 15px;
+    padding-top: 45px;
     overflow-x: auto;
     margin: 20px 0;
     position: relative;
@@ -803,17 +804,10 @@ body {
 
 .markdown-content pre .copy-button,
 .markdown-content pre .lang-label {
-    opacity: 0;
+    opacity: 1;
     transition: opacity 0.3s;
-    position: absolute;
-    top: 20px;
-    right: 20px;
 }
 
-.markdown-content pre:hover .copy-button,
-.markdown-content pre:hover .lang-label {
-    opacity: 1;
-}
 
 .copy-button:hover {
     background: #0077ed;

@@ -195,7 +195,7 @@ function addCopyButtons() {
         
         // 創建按鈕容器
         const buttonContainer = document.createElement('div');
-        buttonContainer.style.cssText = 'position: absolute; top: 5px; right: 5px; display: flex; gap: 5px; align-items: center;';
+        buttonContainer.style.cssText = 'position: sticky; top: 10px; float: right; margin-right: -5px; margin-top: -35px; display: flex; gap: 5px; align-items: center; z-index: 10;';
         
         // 如果有語言標示，添加語言標籤
         if (language) {
@@ -265,8 +265,8 @@ function addCopyButtons() {
         // 添加按鈕到容器
         buttonContainer.appendChild(button);
         
-        // 添加容器到程式碼區塊
-        block.appendChild(buttonContainer);
+        // 將容器插入到程式碼區塊的開頭
+        block.insertBefore(buttonContainer, block.firstChild);
     });
 }
 
