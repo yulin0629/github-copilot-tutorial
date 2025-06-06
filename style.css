@@ -381,6 +381,33 @@ body {
     border-color: #1a1e22;
 }
 
+/* 前後對比按鈕樣式 */
+.btn-before {
+    background: #e74c3c;
+    color: white;
+    font-weight: 500;
+    border: 1px solid #e74c3c;
+}
+
+.btn-before:hover {
+    background: #c0392b;
+    border-color: #c0392b;
+    transform: scale(1.05);
+}
+
+.btn-after {
+    background: #27ae60;
+    color: white;
+    font-weight: 500;
+    border: 1px solid #27ae60;
+}
+
+.btn-after:hover {
+    background: #229954;
+    border-color: #229954;
+    transform: scale(1.05);
+}
+
 /* 三個按鈕的特殊布局 */
 .scenario-links-3 {
     flex-wrap: wrap;

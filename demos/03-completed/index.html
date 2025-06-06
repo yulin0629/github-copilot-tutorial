@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>CSV 數據處理工具</title>
+    <link rel="stylesheet" href="style.css?v=20250602230252">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>CSV 數據處理工具</h1>
+            <p>✅ 完整功能版本 - 所有函數都已完成實作！</p>
+        </header>
+
+        <main>
+            <!-- 步驟指引 -->
+            <section class="guide-section">
+                <h2>📋 操作步驟</h2>
+                <div class="steps-container">
+                    <div class="step active" data-step="1">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>載入數據</h3>
+                            <p>點擊「載入範例數據」或上傳 CSV 檔案</p>
+                        </div>
+                    </div>
+                    <div class="step" data-step="2">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>處理數據</h3>
+                            <p>點擊「處理數據」解析 CSV</p>
+                        </div>
+                    </div>
+                    <div class="step" data-step="3">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>使用工具</h3>
+                            <p>選擇下方工具處理數據</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="upload-section">
+                <h2>📥 步驟 1：載入 CSV 數據</h2>
+                <div class="upload-area">
+                    <div class="quick-start">
+                        <p>🚀 <strong>快速開始：</strong></p>
+                        <button id="loadSampleBtn" class="primary-btn large-btn">載入範例數據</button>
+                    </div>
+                    
+                    <div class="divider">或</div>
+                    
+                    <div class="manual-upload">
+                        <p>手動貼上 CSV 內容：</p>
+                        <textarea id="csvText" placeholder="姓名,年齡,城市,電子郵件,電話,入職日期&#10;張三,25,台北,zhang.san@example.com,0912-345-678,2023-01-15&#10;李四,30,台中,lisi@invalid-email,0923456789,2022-06-20&#10;王五,28,高雄,wang5@company.com.tw,0934567890,2023-03-10"></textarea>
+                    </div>
+                    
+                    <div class="process-area">
+                        <button id="processBtn" class="primary-btn large-btn" disabled>
+                            🔄 步驟 2：處理數據
+                        </button>
+                        <p class="hint" id="processHint">請先載入數據</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="tools-section" id="toolsSection" style="display: none;">
+                <h2>🛠️ 步驟 3：選擇數據處理工具</h2>
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <h3>✅ 數據驗證</h3>
+                        <p>檢查電子郵件格式是否正確（步驟 2）</p>
+                        <button class="tool-btn" data-action="validate">驗證電子郵件</button>
+                    </div>
+                    <div class="tool-card">
+                        <h3>🔄 格式轉換</h3>
+                        <p>將日期從 YYYY-MM-DD 轉換為 DD/MM/YYYY（步驟 3）</p>
+                        <button class="tool-btn" data-action="convert">轉換日期格式</button>
+                    </div>
+                    <div class="tool-card">
+                        <h3>📊 數據統計</h3>
+                        <p>計算年齡欄位的平均值、中位數等統計資訊（步驟 4）</p>
+                        <button class="tool-btn" data-action="statistics">計算統計值</button>
+                    </div>
+                    <div class="tool-card">
+                        <h3>📤 數據導出</h3>
+                        <p>將處理後的數據導出為 CSV 檔案（步驟 5）</p>
+                        <button class="tool-btn" data-action="export">導出為 CSV</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="results-section">
+                <h2>📋 處理結果</h2>
+                <div id="results" class="results-container">
+                    <p class="placeholder">👆 請先完成上方步驟，處理結果將顯示在這裡</p>
+                </div>
+            </section>
+
+            <section class="preview-section">
+                <h2>📊 數據預覽</h2>
+                <div id="dataPreview" class="data-table-container">
+                    <p class="placeholder">🔄 處理數據後將在此顯示預覽表格</p>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>💡 提示：這個專案的所有數據處理函數都是使用 GitHub Copilot 生成的！</p>
+        </footer>
+    </div>
+
+    <script src="data-processor.js?v=20250602230252"></script>
+    <script src="ui-handler.js?v=20250602230252"></script>
+</body>
+</html>
