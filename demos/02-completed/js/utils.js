@@ -6,13 +6,16 @@ function formatCurrency(amount) {
     return `NT$ ${amount.toLocaleString('zh-TW')}`;
 }
 
-// 計算運費
-// 滿 1000 元免運費，否則收取 60 元
+// 計算運費 (課程中新增的階梯式運費)
+// 500以下60元，500-1000收30元，1000以上免運
 function calculateShipping(subtotal) {
-    const FREE_SHIPPING_THRESHOLD = 1000;
-    const SHIPPING_FEE = 60;
-    
-    return subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_FEE;
+    if (subtotal >= 1000) {
+        return 0;     // 1000以上免運
+    } else if (subtotal >= 500) {
+        return 30;    // 500-1000收30元
+    } else {
+        return 60;    // 500以下60元
+    }
 }
 
 // 產生唯一 ID
