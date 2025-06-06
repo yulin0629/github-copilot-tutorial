@@ -1,10 +1,10 @@
-// 購物車計算器 - 含有多個 Bug 的版本
-// 讓 GitHub Copilot Agent 來幫你找出並修復這些問題！
+// 購物車計算器 - 含有6個明顯Bug的簡化版本
+// 讓 GitHub Copilot 幫你找出並修復這些問題！
 
 let cart = [];
 let discount = 0;
 
-// Bug 1: 函數名稱拼寫錯誤，但 HTML 中呼叫的是正確的名稱
+// ✅ 正常：新增商品到購物車
 function addToCart(productId, price) {
     const qtyInput = document.getElementById(productId + '-qty');
     const quantity = parseInt(qtyInput.value);
@@ -14,10 +14,9 @@ function addToCart(productId, price) {
         return;
     }
     
-    // Bug 2: 沒有正確處理商品重複添加的數量更新
+    // 處理重複商品
     const existingItem = cart.find(item => item.id === productId);
     if (existingItem) {
-        // Bug: 應該要更新價格或其他邏輯
         existingItem.quantity += quantity;
     } else {
         cart.push({
@@ -67,23 +66,23 @@ function updateCartDisplay() {
 }
 
 function updatePricing() {
-    // Bug 3: subtotal 計算錯誤 - 使用加法而不是乘法
+    // 🐛 Bug 1: 金額計算錯誤 - 使用加法而不是乘法
     let subtotal = 0;
     cart.forEach(item => {
-        subtotal += item.price + item.quantity; // 錯誤：應該是 *
+        subtotal += item.price + item.quantity; // ❌ 錯誤：應該是 *
     });
     
-    // Bug 4: 運費計算邏輯錯誤
+    // 🐛 Bug 2: 運費邏輯被覆蓋
     let shipping = 0;
     if (subtotal < 10000) {
         shipping = 200; // 基本運費
     } else if (subtotal < 30000) {
         shipping = 100; // 中等運費
     }
-    // 超過 30000 免運費，但這個邏輯被下面的代碼覆蓋了
-    shipping = 150; // Bug: 永遠是 150
+    // 超過 30000 免運費，但被下面的代碼覆蓋了
+    shipping = 150; // ❌ Bug: 永遠是 150
     
-    // Bug 5: 優惠券折扣在某些情況下計算異常
+    // ✅ 正常：優惠券折扣計算
     const discountAmount = subtotal * (discount / 100);
     const total = subtotal + shipping - discountAmount;
     
@@ -94,23 +93,23 @@ function updatePricing() {
     document.getElementById('total').textContent = `$${total.toLocaleString()}`;
 }
 
+// ✅ 正常：移除商品
 function removeFromCart(index) {
-    // Bug 10: 移除商品時沒有確認或動畫效果
     cart.splice(index, 1);
     updateCartDisplay();
 }
 
-// Bug 6: 清空購物車函數名稱錯誤
-function clearShoppingCart() {  // HTML 中呼叫的是 clearCart()
+// 🐛 Bug 3: 函數名稱錯誤
+function clearShoppingCart() {  // ❌ HTML 中呼叫的是 clearCart()
     cart = [];
     discount = 0;
     updateCartDisplay();
 }
 
+// 🐛 Bug 4: 優惠券功能不完整
 function applyCoupon() {
     const couponCode = document.getElementById('coupon-code').value.toUpperCase();
     
-    // Bug 7: 優惠券邏輯有問題
     switch (couponCode) {
         case 'SAVE10':
             discount = 10;
@@ -121,7 +120,7 @@ function applyCoupon() {
             alert('已套用 20% 折扣！');
             break;
         case 'FREESHIP':
-            // Bug: 免運費功能沒有實現
+            // ❌ Bug: 免運費功能沒有實現，只顯示訊息
             alert('已套用免運費！');
             break;
         default:
@@ -130,10 +129,10 @@ function applyCoupon() {
     }
     
     document.getElementById('coupon-code').value = '';
-    // Bug 7: 沒有正確更新優惠券狀態
-    updatePricing();
+    updatePricing(); // ✅ 正常：會更新價格
 }
 
+// 🐛 Bug 5: 結帳後不會清空購物車
 function checkout() {
     if (cart.length === 0) {
         alert('購物車是空的！');
@@ -143,9 +142,14 @@ function checkout() {
     const total = document.getElementById('total').textContent;
     alert(`結帳成功！總金額：${total}`);
     
-    // Bug 8: 結帳後沒有清空購物車
+    // ❌ Bug: 結帳後沒有清空購物車
     // clearCart();
 }
 
-// Bug 9: 當使用者修改商品數量時，沒有自動更新購物車
-// 應該要監聽 input 事件並重新計算
+// 🐛 Bug 6: 點擊新增按鈕時，如果輸入框是空的會出錯
+function validateAndAdd(productId, price) {
+    const qtyInput = document.getElementById(productId + '-qty');
+    const quantity = qtyInput.value; // ❌ Bug: 沒有檢查 NaN
+    
+    addToCart(productId, price);
+}
