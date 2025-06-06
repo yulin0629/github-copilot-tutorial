@@ -60,6 +60,17 @@ function loadFromStorage(key) {
     }
 }
 
+// 計算折扣 (課程中新增的功能)
+// 滿 1000 打 95 折，滿 2000 打 9 折
+function calculateDiscount(subtotal) {
+    if (subtotal >= 2000) {
+        return subtotal * 0.9; // 9 折
+    } else if (subtotal >= 1000) {
+        return subtotal * 0.95; // 95 折
+    }
+    return subtotal; // 無折扣
+}
+
 // 顯示通知訊息
 function showNotification(message, type = 'info') {
     const notification = document.createElement('div');

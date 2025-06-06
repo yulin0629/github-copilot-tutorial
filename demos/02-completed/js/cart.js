@@ -135,10 +135,14 @@ function updateQuantity(itemId, action) {
 
 // 計算總金額
 function calculateTotal() {
-    // 計算小計
-    cart.subtotal = cart.items.reduce((sum, item) => sum + item.subtotal, 0);
+    // 計算原始小計
+    const originalSubtotal = cart.items.reduce((sum, item) => sum + item.subtotal, 0);
     
-    // 計算運費
+    // 應用折扣 (課程中新增的功能)
+    cart.subtotal = calculateDiscount(originalSubtotal);
+    cart.discount = originalSubtotal - cart.subtotal; // 記錄折扣金額
+    
+    // 計算運費 (基於折扣後金額)
     cart.shipping = calculateShipping(cart.subtotal);
     
     // 計算總計
@@ -190,6 +194,16 @@ function updateCartDisplay() {
     document.getElementById('subtotal').textContent = formatCurrency(cart.subtotal);
     document.getElementById('shipping').textContent = formatCurrency(cart.shipping);
     document.getElementById('total').textContent = formatCurrency(cart.total);
+    
+    // 更新折扣顯示 (課程中新增的功能)
+    const discountRow = document.getElementById('discountRow');
+    const discountElement = document.getElementById('discount');
+    if (cart.discount && cart.discount > 0) {
+        discountRow.style.display = 'flex';
+        discountElement.textContent = '-' + formatCurrency(cart.discount);
+    } else {
+        discountRow.style.display = 'none';
+    }
     
     // 更新結帳按鈕狀態
     const checkoutBtn = document.getElementById('checkoutBtn');

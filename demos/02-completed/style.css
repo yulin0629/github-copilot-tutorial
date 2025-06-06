@@ -250,6 +250,15 @@ main {
     font-size: 16px;
 }
 
+.discount {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    color: #E74C3C;
+    font-weight: 500;
+    font-size: 16px;
+}
+
 .total {
     font-size: 20px;
     font-weight: bold;
