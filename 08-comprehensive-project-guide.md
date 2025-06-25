@@ -17,7 +17,42 @@
 2. 更新了 git remote 到你的 Fork
 3. 在你的 GitHub repo 創建了至少一個 Issue
 
-如果還沒完成，請參考 [SETUP.md](./08-comprehensive-project/SETUP.md) 的快速設置指南。
+<details>
+<summary>📋 點擊展開：快速設置指南</summary>
+
+### 🚀 三步驟快速開始
+
+#### 步驟 1：Fork Demo Repository
+1. 開啟瀏覽器，前往：https://github.com/yulin0629/copilot-agent-demo-todo
+2. 點擊右上角 **Fork** 按鈕
+3. 選擇你的帳號，完成 Fork
+4. 複製你的 Fork URL（例如：https://github.com/你的帳號/copilot-agent-demo-todo）
+
+#### 步驟 2：讓 Agent 幫你設置（你的第一個 Agent 體驗！）
+在 VS Code 中開啟 Copilot Chat，選擇 **Agent 模式**，輸入：
+
+```
+請幫我更新 git remote 到 [貼上你的 Fork URL]
+```
+
+例如：
+```
+請幫我更新 git remote 到 https://github.com/alice/copilot-agent-demo-todo
+```
+
+💡 **觀察**：Agent 會自動執行正確的 git 指令！
+
+#### 步驟 3：創建你的第一個 Issue
+1. 在瀏覽器中開啟你的 Fork
+2. 前往 Issues 頁面
+3. 創建新 Issue，例如：
+   - 標題：添加深色模式
+   - 內容：請為待辦事項應用添加深色模式切換功能
+   - 標籤：enhancement
+
+✅ **完成！** 現在你可以開始體驗 Agent 的威力了！
+
+</details>
 
 ## 🚀 實作步驟
 
