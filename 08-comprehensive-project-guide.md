@@ -2,171 +2,154 @@
 
 ## 🎯 場景概述
 
-### 為什麼需要獨立 Repo？
-- 真實展示 Issue → PR 完整流程
-- 學員體驗真實的 GitHub 協作
-- 預置實際的功能需求和 Issues
-- 避免影響主教學專案
+在這個場景中，你將體驗 **100% Agent 模式** - 讓 AI 完全接管從 Issue 到 Pull Request 的開發流程。
 
-### 獨立 Repo 資訊
-1. **Repo 名稱**：`copilot-agent-demo-todo`
-2. **專案類型**：待辦事項管理應用
-3. **預置 Issues**：3-5 個實際功能需求和 Bug
-4. **功能**：完整的 Issues 和 Pull Requests 功能
+### 你將學到什麼？
+- 如何讓 Agent 讀取並理解 GitHub Issues
+- 如何讓 Agent 自主實作功能
+- 如何讓 Agent 創建專業的 Pull Request
+- 體驗真實的 AI 驅動開發流程
 
-## 🚀 學習目標
-- 體驗 **Agent 100% 主導**：AI 驅動從 Issue 到 PR 的完整開發流程
-- 了解 `.github/instructions` 和 `.github/prompts` 的實際應用
-- 學習如何讓 AI 成為真正的開發夥伴
-- 見證 AI 如何理解需求、制定策略、實作功能並創建 PR
+## 📚 前置準備
 
-## 📋 教學重點
+在開始之前，請確保你已經：
+1. Fork 了 `copilot-agent-demo-todo` repository
+2. 更新了 git remote 到你的 Fork
+3. 在你的 GitHub repo 創建了至少一個 Issue
 
-### 核心流程
-1. **人類創建 Issue**：功能需求或 Bug
-2. **Agent 完全接管**：
-   - 讀取 Issue 內容
-   - 查看 `.github/instructions` 取得開發規範
-   - 制定解決方案
-   - 實作功能
-   - 創建 Pull Request
-3. **人類審核 PR**：決定是否合併
+如果還沒完成，請參考 [SETUP.md](./08-comprehensive-project/SETUP.md) 的快速設置指南。
 
-## 🎬 Demo 腳本
+## 🚀 實作步驟
 
-### 步驟 1：展示獨立 GitHub Repository (2分鐘)
+### 步驟 1：了解你的專案結構
 
-#### 展示內容
-1. 開啟瀏覽器展示 `copilot-agent-demo-todo` repo
-2. 展示已經準備好的 3-5 個 Issues
-3. 簡單說明每個 Issue 的內容
-4. 強調這些都是真實的 GitHub Issues
-
-**預置 Issues 範例**：
-- Issue #1: 添加清除已完成任務功能 (enhancement, good first issue)
-- Issue #2: 修復刪除任務後 LocalStorage 不更新的問題 (bug)  
-- Issue #3: 在標題顯示未完成任務數量 (enhancement)
-- Issue #4: 添加鍵盤快捷鍵支援 (enhancement)
-
-### 步驟 2：展示 Agent 自動化流程 (15分鐘)
-
-#### Demo 1：讓 Agent 實作功能 - 從 Issue 到 PR
-
-**Prompt：**
+你的 Fork 包含一個待辦事項應用，檔案結構如下：
 ```
-請查看我的 GitHub repo 中的 open issues，選擇 Issue #1 來實作
-
-完成後請執行以下工作：
-1. 分析這個 Issue 內容
-2. 查看 .github 目錄的開發規範
-3. 實作這個功能
-4. 創建符合規範的 Pull Request
-
-記得在 PR 中詳細說明
+copilot-agent-demo-todo/
+├── index.html      # 應用介面
+├── app.js          # 核心邏輯（含一些 bug）
+├── style.css       # 樣式檔案
+└── README.md       # 專案說明
 ```
 
-**使用模式：Agent**  
-**開啟新對話**
+### 步驟 2：創建你的第一個 Issue
 
-**重點展示**：
-- Agent 自動讀取 `.github/copilot-instructions.md`
-- Agent 遵循專案的開發規範
-- Agent 展示實作如何思考
-- Agent 按 PR 規範創建完整的 PR
+如果還沒有 Issue，請在你的 GitHub repo 創建一個。建議的 Issue：
 
-#### Demo 2：批次分析 - 評估所有 Issues
+**簡單功能**：
+- 標題：添加深色模式切換
+- 描述：請為待辦事項應用添加深色模式，包含一個切換按鈕
 
-**Prompt：**
+**Bug 修復**：
+- 標題：修復刪除任務後重新整理會還原的問題
+- 描述：當刪除任務後，重新整理頁面，被刪除的任務又出現了
+
+### 步驟 3：讓 Agent 接管開發 - 你的第一個 Agent 體驗
+
+#### 練習 1：單一 Issue 實作
+
+在 VS Code 中開啟 Copilot Chat，選擇 **Agent 模式**，輸入：
+
 ```
-分析所有 open issues，為每個 issue 評估實作難度和時間
-請提供一個優先順序建議，並說明理由
+請查看我的 GitHub repo 中的 open issues，選擇第一個 issue 來實作
 ```
 
 **使用模式：Agent**
 
-**展示重點**：
-- Agent 能批次分析多個 Issue
-- Agent 能評估技術難度
-- Agent 能提供策略建議
+**觀察重點**：
+- Agent 如何自動連接到你的 GitHub repo
+- Agent 如何理解 Issue 的需求
+- Agent 如何規劃實作步驟
+- Agent 如何修改程式碼
 
-### 步驟 3：進階應用展示 (3分鐘)
+#### 練習 2：完整自動化流程
 
-#### 更多實際應用場景
+當 Agent 完成實作後，繼續指示：
 
-##### 1. 批次處理
 ```
-請處理所有標記為 'good first issue' 的問題，為每個創建獨立的 PR
-```
-
-##### 2. 文件更新
-```
-當功能 PR 合併後：
-請檢查是否需要更新 README.md 說明新功能使用方式
+請為剛才的修改創建一個 Pull Request，包含：
+1. 清楚的標題
+2. 詳細的修改說明
+3. 測試步驟
 ```
 
-##### 3. Code Review 協助
-```
-查看 PR #5
-請提供這個 PR 的改進建議，包括程式碼品質和最佳實踐
-```
+**使用模式：Agent**
 
-## 💡 關鍵要點
+### 步驟 4：進階練習（選擇性）
 
-### GitHub 工作流程整合
-1. **真實的 Issue**：不是模擬，是真實的開發需求
-2. **指令系統整合**：讓 Agent 理解專案規範
-3. **完整的流程**：從 Agent 理解需求、實作到創建 PR
-4. **實際的價值**：展示真實開發場景的效率提升
+當你熟悉基本流程後，可以嘗試：
 
-### 指令系統架構範例
+#### 進階練習 1：批次分析
 ```
-.github/
-├── copilot-instructions.md      # 全域指令
-├── instructions/                 # 細部指令
-│   ├── frontend.instructions.md # 前端規範
-│   ├── testing.instructions.md  # 測試規範
-│   └── pr.instructions.md       # PR 規範
-└── prompts/                     # 提示模板
-    ├── feature.prompt.md        # 功能開發
-    ├── bugfix.prompt.md         # Bug 修復
-    └── refactor.prompt.md       # 重構指南
+分析我的所有 open issues，評估每個的實作難度和所需時間
 ```
 
-### 實際應用場景
-- **自動化 Code Review**：Agent 分析 PR 並提供建議
-- **批次問題處理**：一次處理多個相關的 Issues
-- **文件自動更新**：功能完成後自動更新相關文件
-- **測試生成**：為新功能自動生成測試案例
+#### 進階練習 2：策略規劃
+```
+根據現有的 issues，建議一個開發順序，並說明理由
+```
 
-## 🎯 學習成果
+#### 進階練習 3：多 Issue 處理
+```
+選擇兩個相關的 issues 一起實作，並創建一個綜合的 PR
+```
 
-完成這個場景後，學員應該能：
-- 理解 GitHub 工作流程的 AI 整合
-- 掌握指令系統的設計和使用
-- 達到 90% Agent 輔助的開發效率
-- 建立自己的 AI 輔助開發流程
-- 理解 AI 在團隊協作中的角色
+## 💡 實用技巧
 
-## 📝 總結重點
+### 1. 清晰的指令
+給 Agent 明確的指示，例如：
+- 「請實作 Issue #1」比「幫我寫程式」更好
+- 「創建 PR 並說明測試步驟」比「提交程式碼」更完整
 
-### 從 0% 到 100% 的旅程
-1. **場景 1-2 (0% Agent)**：建立基礎認知
-2. **場景 3-4 (20-30% Agent)**：初步輔助開發
-3. **場景 5-6 (50-60% Agent)**：深度應用
-4. **場景 7-8 (80-100% Agent)**：完全自動化
+### 2. 分步驟執行
+如果 Agent 一次處理太多，可以分步驟：
+1. 先讓 Agent 分析 Issue
+2. 確認理解後再實作
+3. 最後創建 PR
 
-### 核心洞察
-- **AI 不是工具，是夥伴**：人類定義做什麼，AI 決定如何做
-- **指令系統是關鍵**：好的指令系統讓 AI 更有效
-- **給 AI 空間**：讓 AI 發揮創造力和解決問題的能力
+### 3. 善用 Context
+雖然 Agent 模式不支援 @workspace，但 Agent 會自動理解專案結構
 
-### 未來展望
-- **開發者角色轉變**：從寫程式到定義需求和審核
-- **效率大幅提升**：專注於業務邏輯而非實作細節
-- **持續學習**：AI 和人類共同成長
+## 🎯 學習重點回顧
 
-## 🚨 注意事項
-1. **準備工作**：確保學員已經完成 Fork 和設置
-2. **時間控制**：Agent 處理可能需要時間，控制好節奏
-3. **備案準備**：準備好已完成的 PR 作為備用展示
-4. **強調價值**：不斷提醒這是真實的開發場景，不是 Demo
+### 你剛剛體驗了什麼？
+1. **100% Agent 模式**：AI 完全主導開發流程
+2. **真實 GitHub 工作流程**：從 Issue 到 PR 的完整體驗
+3. **AI 的決策能力**：觀察 Agent 如何分析、規劃和實作
+4. **效率提升**：原本需要 30 分鐘的工作，Agent 幾分鐘完成
+
+### Agent 模式的優勢
+- **自主性**：Agent 可以獨立完成複雜任務
+- **整合性**：自動整合 GitHub API，無需手動操作
+- **智能性**：理解需求並制定最佳解決方案
+- **完整性**：從分析到實作到文件，一次完成
+
+## 🚀 下一步
+
+### 實際應用建議
+1. **在你的專案中應用**：
+   - 創建 `.github/copilot-instructions.md`
+   - 讓 Agent 處理日常的 Issues
+   - 逐步提高 Agent 的使用比例
+
+2. **團隊協作**：
+   - 分享你的 Agent 使用經驗
+   - 建立團隊的 AI 使用規範
+   - 創建共享的 prompt 模板
+
+3. **持續優化**：
+   - 觀察 Agent 的產出品質
+   - 調整指令讓 Agent 更準確
+   - 記錄最佳實踐
+
+## 💭 思考題
+
+1. Agent 模式適合處理哪些類型的任務？
+2. 如何在保持程式碼品質的同時提高 Agent 使用率？
+3. 你的團隊可以如何整合 Agent 到現有工作流程？
+
+## 🎉 恭喜！
+
+你已經完成了 GitHub Copilot Agent 的完整學習旅程！從 0% 到 100% Agent，你見證了 AI 如何改變軟體開發的方式。
+
+記住：**Agent 是你的開發夥伴，而不只是工具。** 善用它，讓你專注於更有價值的創造性工作！
