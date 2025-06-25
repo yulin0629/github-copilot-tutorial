@@ -242,7 +242,7 @@ github-copilot-tutorial/
 ├── 05-unit-testing/                  # 場景 5：單元測試 (50% Agent)
 ├── 06-code-refactoring/              # 場景 6：程式碼重構 (60% Agent)
 ├── 07-documentation/                 # 場景 7：文件生成 (80% Agent)
-├── 08-comprehensive-project/         # 場景 8：綜合專案開發 (90% Agent)
+├── 08-comprehensive-project/         # 場景 8：GitHub 自動化 Agent (100% Agent) [submodule]
 ├── README.md                        # 主要說明檔案
 └── CLAUDE.md                        # Claude 專案指令檔案
 ```
