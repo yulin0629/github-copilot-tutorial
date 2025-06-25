@@ -6,3 +6,4 @@ capture-iphone-screenshot.js
 capture_iphone.html
 package-lock.json
 package.json
+.claude-trace/
