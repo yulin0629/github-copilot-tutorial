@@ -1,0 +1,19 @@
+# Build artifacts
+obj/
+bin/
+*.exe
+*.dll
+*.pdb
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# NuGet
+packages/
+*.nupkg
+
+# Unity StackOverflow Fix - Demonstration Project
+# This project demonstrates how to fix Unity dependency injection circular dependency issues
+# Focus on the source code files, not the build artifacts
