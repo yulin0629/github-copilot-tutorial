@@ -1,3 +1,5 @@
+
+
 # GitHub Copilot 教學專案
 
 這是一個 GitHub Copilot 完整教學專案，透過 8 個由淺入深的實作場景，讓您掌握 GitHub Copilot 的各種功能。
@@ -51,7 +53,7 @@ git submodule update --init --recursive
 - 讓學員體驗完整的 AI 自動化開發
 - 可以在獨立 repo 中預置測試用的 Issues
 
-## 安裝與設定指南（Windows）
+## 安裝與設定指南（Windows / Mac）
 
 ### 步驟 1：安裝 Visual Studio Code
 
@@ -99,12 +101,10 @@ GitHub Copilot 於 2025 年 6 月更新方案，提供三種主要選擇：
 1. 開啟 VS Code
 2. 按下 `Ctrl+Shift+X` (`Cmd+Shift+X`) 開啟擴充套件市集
 3. 搜尋「**GitHub Copilot**」
-4. 安裝由 GitHub 官方提供的擴充套件
-5. 安裝「**GitHub Copilot Chat**」擴充套件（用於聊天功能）
+4. 安裝由 GitHub 官方提供的擴充套件（Chat 功能已整合在內，無需再額外安裝 Chat 擴充套件）
 
 #### 方法 2：直接安裝連結
 - [GitHub Copilot](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot)
-- [GitHub Copilot Chat](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot-chat)
 
 ### 步驟 4：登入 GitHub 帳號
 
